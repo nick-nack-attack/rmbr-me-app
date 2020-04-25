@@ -1,13 +1,18 @@
 import React, { Component } from 'react'
 
 export default class AddNote extends Component {
+
+    goBack = () => {
+        this.props.history.push('/my-people');
+    }
+
     render(){
         return(
             <div>
                 <header>
                     Add note
                 </header>
-                <form>
+                <form onSubmit={this.goBack}>
                     <p>John</p>
                     <div>
                         <input

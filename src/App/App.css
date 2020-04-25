@@ -1,0 +1,84 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-size: 20px;
+    color: gray;
+    text-align: center;
+    line-height: 2.0;
+}
+
+nav, footer {
+    padding: 1% 0;
+    background-color: darkgray;
+}
+
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+header {
+    padding: 50px 25px;
+}
+
+section {
+    min-height: 200px;
+    padding: 30px 30px;
+    background-color: #bbb;
+}
+
+section:nth-child(even) {
+    background-color: #ddd;
+}
+
+p + p {
+    margin-top: 15px;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    display: inline;
+    padding-right: 20px;
+}
+
+.person-cell {
+    border: 2px grey solid;
+    text-align: left;
+    padding-left: 30px;
+    padding-bottom: 20px;
+    line-height: 10px;
+    margin-bottom: 15px;
+}
+
+.profile-info {
+    display: inline;
+}
+
+.App__header {
+    background-color: #0b1f3a;
+    color: #bdbdbd;
+    font-family: var(--custom-font);
+    grid-area: header;
+    padding-left: 16px;
+    padding-top: 32px;
+    text-shadow: 2px 1px 2px black;
+  }
+
+  .App__main {
+    background-color: #102541;
+    margin-top: 55px;
+    grid-area: main;
+    height: calc(100vh - 65px);
+    overflow: auto;
+  }

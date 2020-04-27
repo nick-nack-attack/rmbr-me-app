@@ -30,7 +30,9 @@ export default class DemoPage extends Component {
                             Add Note
                         </button>
                         </Link>
-                        <button>View Person</button>
+                        <Link to={'/view-profile'}>
+                            <button>View Person</button>
+                        </Link>
                         <button>Delete</button>
                     </div>
                 </div>

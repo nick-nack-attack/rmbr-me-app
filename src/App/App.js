@@ -4,9 +4,10 @@ import landingPage from '../routes/landingPage/landingPage'
 import LoginPage from '../routes/LoginPage/LoginPage'
 import SignUpPage from '../routes/SignUpPage/SignUpPage'
 import MyPeople from '../routes/MyPeople/MyPeople'
-import ViewProfile from '../routes/ViewProfile/ViewProfile'
+import ViewProfile from '../routes/ViewProfilePage/ViewProfilePage'
 import AddNotePage from '../routes/AddNotePage/AddNotePage'
 import AddPersonPage from '../routes/AddPersonPage/AddPersonPage'
+import ViewProfilePage from '../routes/ViewProfilePage/ViewProfilePage'
 import './App.css'
 
 class App extends Component {
@@ -56,6 +57,10 @@ class App extends Component {
               <Route
                 path={'/add-person'}
                 component={AddPersonPage}
+              />
+              <Route 
+                path={'/view-profile'}
+                component={ViewProfilePage}
               />
 
               

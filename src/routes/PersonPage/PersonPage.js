@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 
-export default class ViewProfilePage extends Component {
+export default class PersonPage extends Component {
 
     goBack = () => {
         this.props.history.push('/my-people');

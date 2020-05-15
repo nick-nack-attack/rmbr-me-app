@@ -1,32 +1,32 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import { Section } from "../../components/Utils/Utils";
+import SignUpForm from "../../components/SignUpForm/SignUpForm";
 
-class SignUpPage extends Component {
-    render(){
-        return(
-            <div>
-                <header>
-                    Sign up
-                </header>
-                <form>
-                    <div>
-                        <label>First Name </label>
-                        <input />
-                    </div>
-                    <div>
-                        <label>Email </label>
-                        <input />
-                    </div>
-                    <div>
-                        <label>Password </label>
-                        <input />
-                    </div>
-                    <div>
-                        <button>Sign up</button>
-                    </div>
-                </form>
-            </div>
+export default class SignUpPage extends Component {
+
+    static defaultProps = {
+        history: {
+            push: () => {},
+        },
+    };
+
+    handleSignUpSuccess = () => {
+        console.log('handleSignUpSuccess on SignUp page ran')
+        const { history } = this.props
+        history.push('/login')
+    };
+
+    render() {
+
+        return (
+            <Section
+                className='SignUpPage'
+            >
+                <h2>Sign Up</h2>
+                <SignUpForm
+                    onRegistrationSuccess={this.handleSignUpSuccess}
+                />
+            </Section>
         )
     }
-}
-
-export default SignUpPage
+};

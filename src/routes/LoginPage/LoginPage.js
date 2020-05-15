@@ -1,28 +1,31 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
+import LoginForm from "../../components/LoginForm/LoginForm";
+import { Section } from "../../components/Utils/Utils";
 
-class LoginPage extends Component {
-    render(){
-        return(
-            <div>
-                <header>
-                    Log in
-                </header>
-                <form>
-                    <div>
-                        <label>Email </label>
-                        <input />
-                    </div>
-                    <div>
-                        <label>Password </label>
-                        <input />
-                    </div>
-                    <div>
-                        <button>Log in</button>
-                    </div>
-                </form>
-            </div>
+export default class LoginPage extends Component {
+
+    static defaultProps = {
+        location: {},
+        history: {
+            push: () => {}
+        }
+    };
+
+    handleLoginSuccess = () => {
+        const { location, history } = this.props
+        const destination = (location.state || {}.from || '/')
+    };
+
+    render() {
+        return (
+            <Section
+                className='LoginPage'
+            >
+                <h2>Log In</h2>
+                <LoginForm
+                    onLoginSuccess={this.handleLoginSuccess}
+                />
+            </Section>
         )
     }
-}
-
-export default LoginPage
+};

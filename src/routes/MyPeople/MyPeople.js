@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import './MyPeople.css'
 
-export default class DemoPage extends Component {
+export default class MyPeople extends Component {
 
     render(){
 

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class LandingPage extends Component {
 
     render() {
-
+        console.log('landing page is running...');
         return (
 
             <div>

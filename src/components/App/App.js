@@ -4,11 +4,12 @@ import { Route, Switch } from 'react-router-dom';
 import Header from "../Header/Header";
 import PrivateRoute from "../Utils/PrivateRoute";
 import PublicOnlyRoute from "../Utils/PublicOnlyRoute";
-import MyPeople from '../../routes/MyPeople/MyPeople'
-import LandingPage from "../../routes/LandingPage/landingPage";
-import ViewPerson from '../../routes/PersonPage/PersonPage'
+
+import MyPeople from '../../routes/MyPeople/MyPeople';
+import LandingPage from "../../routes/LandingPage/LandingPage";
+import PersonPage from '../../routes/PersonPage/PersonPage'
 import LoginPage from '../../routes/LoginPage/LoginPage'
-import SignUpPage from '../../routes/SignUpPage/SignUpPage'
+import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage'
 import NotFoundPage from "../../routes/NotFoundPage/NotFoundPage";
 import TokenService from "../../services/token-service";
 import AuthApiService from "../../services/auth-api-service";
@@ -17,7 +18,6 @@ import './App.css'
 
 import AddNotePage from '../../routes/AddNotePage/AddNotePage'
 import AddPersonPage from '../../routes/AddPersonPage/AddPersonPage'
-import PersonPage from '../../routes/PersonPage/PersonPage'
 
 class App extends Component {
 
@@ -31,7 +31,7 @@ class App extends Component {
 
   componentDidMount() {
     IdleService.setIdleCallback(this.logoutFromIdle)
-    if(TokenService.hasAuthToken()) {
+    if (TokenService.hasAuthToken()) {
       IdleService.registerIdleTimerResets()
       TokenService.queueCallbackBeforeExpiry(() => {
         AuthApiService.postRefreshToken()
@@ -69,8 +69,8 @@ class App extends Component {
                 component={LoginPage}
               />
               <PublicOnlyRoute
-                path={'/signup'}
-                component={SignUpPage}
+                path={'/register'}
+                component={RegistrationPage}
               />
               <PrivateRoute
                 path={'/people'}
@@ -80,32 +80,24 @@ class App extends Component {
                 path={'/people/:personId'}
                 component={PersonPage}
               />
-              <Route
-                component={NotFoundPage}
-              />
-              <Route
-                path={'/my-people'}
-                component={MyPeople}
-              />
-              <Route
-                path={'/log-in'}
-                component={LoginPage}
-              />
-              <Route
-                path={'/sign-in'}
-                component={SignUpPage}
-              />
-              <Route
-                path={'/view-person'}
-                component={ViewPerson}
-              />
-              <Route
+              <PrivateRoute
                 path={'/add-note'}
                 component={AddNotePage}
               />
-              <Route
+              <PrivateRoute
                 path={'/add-person'}
                 component={AddPersonPage}
+              />
+              {/*<PrivateRoute*/}
+              {/*    path={'/edit-note/:noteId'}*/}
+              {/*    component={EditNotePage}*/}
+              {/*/>*/}
+              {/*<PrivateRoute*/}
+              {/*    path={'/edit-person/:personId'}*/}
+              {/*    component={EditPersonPage}*/}
+              {/*/>*/}
+              <Route
+                  component={NotFoundPage}
               />
             </Switch>  
           </main>

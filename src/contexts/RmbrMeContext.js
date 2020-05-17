@@ -8,6 +8,7 @@ export const nullPerson = {
 const RmbrMeContext = React.createContext({
     person: nullPerson,
     rmbrs: [],
+    people: [],
     error: null,
     setError: () => {},
     clearError: () => {},
@@ -16,6 +17,7 @@ const RmbrMeContext = React.createContext({
     setRmbrs: () => {},
     addRmbr: () => {},
     addPerson: () => {},
+    setPeople: () => {},
     deletePerson: () => {},
     editPerson: () => {},
     deleteRmbr: () => {},
@@ -42,6 +44,10 @@ export class PersonProvider extends Component {
     setPerson = person => {
         this.setState({person})
     };
+    setPeople = people => {
+        this.setState({people})
+
+    }
     setRmbrs = rmbrs => {
         this.setState({rmbrs})
     };
@@ -55,6 +61,12 @@ export class PersonProvider extends Component {
             rmbr
         ])
     };
+    addPerson = person => {
+        this.setPeople([
+            ...this.state.people,
+            person
+        ])
+    }
     render() {
         const value = {
             person: this.state.person,
@@ -65,7 +77,8 @@ export class PersonProvider extends Component {
             setPerson: this.setPerson,
             setRmbrs: this.setRmbrs,
             clearPerson: this.clearPerson,
-            addRmbr: this.addRmbr
+            addRmbr: this.addRmbr,
+            addPerson: this.addPerson
         }
         return (
             <RmbrMeContext.Provider value={value}>

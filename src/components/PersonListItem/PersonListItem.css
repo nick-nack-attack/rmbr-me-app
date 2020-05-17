@@ -1,0 +1,28 @@
+.PersonListItem__heading {
+    text-align: left;
+    margin: 0;
+}
+
+.PersonListItem__header, .person_category {
+    padding: 0;
+}
+
+.person_category {
+    text-align: left;
+    margin: 0;
+}
+
+.PersonListItem__footer {
+    padding: 0;
+    width: 20px;
+}
+
+.personListItem__button {
+    position: relative;
+    margin-left: 0;
+}
+
+.personListItem__div_button {
+    width: 150px;
+    text-align: left;
+}

@@ -73,7 +73,7 @@ class App extends Component {
                 component={RegistrationPage}
               />
               <PrivateRoute
-                path={'/people'}
+                path={'/my-people'}
                 component={MyPeople}
               />
               <PrivateRoute

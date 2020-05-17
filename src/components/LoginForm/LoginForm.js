@@ -3,13 +3,15 @@ import AuthApiService from '../../services/auth-api-service'
 import { Button, Input } from '../Utils/Utils'
 
 export default class LoginForm extends Component {
+
     static defaultProps = {
         onLoginSuccess: () => {}
-    }
+    };
 
-    state = { error: null }
+    state = { error: null };
 
     handleSubmitJwtAuth = ev => {
+
         ev.preventDefault()
         this.setState({ error: null })
         const { user_name, password } = ev.target

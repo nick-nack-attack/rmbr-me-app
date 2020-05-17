@@ -1,5 +1,5 @@
 .Header {
-    height: 40px;
+    height: inherit;
     display: flex;
     align-items: normal;
     justify-content: space-between;

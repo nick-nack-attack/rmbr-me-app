@@ -47,7 +47,7 @@ class Header extends Component {
         return <>
             <nav className='Header'>
                 <h1>
-                    <Link to='/'>
+                    <Link to={TokenService.hasAuthToken() ? '/my-people' : '/'}>
                         {' '}
                         rmbr me
                     </Link>

@@ -8,16 +8,18 @@ const PeopleListContext = React.createContext(({
     setPeopleList: () => {}
 }))
 
+export default PeopleListContext;
+
 export class PeopleListProvider extends Component {
     state = {
         peopleList: [],
         error: null
     };
     setPeopleList = peopleList => {
-        this.setState({peopleList})
+        this.setState({ peopleList })
     }
     setError = error => {
-        this.setState({error})
+        this.setState({ error })
     }
     clearError = () => {
         this.setState({error:null})
@@ -37,5 +39,3 @@ export class PeopleListProvider extends Component {
         )
     }
 };
-
-export default PeopleListContext;

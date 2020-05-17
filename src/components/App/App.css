@@ -76,7 +76,7 @@ li {
 
   .App__main {
     background-color: #102541;
-    margin-top: 55px;
+    /*margin-top: 55px;*/
     grid-area: main;
     height: calc(100vh - 65px);
     overflow: auto;

@@ -4,6 +4,7 @@ import TokenService from "./token-service";
 const PeopleApiService = {
 
     getPeople() {
+        console.log('getPeople ran')
         return fetch(`${config.API_ENDPOINT}/people`, {
             headers: {}
         })
@@ -28,11 +29,27 @@ const PeopleApiService = {
             .then(res => (!res.ok) ? res.json().then(e => Promise.reject(e)) : res.json() )
     },
 
+    postPerson(person_name, type_of_person, user_id, first_met) {
+        return fetch (`${config.API_ENDPOINT}/people`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `bearer ${TokenService.getAuthToken()}`
+            },
+            body: JSON.stringify({
+                person_name,
+                type_of_person,
+                user_id,
+                first_met
+            })
+        })
+            .then(res => (!res.ok) ? res.json().then(e => Promise.reject(e)) : res.json() )
+    },
+
     postRmbr(personId, title, text, category, userId) {
         return fetch (`${config.API_ENDPOINT}/rmbrs`, {
             method: 'POST',
             headers: {
-                'authorization': `bearer ${TokenService.getAuthToken()}`
+                'Authorization': `bearer ${TokenService.getAuthToken()}`
             },
             body: JSON.stringify({
                 person_id: personId,

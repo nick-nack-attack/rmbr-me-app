@@ -9,11 +9,11 @@ export default function PersonRmbr(props) {
 
         return (
 
-            <li>
+            <li key={props.id} className='PersonRmbrListItem'>
                 <div><p>title: {props.rmbr_title}</p></div>
-                <div><p>text: {props.rmbr_text}</p></div>
-                <div> <p>Created: {props.date_created}</p></div>
-                <div> <p>Modified: {props.date_modified}</p></div>
+                { !props.rmbr_text ? <div></div> : <div><p>text: {props.rmbr_text}</p></div> } 
+                {/* <div> <p>Created: {props.date_created}</p></div>
+                <div> <p>Modified: {props.date_modified}</p></div> */}
             </li>
 
         )

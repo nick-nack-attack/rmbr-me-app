@@ -23,7 +23,7 @@ export default class LoginPage extends Component {
             <Section className='LoginPage'>
                 <h2>Login</h2>
                 <LoginForm
-                    onLoginSuccess={this.handleLoginSuccess}
+                    onLoginSuccess={this. handleLoginSuccess}
                 />
             </Section>
         )

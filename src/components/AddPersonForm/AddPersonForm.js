@@ -6,57 +6,92 @@ import PeopleApiService from "../../services/person-api-service";
 
 export default class AddPersonForm extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            formPersonName: '',
+            selectedOption: 'Friend',
+            onPersonPostSuccess: () => {}
+        }
+    }
+
     static contextType = RmbrMeContext;
 
     goBack = () => {
         this.props.history.push('/my-people');
     };
 
+    handleOptionChange = changeEvent => {
+        this.setState({
+            selectedOption: changeEvent.target.value
+        })
+    }
+
+    handleNameChange = changedName => {
+        this.setState({
+            formPersonName: changedName.target.value
+        })
+    }
+
     renderCategoryOptions() {
         return (
             <>
-                <option>Select one..</option>
-                <option value='Friend'>Friend</option>
-                <option value='Co-Worker'>Co-Worker</option>
-                <option value='Family'>Family</option>
+                <label><input 
+                    type='radio' 
+                    value='Friend'
+                    checked={this.state.selectedOption === 'Friend'}
+                    onChange={this.handleOptionChange}
+                    ></input>Friend</label>
+                    <label><input 
+                    type='radio' 
+                    value='Family'
+                    checked={this.state.selectedOption === 'Family'}
+                    onChange={this.handleOptionChange}
+                    ></input>Family</label>
+                    <label><input 
+                    type='radio' 
+                    value='Co-Worker'
+                    checked={this.state.selectedOption === 'Co-Worker'}
+                    onChange={this.handleOptionChange}
+                    ></input>Co-Worker</label>
             </>
         )
     }
 
     handleSubmit = ev => {
         ev.preventDefault()
-        const { personName } = ev.target
-        const { personCategory } = ev.target
-        const { firstmet } = new Date();
-        PeopleApiService.postPerson(personName, personCategory, 4, firstmet)
-            .then(this.context.addPerson)
+        this.setState({ error: null })
+        const person_name = this.state.formPersonName
+        const user_id = this.props.userId
+        const type_of_person  = this.state.selectedOption
+        const newPerson = { person_name, user_id, type_of_person }
+        console.log('This is the new person: ', newPerson)
+        PeopleApiService.postPerson(newPerson)
             .then(() => {
-                personName.value = '';
-                personCategory.value = '';
-                this.props.onPersonPostSuccess()
+                this.context.addPerson(newPerson);
+                person_name.value = '' // 
+                type_of_person.value = '' // 
             })
             .catch(res => {
+                console.log('shit!')
                 this.setState({error: res.error})
             })
     }
 
     render() {
-        console.log(this.context.person)
         return (
-            <form onSubmit={() => this.handleSubmit}>
+            <form onSubmit={(ev) => this.handleSubmit(ev)}>
                 <legend>Add Person</legend>
                 <div>
                     <label>Name</label>
-                    <input name='personName' id='personName'/>
+                    <input 
+                    name='personName' 
+                    id='personName'
+                    onChange={this.handleNameChange}
+                    />
                 </div>
                 <div>
-                    <label>Category</label>
-                    <select name='personCategory' id='personCategory'>
-                        <option>Select one..</option>
-                        <option value='Friend'>Friend</option>
-                        <option value='Co-Worker'>Co-Worker</option>
-                        <option value='Family'>Family</option>
-                    </select>
+                    {this.renderCategoryOptions()}
                 </div>
                 <div>
                     <button>Submit</button>

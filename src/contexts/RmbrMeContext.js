@@ -6,21 +6,31 @@ export const nullPerson = {
 }
 
 const RmbrMeContext = React.createContext({
+    // vars
+    userId: [],
+    personId,
     person: nullPerson,
-    rmbrs: [],
-    people: [],
+    peopleList: [],
+    rmbrsList: [],
     error: null,
-    setError: () => {},
-    clearError: () => {},
+    // set
     setPerson: () => {},
+    setPeopleList: () => {},
+    setUserId: () => {},
+    setPersonId: () => {},
+    setRmbrsList: () => {},
+    setError: () => {},
+    //  clear
     clearPerson: () => {},
-    setRmbrs: () => {},
+    clearError: () => {},
+    // add
     addRmbr: () => {},
     addPerson: () => {},
-    setPeople: () => {},
+    // delete
     deletePerson: () => {},
-    editPerson: () => {},
     deleteRmbr: () => {},
+    // edit
+    editPerson: () => {},
     editRmbr: () => {},
     toggle: false,
     toggleErrors: () => {},
@@ -30,53 +40,72 @@ const RmbrMeContext = React.createContext({
 
 export default RmbrMeContext;
 
-export class PersonProvider extends Component {
+export class RmbrMeProvider extends Component {
     state = {
+        userId: [],
+        personId: [],
         person: nullPerson,
+        peopleList: [],
+        rmbrsList: [],
         error: null
-    };
-    setError = error => {
-        this.setState({error})
-    };
-    clearError = () => {
-        this.setState({error: null})
     };
     setPerson = person => {
         this.setState({person})
     };
-    setPeople = people => {
-        this.setState({people})
-
-    }
-    setRmbrs = rmbrs => {
-        this.setState({rmbrs})
+    setPeopleList = peopleList => {
+        this.setState({peopleList})
     };
+    setUserId = (userId) => {
+        this.setState({ userId: localStorage.setItem('user_id', userId) });
+        console.log('userid:', this.state.userId);
+    };
+    setPersonId = () => {
+        this.setState({ personId: this.props.match.params.personId })
+    };
+    setRmbrsList = rmbrsList => {
+        this.setState({rmbrsList})
+    };
+    setError = error => {
+        this.setState({error})
+    };
+
     clearPerson = () => {
         this.setPerson(nullPerson)
         this.setRmbrs([])
     };
+    clearError = () => {
+        this.setState({error: null})
+    };
+
     addRmbr = rmbr => {
         this.setRmbrs([
-            ...this.state.rmbrs,
+            ...this.state.rmbrsList,
             rmbr
         ])
     };
     addPerson = person => {
         this.setPeople([
-            ...this.state.people,
+            ...this.state.peopleList,
             person
         ])
-    }
+    };
+
     render() {
         const value = {
+            userId: localStorage.getItem('user_id'),
+            personId: this.state.personId,
             person: this.state.person,
-            rmbrs: this.state.rmbrs,
+            peopleList: this.state.peopleList,
+            rmbrsList: this.state.rmbrsList,
             error: this.state.error,
-            setError: this.setError,
-            clearError: this.clearError,
             setPerson: this.setPerson,
-            setRmbrs: this.setRmbrs,
+            setPeopleList: this.setPeopleList,
+            setUserId: this.setUserId,
+            setPersonId: this.setPersonId,
+            setRmbrsList: this.setRmbrsList,
+            setError: this.setError,
             clearPerson: this.clearPerson,
+            clearError: this.clearError,
             addRmbr: this.addRmbr,
             addPerson: this.addPerson
         }

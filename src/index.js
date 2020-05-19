@@ -4,14 +4,14 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css';
 import App from './components/App/App';
 import { PeopleListProvider } from "./contexts/PeopleListContext";
-import { PersonProvider } from './contexts/RmbrMeContext';
+import { RmbrMeProvider } from './contexts/RmbrMeContext';
 
 ReactDOM.render(
   <BrowserRouter>
-      <PersonProvider>
+      <RmbrMeProvider>
         <PeopleListProvider>
     <App/>
         </PeopleListProvider>
-      </PersonProvider>
+      </RmbrMeProvider>
   </BrowserRouter>, 
   document.getElementById('root'));

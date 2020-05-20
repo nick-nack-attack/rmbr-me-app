@@ -18,8 +18,7 @@ export default class PersonPage extends Component {
     componentDidMount() {
         // this.context.clearError()
        const currentPersonId = this.props.match.params.personId;
-       console.log(currentPersonId);
-       console.log(this.context);
+
        this.context.setPersonId(currentPersonId);
         /* PeopleApiService.getPerson(currentPersonId)
             .then(this.context.setPerson)
@@ -31,6 +30,7 @@ export default class PersonPage extends Component {
         PeopleApiService.getPersonRmbrs(currentPersonId)
             .then(this.context.setRmbrsList)
             .catch(this.context.setError)
+        
             // PeopleApiService.Notes()
             // .then(this.context.setNote)
             // .catch(this.context.setError)
@@ -48,10 +48,10 @@ export default class PersonPage extends Component {
 
     render() {
 
-        const currentPersonId = this.props.match.params.personId;
-        const userId = this.context.userId;
-        const currentPersonName = this.context.person.person_name;
-        const currentPersonCategory = this.context.person.type_of_person;
+        const currentPersonId = 1 //this.props.match.params.personId;
+        const userId = 1 //this.context.userId;
+        const currentPersonName = 'jack' // this.context.person.person_name;
+        const currentPersonCategory = 'thomas' //this.context.person.type_of_person;
 
         console.log('person page rendered with', currentPersonName, currentPersonCategory)
 

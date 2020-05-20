@@ -8,7 +8,7 @@ export const nullPerson = {
 const RmbrMeContext = React.createContext({
     // vars
     userId: [],
-    personId,
+    personId: 1,
     person: nullPerson,
     peopleList: [],
     rmbrsList: [],
@@ -42,8 +42,8 @@ export default RmbrMeContext;
 
 export class RmbrMeProvider extends Component {
     state = {
-        userId: [],
-        personId: [],
+        userId: 0,
+        personId: 0,
         person: nullPerson,
         peopleList: [],
         rmbrsList: [],
@@ -60,7 +60,7 @@ export class RmbrMeProvider extends Component {
         console.log('userid:', this.state.userId);
     };
     setPersonId = () => {
-        this.setState({ personId: this.props.match.params.personId })
+        this.setState({ personId: 1 })
     };
     setRmbrsList = rmbrsList => {
         this.setState({rmbrsList})

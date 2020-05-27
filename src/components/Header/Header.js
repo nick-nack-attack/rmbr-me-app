@@ -4,6 +4,7 @@ import { Hyph } from "../Utils/Utils";
 import TokenService from '../../services/token-service'
 import IdleService from "../../services/idle-service";
 import './Header.css'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 class Header extends Component {
 
@@ -11,6 +12,7 @@ class Header extends Component {
         TokenService.clearAuthToken()
         TokenService.clearCallbackBeforeExpiry()
         IdleService.unregisterIdleResets()
+        window.location.reload(true)
     };
 
     renderLogoutLink() {
@@ -19,8 +21,9 @@ class Header extends Component {
             <div className='Header__logged-in'>
                 <Link
                     onClick={this.handleLogoutClick}
-                    to='/'>
-                    Logout
+                    to='/'
+                >
+                    Logout <FontAwesomeIcon icon='sign-out-alt' />
                 </Link>
             </div>
         )
@@ -31,12 +34,12 @@ class Header extends Component {
         return (
             <div className='Header__not-logged-in'>
                 <Link
-                    to='/register'>
+                    to='/sign-up'>
                     Register
                 </Link>
                 <Hyph/>
                 <Link
-                    to='/login'>
+                    to='/log-in'>
                     Log in
                 </Link>
             </div>
@@ -47,7 +50,7 @@ class Header extends Component {
         return <>
             <nav className='Header'>
                 <h1>
-                    <Link to={TokenService.hasAuthToken() ? '/my-people' : '/'}>
+                    <Link to={TokenService.hasAuthToken() ? '/' : '/'}>
                         {' '}
                         rmbr me
                     </Link>

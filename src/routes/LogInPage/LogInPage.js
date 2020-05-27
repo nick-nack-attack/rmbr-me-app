@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import LoginForm from '../../components/LoginForm/LoginForm'
+import LogInForm from '../../components/LogInForm/LogInForm'
 import { Section } from '../../components/Utils/Utils'
 
-export default class LoginPage extends Component {
+export default class LogInPage extends Component {
 
     static defaultProps = {
         location: {},
@@ -13,17 +13,19 @@ export default class LoginPage extends Component {
 
     handleLoginSuccess = () => {
         const { location, history } = this.props
-        const destination = (location.state || {}).from || '/my-people'
+        const userLoggedIn = window.localStorage.getItem('isLoggedIn')
+        const destination = (location.state || {}).from || '/'
         history.push(destination)
+        window.location.reload(true)
+
     }
 
     render() {
         console.log('login page is running...');
         return (
             <Section className='LoginPage'>
-                <h2>Login</h2>
-                <LoginForm
-                    onLoginSuccess={this. handleLoginSuccess}
+                <LogInForm
+                    onLoginSuccess={this.handleLoginSuccess}
                 />
             </Section>
         )

@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import RmbrMeContext from "../../contexts/RmbrMeContext";
+import RmbrContext from "../../contexts/RmbrContext";
 import { Link } from "react-router-dom";
-import PeopleListContext from "../../contexts/PeopleListContext";
+import PersonContext from "../../contexts/PersonContext";
 import AddPersonForm from "../../components/AddPersonForm/AddPersonForm";
 
 export default class AddPersonPage extends Component {
 
-    static contextType = PeopleListContext;
+    static contextType = PersonContext;
 
     goBack = () => {
         this.props.history.push('/my-people');

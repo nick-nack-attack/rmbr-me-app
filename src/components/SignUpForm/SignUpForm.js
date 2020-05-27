@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
-import { Button, Input, Required } from '../Utils/Utils'
+import { Input, Required } from '../Utils/Utils'
 import AuthApiService from "../../services/auth-api-service";
+import UserContext from "../../contexts/UserContext";
 
-export default class RegistrationForm extends Component {
+import Button from '@material-ui/core/Button';
+
+export default class SignUpForm extends Component {
 
     static defaultProps = {
-        onRegistrationSuccess: () => {}
+        onSignUpSuccess: () => {}
     };
+
+    static contextType = UserContext;
 
     state = {
         error: null
@@ -21,10 +26,11 @@ export default class RegistrationForm extends Component {
             user_name: user_name.value,
             password: password.value
         })
-            .then(u => {
+            .then(res => {
                 user_name.value = ''
                 password.value = ''
-                this.props.onRegistrationSuccess()
+                this.context.setUserId(res.user_id, true);
+                this.props.onSignUpSuccess()
             })
             .catch(r => {
                 this.setState({ error: r.error })
@@ -32,7 +38,7 @@ export default class RegistrationForm extends Component {
     }
 
     render() {
-        const { error } = this.state
+        const { error } = this.state;
         return (
             <form
                 className='RegistrationForm'

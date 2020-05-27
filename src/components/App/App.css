@@ -7,12 +7,12 @@ body {
     font-size: 20px;
     color: gray;
     text-align: center;
-    line-height: 2.0;
+    /* line-height: 2.0; */
 }
 
 nav, footer {
     padding: 1% 0;
-    background-color: darkgray;
+    /*background-color: darkgray;*/
 }
 
 nav {
@@ -23,8 +23,27 @@ nav {
     z-index: 10;
 }
 
-header {
-    padding: 50px 25px;
+h2 {
+    margin: 30px 0 0 0;
+}
+
+h3 {
+    margin: 0;
+    text-align: left;
+}
+
+h4 {
+    margin: 0;
+    text-align: left;
+}
+
+h5 {
+    text-align: left;
+}
+
+p {
+    text-align: left;
+    margin: 0;
 }
 
 section {
@@ -43,21 +62,20 @@ p + p {
 
 ul {
     list-style-type: none;
-    margin: 0;
-    padding: 0;
+    padding-left: 10px;
+    padding-right: 10px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 li {
-    display: inline;
-    padding-right: 20px;
-}
-
-.person-cell {
-    border: 2px grey solid;
-    text-align: left;
-    padding-left: 30px;
-    padding-bottom: 20px;
-    margin-bottom: 15px;
+    display: inline-block;
+    border: 2px solid gray;
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    margin-top: 20px;
 }
 
 .profile-info {
@@ -65,18 +83,13 @@ li {
 }
 
 .App__header {
-    background-color: #0b1f3a;
     color: #bdbdbd;
-    font-family: var(--custom-font);
     grid-area: header;
-    padding-left: 16px;
     padding-top: 32px;
-    text-shadow: 2px 1px 2px black;
   }
 
   .App__main {
-    background-color: #102541;
-    /*margin-top: 55px;*/
+    background-color: white;
     grid-area: main;
     height: calc(100vh - 65px);
     overflow: auto;
@@ -95,10 +108,69 @@ button {
     border: 2px black solid;
     background-color: white;
     font-size: 14px;
-    padding: 10px 30px;
 }
 
 button:hover {
     cursor: pointer;
     background-color: gainsboro;
+}
+
+.person_page_header {
+    text-align: left;
+    margin-left: 20px;
+}
+
+.root_container {
+    max-width: 500px;
+    background-color: #CA1551;
+}
+
+.personListItem__button {
+    position: absolute;
+    right: 33px;
+    margin-top: -65px;
+    background-color: transparent;
+}
+
+.personListItem__button:hover {
+    color: white;
+    background-color: #CA1551;
+}
+
+.PersonListItem:hover {
+    cursor: pointer;
+    background-color: gainsboro;
+}
+
+.personListItem__div_button {
+    text-align: left;
+}
+
+.rmbr_item_button_bar {
+    display: flex;
+}
+
+.add_person_radio_options {
+    margin: auto 30px 10px 30px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.latest_rmbr {
+    float: right;
+}
+
+.focus_label {
+    background-color: black;
+    color: white;
+    padding: 0 5px 0 5px;
+}
+
+.rmbr_added_label {
+    /*float: left;*/
+    color: dimgray;
+}
+
+.rmbr_item_header {
+    margin-bottom: 5%;
 }

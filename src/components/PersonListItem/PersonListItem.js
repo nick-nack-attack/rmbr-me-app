@@ -1,34 +1,85 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { NiceDate } from '../Utils/Utils';
+import { NiceDate, PrettyDate } from '../Utils/Utils';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import StyleIcon from '../StyleIcon/StyleIcon'
-import './PersonListItem.css'
 
-export default function PersonListItem(props)  {
-        return (
-            <li key={props.id} className='PersonListItem'>
-                <div> <h3 className='PersonListItem__heading'> { props.person_name } </h3> </div>
-                <div> <p className='person_category'>{ props.type_of_person }</p> </div>
-                <div className='personListItem__div_button'><Link to={`/people/${props.id}`}><button className='personListItem__button'>View Person</button></Link></div>
+import PersonContext from "../../contexts/PersonContext";
+import RmbrApiService from "../../services/rmbr-api-service";
+
+import { toDate } from 'date-fns'
+import { format } from 'date-fns'
+import {findRmbrByPersonId} from "../../helpers";
+
+
+export default class PersonListItem extends Component {
+
+    constructor(props) {
+        super(props)
+        this.state = {
+            error: null,
+        }
+    }
+
+    static contextType = PersonContext;
+
+    handleDeletePerson = personId => {
+        this.setState({error: null})
+        RmbrApiService.deletePerson(personId)
+            .then(this.context.deletePerson(personId))
+            .catch(res => {
+                this.setState({
+                    error: res.error
+                })
+            })
+    }
+
+    render() {
+        // console.log(this.props.person.date_created)
+        // console.log( format(new Date(this.props.person.date_created), 'MMM, do Y'))
+
+        const makeARmbrPromptButton = <Link to={`/person/${this.props.person.id}`}><button> <FontAwesomeIcon icon='plus' /> Create a Rmbr </button></Link>
+        const arrayLength = this.props.rmbrArray.length
+        const PersonRmbrList = !arrayLength
+            ? makeARmbrPromptButton
+            : (this.props.rmbrArray.find(rbr => rbr.person_id === this.props.person.id)).rmbr_title
+
+
+
+    return (
+        <Link to={`/person/${this.props.person.id}`}>
+            <li
+                key={this.props.person.id}
+                className='PersonListItem'
+            >
+                <h3 className='PersonListItem__heading'> { this.props.person.person_name } </h3>
+                <p className='person_category'>{ this.props.person.type_of_person } <FontAwesomeIcon icon='bolt'/> {this.props.person.number_of_rmbrs} rmbrs</p>
+                <div
+                    className='latest_rmbr'
+                >
+                    { !arrayLength ? `No Rmbrs Yet!` : `` }
+                    <div>
+                        <div>{ PersonRmbrList }</div>
+                        <div>
+                            { !arrayLength
+                                ? ''
+                                : format(new Date(this.props.rmbrArray.find(rbr => rbr.person_id === this.props.person.id).date_created), 'MMM, do Y')
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                        <button
+                            className='personListItem__button'
+                            onClick={() => this.handleDeletePerson(this.props.person.id)}
+                        >
+                            <FontAwesomeIcon icon='trash-alt' /><span> Delete</span>
+                        </button>
+
             </li>
-            //     <header className='PersonListItem__header'>
-            //         <h3 className='PersonListItem__heading'>
-            //             { props.person_name }
-            //         </h3>
-            //     </header>
-            //     <div>
-            //         <p className='person_category'>{ props.type_of_person }</p>
-            //     </div>
-            //     <footer className='PersonListItem__footer'>
-            //         <PersonRmbrCount person={2}/>
-            //     </footer>
-            // <Link to={`/people/${props.id}`}>
-            //     <button>View Person</button>
-            // </Link>
-            // </li>
+        </Link>
         )
-
+    }
 };
 
 function PersonStyle({ person }) {

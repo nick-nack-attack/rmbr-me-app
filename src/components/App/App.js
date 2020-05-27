@@ -3,30 +3,25 @@ import { Route, Switch } from 'react-router-dom';
 
 import Header from "../Header/Header";
 import PrivateRoute from "../Utils/PrivateRoute";
-import PublicOnlyRoute from "../Utils/PublicOnlyRoute";
+import PublicRoute from "../Utils/PublicRoute";
 
-import MyPeople from '../../routes/MyPeople/MyPeople';
-import LandingPage from "../../routes/LandingPage/LandingPage";
+import Root from '../../routes/Root/Root';
 import PersonPage from '../../routes/PersonPage/PersonPage'
-import LoginPage from '../../routes/LoginPage/LoginPage'
-import RegistrationPage from '../../routes/RegistrationPage/RegistrationPage'
+import LogInPage from '../../routes/LogInPage/LogInPage'
+import SignUpPage from '../../routes/SignUpPage/SignUpPage'
 import NotFoundPage from "../../routes/NotFoundPage/NotFoundPage";
+
 import TokenService from "../../services/token-service";
 import AuthApiService from "../../services/auth-api-service";
 import IdleService from "../../services/idle-service";
 import './App.css'
+import UserLoggedOut from "../UserLoggedOut/UserLoggedOut";
+import PersonList from "../PersonList/PersonList";
 
-import AddNotePage from '../../routes/AddNotePage/AddNotePage'
-import AddPersonPage from '../../routes/AddPersonPage/AddPersonPage'
-
-class App extends Component {
+export default class App extends Component {
 
   state = {
     hasError: false
-  };
-
-  static getDerivedStateFromError() {
-    return { hasError: true }
   };
 
   componentDidMount() {
@@ -35,6 +30,9 @@ class App extends Component {
       IdleService.registerIdleTimerResets()
       TokenService.queueCallbackBeforeExpiry(() => {
         AuthApiService.postRefreshToken()
+            .then(r => {
+              console.log('refresh token posted')
+            })
       })
     }
   };
@@ -51,7 +49,18 @@ class App extends Component {
     this.forceUpdate()
   };
 
+  renderMainPage = () => {
+    return !window.localStorage.user_id
+        ? UserLoggedOut
+        : PersonList
+  }
+
   render() {
+
+    const mainPage = this.renderMainPage()
+    const getUserLoggedIn = window.localStorage.getItem('isLoggedIn')
+    console.log('logged in?', getUserLoggedIn)
+    console.log('mainPage is:', mainPage)
     return (
       <div className="App">
         <header className='App__header'>
@@ -61,41 +70,21 @@ class App extends Component {
             { this.state.hasError && <p className='red'>There was an error!</p> }
             <Switch>
               <Route
-                exact path={'/'}
-                component={LandingPage}
+                  exact path={'/'}
+                  component={ mainPage }
               />
-              <PublicOnlyRoute
-                path={'/login'}
-                component={LoginPage}
+              <PublicRoute
+                path={'/log-in'}
+                component={LogInPage}
               />
-              <PublicOnlyRoute
-                path={'/register'}
-                component={RegistrationPage}
-              />
-              <PrivateRoute
-                path={'/my-people'}
-                component={MyPeople}
+              <PublicRoute
+                path={'/sign-up'}
+                component={SignUpPage}
               />
               <PrivateRoute
-                path={'/people/:personId'}
+                path={'/person/:person_id'}
                 component={PersonPage}
               />
-              <PrivateRoute
-                path={'/add-note'}
-                component={AddNotePage}
-              />
-              <PrivateRoute
-                path={'/add-person'}
-                component={AddPersonPage}
-              />
-              {/*<PrivateRoute*/}
-              {/*    path={'/edit-note/:noteId'}*/}
-              {/*    component={EditNotePage}*/}
-              {/*/>*/}
-              {/*<PrivateRoute*/}
-              {/*    path={'/edit-person/:personId'}*/}
-              {/*    component={EditPersonPage}*/}
-              {/*/>*/}
               <Route
                   component={NotFoundPage}
               />
@@ -105,5 +94,3 @@ class App extends Component {
     )
   }
 }
-
-export default App;

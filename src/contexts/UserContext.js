@@ -1,4 +1,5 @@
 import React, {
+    Component,
     createContext,
     useReducer
 } from 'react';
@@ -6,7 +7,12 @@ import React, {
 // Services
 import TokenService from "../services/token-service";
 
-let UserContext = createContext();
+let UserContext = createContext(({
+    user_id: [],
+    isLoggedIn: false
+}));
+
+export default UserContext;
 
 let initialState = {
     isLoggedIn: false,
@@ -33,16 +39,39 @@ let reducer = (state, action) => {
     }
 };
 
-const UserContextProvider = (props) => {
-    let [state, dispatch] = useReducer( reducer, initialState );
-    let value = { state, dispatch };
-    return (
-        <UserContext.Provider value={value}>
-            { props.children }
-        </UserContext.Provider>
-    );
+export class UserProvider extends Component {
+
+    state = {
+        user_id: [],
+        isLoggedIn: false
+    }
+
+    setUserId = (user_id, isLoggedIn) => {
+        this.setState({
+            user_id: localStorage.setItem('user_id', user_id),
+            isLoggedIn: localStorage.setItem('isLoggedIn', isLoggedIn)
+        })
+    }
+
+    setUserLoggedOut = user_id => {
+        this.setState({
+            isLoggedIn: false
+        })
+    }
+
+    render(){
+
+        const value = {
+            user_id: this.state.user_id,
+            setUserId: this.setUserId,
+            setUserLoggedOut: this.setUserLoggedOut
+        }
+
+        return (
+            <UserContext.Provider value={value}>
+                { this.props.children }
+            </UserContext.Provider>
+        );
+
+    }
 };
-
-let UserContextConsumer = UserContext.Consumer;
-
-export { UserContext, UserContextProvider, UserContextConsumer };

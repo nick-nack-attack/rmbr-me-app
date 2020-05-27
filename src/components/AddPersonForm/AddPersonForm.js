@@ -1,8 +1,12 @@
 import React, { Component } from 'react';
-import { Button, Textarea } from '../Utils/Utils';
-import RmbrMeContext from "../../contexts/RmbrMeContext";
-import {Link} from "react-router-dom";
-import PeopleApiService from "../../services/person-api-service";
+import ReactDOM from 'react-dom';
+
+import { Textarea, Input } from '../Utils/Utils';
+import { Link } from "react-router-dom";
+import RmbrApiService from "../../services/rmbr-api-service";
+import PersonContext from "../../contexts/PersonContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import './AddPersonForm.css'
 
 export default class AddPersonForm extends Component {
 
@@ -10,16 +14,11 @@ export default class AddPersonForm extends Component {
         super(props);
         this.state = {
             formPersonName: '',
-            selectedOption: 'Friend',
-            onPersonPostSuccess: () => {}
+            selectedOption: 'Friend'
         }
     }
 
-    static contextType = RmbrMeContext;
-
-    goBack = () => {
-        this.props.history.push('/my-people');
-    };
+    static contextType = PersonContext;
 
     handleOptionChange = changeEvent => {
         this.setState({
@@ -36,24 +35,25 @@ export default class AddPersonForm extends Component {
     renderCategoryOptions() {
         return (
             <>
-                <label><input 
-                    type='radio' 
-                    value='Friend'
-                    checked={this.state.selectedOption === 'Friend'}
-                    onChange={this.handleOptionChange}
-                    ></input>Friend</label>
-                    <label><input 
-                    type='radio' 
-                    value='Family'
-                    checked={this.state.selectedOption === 'Family'}
-                    onChange={this.handleOptionChange}
-                    ></input>Family</label>
-                    <label><input 
-                    type='radio' 
-                    value='Co-Worker'
-                    checked={this.state.selectedOption === 'Co-Worker'}
-                    onChange={this.handleOptionChange}
-                    ></input>Co-Worker</label>
+                <label><input
+    type='radio'
+    value='Friend'
+    checked={this.state.selectedOption === 'Friend'}
+    onChange={this.handleOptionChange}
+    />Friend</label>
+                    <label><input
+    type='radio'
+    value='Family'
+    className='middle_imput_button'
+    checked={this.state.selectedOption === 'Family'}
+    onChange={this.handleOptionChange}
+    />Family</label>
+                    <label><input
+    type='radio'
+    value='Co-Worker'
+    checked={this.state.selectedOption === 'Co-Worker'}
+    onChange={this.handleOptionChange}
+    />Co-Worker</label>
             </>
         )
     }
@@ -62,18 +62,14 @@ export default class AddPersonForm extends Component {
         ev.preventDefault()
         this.setState({ error: null })
         const person_name = this.state.formPersonName
-        const user_id = this.props.userId
+        const user_id = RmbrApiService.getUserId()
         const type_of_person  = this.state.selectedOption
         const newPerson = { person_name, user_id, type_of_person }
-        console.log('This is the new person: ', newPerson)
-        PeopleApiService.postPerson(newPerson)
-            .then(() => {
-                this.context.addPerson(newPerson);
-                person_name.value = '' // 
-                type_of_person.value = '' // 
+        RmbrApiService.postPerson(newPerson)
+            .then(res => {
+                this.context.addPerson(res)
             })
             .catch(res => {
-                console.log('shit!')
                 this.setState({error: res.error})
             })
     }
@@ -83,14 +79,14 @@ export default class AddPersonForm extends Component {
             <form onSubmit={(ev) => this.handleSubmit(ev)}>
                 <legend>Add Person</legend>
                 <div>
-                    <label>Name</label>
-                    <input 
-                    name='personName' 
-                    id='personName'
-                    onChange={this.handleNameChange}
+                    <Input
+                        name='personName'
+                        id='personName'
+                        placeholder='Type Person Here'
+                        onChange={this.handleNameChange}
                     />
                 </div>
-                <div>
+                <div className='add_person_radio_options'>
                     {this.renderCategoryOptions()}
                 </div>
                 <div>

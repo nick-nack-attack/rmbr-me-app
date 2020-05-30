@@ -1,0 +1,23 @@
+.Rmbr {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}
+
+.rmbr_header_wrapper {
+     display: flex;
+     flex-direction: row;
+     justify-content: space-between;
+ }
+
+.rmbr_icons {
+    display: flex;
+    width: 10px;
+    margin-right: 103px;
+
+  }
+
+#date_added_bolt {
+    margin-right: 5px;
+}
+

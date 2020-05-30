@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import { Button, Textarea } from '../Utils/Utils';
-import RmbrContext from "../../contexts/RmbrContext";
-import { Link } from "react-router-dom";
+import { Textarea } from '../Utils/Utils';
+import RmbrmeContext from "../../contexts/RmbrmeContext";
 import RmbrApiService from "../../services/rmbr-api-service";
 import { findRmbrByPersonId } from "../../helpers";
 
@@ -18,7 +17,7 @@ export default class EditRmbrForm extends Component {
         }
     };
 
-    static contextType = RmbrContext;
+    static contextType = RmbrmeContext;
 
     handleHideForm = event => {
         this.props.onHideEditForm()

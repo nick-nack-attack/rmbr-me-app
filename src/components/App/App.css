@@ -7,12 +7,11 @@ body {
     font-size: 20px;
     color: gray;
     text-align: center;
-    /* line-height: 2.0; */
 }
 
 nav, footer {
     padding: 1% 0;
-    /*background-color: darkgray;*/
+    background-color: darkgray;
 }
 
 nav {
@@ -39,6 +38,7 @@ h4 {
 
 h5 {
     text-align: left;
+    margin: 0;
 }
 
 p {
@@ -71,7 +71,8 @@ ul {
 
 li {
     display: inline-block;
-    border: 2px solid gray;
+    border: 2px solid lightgray;
+    border-radius: 10px;
     padding: 20px;
     width: 90%;
     max-width: 500px;
@@ -83,15 +84,15 @@ li {
 }
 
 .App__header {
-    color: #bdbdbd;
+    color: white;
     grid-area: header;
-    padding-top: 32px;
+    padding-top: 70px;
   }
 
   .App__main {
-    background-color: white;
+    background-color: #FAFAFA;
     grid-area: main;
-    height: calc(100vh - 65px);
+    /*height: calc(100vh - 65px);*/
     overflow: auto;
   }
 
@@ -105,7 +106,8 @@ li {
 }
 
 button {
-    border: 2px black solid;
+    border: 2px solid lightgray;
+    border-radius: 5px;
     background-color: white;
     font-size: 14px;
 }
@@ -122,19 +124,27 @@ button:hover {
 
 .root_container {
     max-width: 500px;
-    background-color: #CA1551;
+    background-color: greenyellow;
 }
 
-.personListItem__button {
+.list_delete_button {
     position: absolute;
-    right: 33px;
-    margin-top: -65px;
-    background-color: transparent;
+    height: 40px;
+    background-color: white;
 }
 
-.personListItem__button:hover {
+.list_delete_button:hover {
     color: white;
     background-color: #CA1551;
+}
+
+ .rmbr_list_db {
+    right: 20px;
+}
+
+.person_list_db {
+    margin-top: 60px;
+    right: 20px;
 }
 
 .PersonListItem:hover {
@@ -151,7 +161,7 @@ button:hover {
 }
 
 .add_person_radio_options {
-    margin: auto 30px 10px 30px;
+    margin: auto 150px 10px 150px;
     display: flex;
     justify-content: space-around;
 }
@@ -173,4 +183,25 @@ button:hover {
 
 .rmbr_item_header {
     margin-bottom: 5%;
+}
+
+#arrow-left {
+    margin-right: 5px;
+}
+
+.edit_title_inline_button {
+    margin-left: 5px;
+}
+
+.rmbr_add_details_button {
+    margin-top: 10px;
+}
+
+.inline_before_icon {
+    margin-right: 5px;
+}
+
+.person_page_delete_button_div {
+    text-align: right;
+    margin-right: 20px;
 }

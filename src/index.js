@@ -6,23 +6,26 @@ import App from './components/App/App';
 import { PersonProvider } from "./contexts/PersonContext";
 import { RmbrProvider } from './contexts/RmbrContext';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { UserContext, UserProvider } from "./contexts/UserContext";
+import { UserProvider } from "./contexts/UserContext";
 import { library } from '@fortawesome/fontawesome-svg-core';
 import {
-    faPlus, faChevronLeft, faTrashAlt, faCheckDouble, faEdit, faAngleRight, faSignOutAlt, faPen, faFolderOpen, faCheckSquare, faBirthdayCake, faBolt, faCalendarCheck
+    faPlus, faChevronLeft, faTrashAlt, faCheckDouble, faEdit, faAngleRight, faSignOutAlt, faPen, faFolderOpen, faCheckSquare, faBirthdayCake, faBolt, faCalendarCheck, faArrowLeft
 } from '@fortawesome/free-solid-svg-icons';
+import { RmbrmeProvider } from "./contexts/RmbrmeContext";
 
-library.add(faPlus, faChevronLeft, faTrashAlt, faCheckDouble, faEdit, faAngleRight, faSignOutAlt, faPen, faFolderOpen, faCheckSquare, faBirthdayCake, faBolt, faCalendarCheck)
+library.add(faPlus, faChevronLeft, faTrashAlt, faCheckDouble, faEdit, faAngleRight, faSignOutAlt, faPen, faFolderOpen, faCheckSquare, faBirthdayCake, faBolt, faCalendarCheck, faArrowLeft)
 
 ReactDOM.render(
   <BrowserRouter>
-      <UserProvider>
-      <PersonProvider>
-        <RmbrProvider>
-            <CssBaseline />
-            <App/>
-        </RmbrProvider>
-      </PersonProvider>
-      </UserProvider>
+      <RmbrmeProvider>
+          <UserProvider>
+          <PersonProvider>
+            <RmbrProvider>
+                <CssBaseline />
+                <App/>
+            </RmbrProvider>
+          </PersonProvider>
+          </UserProvider>
+      </RmbrmeProvider>
   </BrowserRouter>, 
   document.getElementById('root'));

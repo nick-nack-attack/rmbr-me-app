@@ -1,8 +1,10 @@
 .Header {
-    height: inherit;
+    height: 70px;
     display: flex;
     align-items: normal;
     justify-content: space-between;
+    background-color: #CA1551;
+    padding: 10px 30px;
 }
 
 .Header h1 {
@@ -10,7 +12,7 @@
 }
 
 .Header a {
-    color: #444;
+    color: white;
     text-decoration: none;
 }
 
@@ -66,4 +68,8 @@
     .Header__tagline--narrow {
         display: inherit;
     }
+}
+
+.rmbr_add_details_button {
+    text-align: left;
 }

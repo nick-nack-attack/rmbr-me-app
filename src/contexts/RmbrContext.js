@@ -37,8 +37,6 @@ export class RmbrProvider extends Component {
     };
 
     updateRmbr = updatedRmbr => {
-        const newArray = [];
-        const oldList = newArray.push(this.state.rmbrList.filter((rmbr) => rmbr.id !== updatedRmbr.id))
         this.setRmbrList([
             ...this.state.rmbrList,
             updatedRmbr

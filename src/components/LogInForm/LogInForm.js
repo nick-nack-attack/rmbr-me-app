@@ -1,18 +1,23 @@
 import React, { Component } from 'react'
 import AuthApiService from '../../services/auth-api-service'
 import { Button, Input } from '../Utils/Utils'
-import UserContext from "../../contexts/UserContext";
+import RmbrmeContext from "../../contexts/RmbrmeContext";
 import TokenService from '../../services/token-service'
 
 export default class LogInForm extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: null
+        }
+    };
 
     static defaultProps = {
         onLoginSuccess: () => {},
     };
 
-    static contextType = UserContext;
-
-    state = { error: null };
+    static contextType = RmbrmeContext;
 
     handleSubmitJwtAuth = ev => {
         ev.preventDefault()
@@ -26,25 +31,23 @@ export default class LogInForm extends Component {
             .then(res => {
                 user_name.value = ''
                 password.value = ''
-                TokenService.saveAuthToken(res.authToken);
-                this.context.setUserId(res.user_id, true);
+                this.context.setUserId(res.user_id);
                 this.props.onLoginSuccess()
             })
             .catch(res => {
-                this.setState({ error: res.error })
+                this.setState({
+                    error: res.error
+                })
             })
     }
 
     render() {
-        const { error } = this.state;
+        const {error} = this.state;
         return (
             <form
                 className='LoginForm'
                 onSubmit={this.handleSubmitJwtAuth}
             >
-                <div role='alert'>
-                    {error && <p className='red'>{error}</p>}
-                </div>
                 <div className='user_name'>
                     <label htmlFor='LoginForm__user_name'>
                         User name

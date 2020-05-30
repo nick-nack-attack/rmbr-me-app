@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { Input, Button, Textarea } from '../Utils/Utils';
-import RmbrContext from "../../contexts/RmbrContext";
-import {Link} from "react-router-dom";
+import { Input } from '../Utils/Utils';
 import RmbrApiService from "../../services/rmbr-api-service";
+import RmbrmeContext from "../../contexts/RmbrmeContext";
 
 export default class AddRmbrForm extends Component {
 
@@ -15,7 +14,7 @@ export default class AddRmbrForm extends Component {
         }
     };
 
-    static contextType = RmbrContext;
+    static contextType = RmbrmeContext;
 
     handleTitleChange = changeEvent => {
         this.setState({
@@ -48,8 +47,6 @@ export default class AddRmbrForm extends Component {
         };
 
     render() {
-        const today = new Date();
-        console.log('today is', today)
         return (
             <form
                 onSubmit={(e) => this.handleSubmitRmbr(e)}

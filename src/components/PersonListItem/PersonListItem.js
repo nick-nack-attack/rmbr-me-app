@@ -1,16 +1,10 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
-import { NiceDate, PrettyDate } from '../Utils/Utils';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import StyleIcon from '../StyleIcon/StyleIcon'
-
-import PersonContext from "../../contexts/PersonContext";
+import RmbrmeContext from "../../contexts/RmbrmeContext";
 import RmbrApiService from "../../services/rmbr-api-service";
 
-import { toDate } from 'date-fns'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { format } from 'date-fns'
-import {findRmbrByPersonId} from "../../helpers";
-
 
 export default class PersonListItem extends Component {
 
@@ -21,9 +15,10 @@ export default class PersonListItem extends Component {
         }
     }
 
-    static contextType = PersonContext;
+    static contextType = RmbrmeContext;
 
-    handleDeletePerson = personId => {
+    handleDeletePerson = (e, personId) => {
+        e.stopPropagation();
         this.setState({error: null})
         RmbrApiService.deletePerson(personId)
             .then(this.context.deletePerson(personId))
@@ -32,7 +27,7 @@ export default class PersonListItem extends Component {
                     error: res.error
                 })
             })
-    }
+    };
 
     render() {
         // console.log(this.props.person.date_created)
@@ -47,7 +42,8 @@ export default class PersonListItem extends Component {
 
 
     return (
-        <Link to={`/person/${this.props.person.id}`}>
+        <>
+            <Link to={`/person/${this.props.person.id}`}>
             <li
                 key={this.props.person.id}
                 className='PersonListItem'
@@ -59,51 +55,24 @@ export default class PersonListItem extends Component {
                 >
                     { !arrayLength ? `No Rmbrs Yet!` : `` }
                     <div>
-                        <div>{ PersonRmbrList }</div>
+                        { PersonRmbrList }
                         <div>
-                            { !arrayLength
-                                ? ''
-                                : format(new Date(this.props.rmbrArray.find(rbr => rbr.person_id === this.props.person.id).date_created), 'MMM, do Y')
-                            }
+                            {/*{ !arrayLength*/}
+                            {/*    ? ''*/}
+                            {/*    : format(new Date(this.context.rmbrArray.find(rbr => rbr.person_id === this.props.person.id).date_created), 'MMM, do Y')*/}
+                            {/*}*/}
                         </div>
                     </div>
                 </div>
-
-                        <button
-                            className='personListItem__button'
-                            onClick={() => this.handleDeletePerson(this.props.person.id)}
-                        >
-                            <FontAwesomeIcon icon='trash-alt' /><span> Delete</span>
-                        </button>
-
             </li>
         </Link>
+            <button
+                className='list_delete_button person_list_db'
+                onClick={(e) => this.handleDeletePerson(e, this.props.person.id)}
+            >
+                <FontAwesomeIcon icon='trash-alt' />
+            </button>
+        </>
         )
     }
-};
-
-function PersonStyle({ person }) {
-    return (
-        <span>
-            { person.style }
-        </span>
-    )
-};
-
-function PersonAddedDate({ person }) {
-    return (
-        <span>
-            <NiceDate/>
-        </span>
-    )
-};
-
-function PersonRmbrCount({ person }) {
-    return (
-        <span>
-            <span>
-                {'2'}
-            </span>
-        </span>
-    )
 };

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import RmbrApiService from "../../services/rmbr-api-service";
-import PersonContext from "../../contexts/PersonContext";
+import RmbrmeContext from "../../contexts/RmbrmeContext";
 import {Input} from "../Utils/Utils";
 
 export default class EditPersonForm extends Component {
@@ -17,7 +17,7 @@ export default class EditPersonForm extends Component {
         }
     }
 
-    static contextType = PersonContext;
+    static contextType = RmbrmeContext;
 
     handleHideForm = e => {
         this.props.onHideEditForm()

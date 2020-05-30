@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 
-import { Textarea, Input } from '../Utils/Utils';
-import { Link } from "react-router-dom";
+import { Input } from '../Utils/Utils';
 import RmbrApiService from "../../services/rmbr-api-service";
-import PersonContext from "../../contexts/PersonContext";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import './AddPersonForm.css'
+import RmbrmeContext from "../../contexts/RmbrmeContext";
 
 export default class AddPersonForm extends Component {
 
@@ -15,51 +11,45 @@ export default class AddPersonForm extends Component {
         this.state = {
             formPersonName: '',
             selectedOption: 'Friend'
-        }
+        };
     }
 
-    static contextType = PersonContext;
+    static contextType = RmbrmeContext;
 
-    handleOptionChange = changeEvent => {
+    handleInputChange = (event) => {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
         this.setState({
-            selectedOption: changeEvent.target.value
-        })
-    }
-
-    handleNameChange = changedName => {
-        this.setState({
-            formPersonName: changedName.target.value
-        })
+            [name]: value
+        });
     }
 
     renderCategoryOptions() {
-        return (
-            <>
-                <label><input
-    type='radio'
-    value='Friend'
-    checked={this.state.selectedOption === 'Friend'}
-    onChange={this.handleOptionChange}
-    />Friend</label>
-                    <label><input
-    type='radio'
-    value='Family'
-    className='middle_imput_button'
-    checked={this.state.selectedOption === 'Family'}
-    onChange={this.handleOptionChange}
-    />Family</label>
-                    <label><input
-    type='radio'
-    value='Co-Worker'
-    checked={this.state.selectedOption === 'Co-Worker'}
-    onChange={this.handleOptionChange}
-    />Co-Worker</label>
-            </>
-        )
+        const CategoryOptions = ['Friend', 'Co-Worker', 'Family']
+        return CategoryOptions.map((option, index) => {
+            return (
+                <label
+                    htmlFor={option}
+                    key={index}
+                >
+                    <input
+                        name='selectedOption'
+                        type='radio'
+                        value={option}
+                        checked={this.state.selectedOption === option}
+                        onChange={(e) => this.handleInputChange(e)}
+                    />
+                    {option}
+                </label>
+            );
+
+        });
+
     }
 
-    handleSubmit = ev => {
-        ev.preventDefault()
+    handleSubmit = (e) => {
+        e.preventDefault()
         this.setState({ error: null })
         const person_name = this.state.formPersonName
         const user_id = RmbrApiService.getUserId()
@@ -68,6 +58,7 @@ export default class AddPersonForm extends Component {
         RmbrApiService.postPerson(newPerson)
             .then(res => {
                 this.context.addPerson(res)
+                this.setState({formPersonName: ''})
             })
             .catch(res => {
                 this.setState({error: res.error})
@@ -80,10 +71,11 @@ export default class AddPersonForm extends Component {
                 <legend>Add Person</legend>
                 <div>
                     <Input
-                        name='personName'
+                        name='formPersonName'
                         id='personName'
                         placeholder='Type Person Here'
-                        onChange={this.handleNameChange}
+                        value={this.state.formPersonName}
+                        onChange={(e) => this.handleInputChange(e)}
                     />
                 </div>
                 <div className='add_person_radio_options'>
@@ -93,8 +85,6 @@ export default class AddPersonForm extends Component {
                     <button>Submit</button>
                 </div>
             </form>
-
-
         )
     }
 }

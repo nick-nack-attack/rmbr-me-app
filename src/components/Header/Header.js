@@ -4,7 +4,7 @@ import { Hyph } from "../Utils/Utils";
 import TokenService from '../../services/token-service'
 import IdleService from "../../services/idle-service";
 import './Header.css'
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 class Header extends Component {
 
@@ -16,7 +16,6 @@ class Header extends Component {
     };
 
     renderLogoutLink() {
-        console.log('renderLogoutLink ran');
         return (
             <div className='Header__logged-in'>
                 <Link
@@ -30,7 +29,6 @@ class Header extends Component {
     };
 
     renderLoginLink() {
-        console.log('renderLoginLink ran');
         return (
             <div className='Header__not-logged-in'>
                 <Link
@@ -47,22 +45,23 @@ class Header extends Component {
     };
 
     render() {
-        return <>
-            <nav className='Header'>
-                <h1>
-                    <Link to={TokenService.hasAuthToken() ? '/' : '/'}>
-                        {' '}
-                        rmbr me
-                    </Link>
-                </h1>
-                <span className='Header__tagline--wide'>Be a Better Buddy</span>
-                { TokenService.hasAuthToken()
-                    ? this.renderLogoutLink()
-                    : this.renderLoginLink() }
-            </nav>
-
-            <span className='Header__tagline--narrow'> </span>
-        </>
+        return (
+            <>
+                <nav className='Header'>
+                    <h1>
+                        <Link to={TokenService.hasAuthToken() ? '/' : '/'}>
+                            {' '}
+                            rmbrme
+                        </Link>
+                    </h1>
+                    <span className='Header__tagline--wide'>Be a Better Buddy</span>
+                        { TokenService.hasAuthToken()
+                            ? this.renderLogoutLink()
+                            : this.renderLoginLink() }
+                    </nav>
+                    <span className='Header__tagline--narrow'> </span>
+            </>
+        )
     }
 }
 

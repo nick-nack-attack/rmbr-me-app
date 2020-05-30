@@ -40,11 +40,11 @@ export default class UserLoggedOut extends Component {
                             <input placeholder="First Name" type="text" name="first-name" id="first-name"/>
                         </div>
                         <div>
-                            <label for="username">Email</label>
+                            <label htmlFor="username">Email</label>
                             <input type="text" name="username" id="username"/>
                         </div>
                         <div>
-                            <label for="password">Password</label>
+                            <label htmlFor="password">Password</label>
                             <input type="password" name="password" id="password"/>
                         </div>
                         <div>

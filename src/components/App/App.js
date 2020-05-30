@@ -5,7 +5,6 @@ import Header from "../Header/Header";
 import PrivateRoute from "../Utils/PrivateRoute";
 import PublicRoute from "../Utils/PublicRoute";
 
-import Root from '../../routes/Root/Root';
 import PersonPage from '../../routes/PersonPage/PersonPage'
 import LogInPage from '../../routes/LogInPage/LogInPage'
 import SignUpPage from '../../routes/SignUpPage/SignUpPage'
@@ -39,7 +38,7 @@ export default class App extends Component {
 
   componentWillUnmount() {
     IdleService.unregisterIdleResets()
-    TokenService.queueCallbackBeforeExpiry()
+    TokenService.clearCallbackBeforeExpiry()
   };
 
   logoutFromIdle = () => {
@@ -50,17 +49,14 @@ export default class App extends Component {
   };
 
   renderMainPage = () => {
-    return !window.localStorage.user_id
-        ? UserLoggedOut
-        : PersonList
+    return TokenService.hasAuthToken()
+        ? PersonList
+        : UserLoggedOut
   }
 
   render() {
 
     const mainPage = this.renderMainPage()
-    const getUserLoggedIn = window.localStorage.getItem('isLoggedIn')
-    console.log('logged in?', getUserLoggedIn)
-    console.log('mainPage is:', mainPage)
     return (
       <div className="App">
         <header className='App__header'>

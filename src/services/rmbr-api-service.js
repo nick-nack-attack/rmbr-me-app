@@ -17,10 +17,11 @@ const RmbrApiService = {
 
     getPersonByUserId(user_id) {
         return fetch(`${config.API_ENDPOINT}/person/user/${user_id}`, {
-            method: 'GET'
-            // headers: {
-            //     'Authorization': `bearer ${TokenService.getAuthToken()}`
-            // }
+            method: 'GET',
+            headers: {
+                'Authorization': `bearer ${TokenService.getAuthToken()}`,
+                'content-type': 'application/json'
+            }
         })
             .then(res => 
                 (!res.ok) 
@@ -32,6 +33,7 @@ const RmbrApiService = {
         return fetch(`${config.API_ENDPOINT}/person/${person_id}`, {
             method: 'GET',
             headers: {
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
                 'content-type': 'application/json'
             }
         })
@@ -42,8 +44,8 @@ const RmbrApiService = {
         return fetch(`${config.API_ENDPOINT}/person/${person_id}/rmbr`, {
             method: 'GET',
             headers: {
-                'content-type': 'application/json',
-                // 'Authorization': `bearer ${TokenService.getAuthToken()}`
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+                'content-type': 'application/json'
             }
         })
             .then(res => 
@@ -56,8 +58,8 @@ const RmbrApiService = {
         return fetch (`${config.API_ENDPOINT}/rmbr/user/${user_id}`, {
             method: 'GET',
             headers: {
-                'content-type': 'application/json',
-                'Authorization': `bearer ${TokenService.getAuthToken()}`
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+                'content-type': 'application/json'
             }
         })
         .then(res =>
@@ -70,8 +72,8 @@ const RmbrApiService = {
         return fetch (`http://localhost:8000/api/person`, {
             method: 'POST',
             headers: {
-                'content-type': 'application/json',
-                'Authorization': `bearer ${TokenService.getAuthToken()}`
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+                'content-type': 'application/json'
             },
             body: JSON.stringify(newPerson)
         })
@@ -82,6 +84,7 @@ const RmbrApiService = {
         return fetch (`${config.API_ENDPOINT}/rmbr`, {
             method: 'POST',
             headers: {
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
                 'content-type': 'application/json'
             },
             body: JSON.stringify(newRmbr)
@@ -93,6 +96,7 @@ const RmbrApiService = {
         return fetch(`${config.API_ENDPOINT}/rmbr/${rmbrId}`, {
             method: 'DELETE',
             headers: {
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
                 'content-type': 'application/json'
             },
         })
@@ -104,6 +108,7 @@ const RmbrApiService = {
         return fetch(`${config.API_ENDPOINT}/rmbr/${rmbr_id}`, {
             method: 'PATCH',
             headers: {
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
                 'content-type': 'application/json'
             },
             body: JSON.stringify(rmbrFields)
@@ -114,6 +119,7 @@ const RmbrApiService = {
         return fetch(`${config.API_ENDPOINT}/person/${person_id}`, {
             method: 'PATCH',
             headers: {
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
                 'content-type': 'application/json'
             },
             body: JSON.stringify(personToUpdate)
@@ -124,6 +130,7 @@ const RmbrApiService = {
         return fetch(`${config.API_ENDPOINT}/person/${personId}`, {
             method: 'DELETE',
             headers: {
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
                 'content-type': 'application/json'
             }
         })

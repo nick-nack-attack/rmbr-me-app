@@ -1,8 +1,6 @@
 import jwtDecode from 'jwt-decode'
 import config from '../config'
-import UserContext from "../contexts/UserContext";
 
-let contextType = UserContext;
 let _timeoutId
 const _TEN_SECONDS_IN_MS = 10000
 
@@ -11,14 +9,14 @@ const TokenService = {
     saveAuthToken(token) {
         window.localStorage.setItem(config.TOKEN_KEY, token)
     },
+    saveUserId(user_id) {
+        window.localStorage.setItem('user_id', user_id)
+    },
     getAuthToken() {
         return window.localStorage.getItem(config.TOKEN_KEY)
     },
     clearAuthToken() {
-        console.info('clearing the auth token')
         window.localStorage.removeItem(config.TOKEN_KEY)
-        window.localStorage.removeItem('user_id')
-        window.localStorage.removeItem('isLoggedIn')
     },
     hasAuthToken() {
         return !!TokenService.getAuthToken()

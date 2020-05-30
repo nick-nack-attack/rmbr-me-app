@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import PersonContext from "../../contexts/PersonContext";
 import RmbrApiService from '../../services/rmbr-api-service';
-import { Section } from "../../components/Utils/Utils";
 import PersonListItem from "../../components/PersonListItem/PersonListItem";
 import AddPersonForm from '../../components/AddPersonForm/AddPersonForm'
 import { findRmbrByPersonId } from "../../helpers";
+import RmbrmeContext from "../../contexts/RmbrmeContext";
 
 export default class PersonList extends Component {
 
-    static contextType = PersonContext;
+    static contextType = RmbrmeContext;
 
     componentDidMount() {
         this.context.clearError()
-        const user_id = window.localStorage.getItem('user_id');
+        const user_id = window.localStorage.getItem('user_id')
         RmbrApiService.getPersonByUserId(user_id)
             .then(this.context.setPersonArray)
             .catch(this.context.setError)
@@ -24,8 +23,9 @@ export default class PersonList extends Component {
     renderPeople() {
         const { personArray = [] } = this.context
         const { rmbrArray = [] } = this.context
-        return personArray.map(person =>
+        return personArray.map((person, index) =>
             <PersonListItem
+                key={index}
                 person={person}
                 rmbrArray={findRmbrByPersonId(rmbrArray, person.id)}
             />

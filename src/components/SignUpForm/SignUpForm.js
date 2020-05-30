@@ -1,54 +1,57 @@
 import React, { Component } from 'react'
-import { Input, Required } from '../Utils/Utils'
 import AuthApiService from "../../services/auth-api-service";
-import UserContext from "../../contexts/UserContext";
-
-import Button from '@material-ui/core/Button';
+import { Button, Section, Input, Required } from '../Utils/Utils'
+import RmbrmeContext from "../../contexts/RmbrmeContext";
 
 export default class SignUpForm extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            error: null
+        }
+    };
 
     static defaultProps = {
         onSignUpSuccess: () => {}
     };
 
-    static contextType = UserContext;
-
-    state = {
-        error: null
-    };
+    static contextType = RmbrmeContext;
 
     handleSubmit = ev => {
         ev.preventDefault()
         const { user_name, password } = ev.target
-
         this.setState({ error: null })
         AuthApiService.postUser({
             user_name: user_name.value,
             password: password.value
         })
-            .then(res => {
+            .then(user => {
                 user_name.value = ''
                 password.value = ''
-                this.context.setUserId(res.user_id, true);
+                this.context.setUserId(user.user_id);
                 this.props.onSignUpSuccess()
             })
-            .catch(r => {
-                this.setState({ error: r.error })
+            .catch(res => {
+                this.context.setError({ error: res.error })
             })
     }
 
     render() {
         const { error } = this.state;
         return (
+            <Section>
             <form
-                className='RegistrationForm'
+                className='SignUpForm'
                 onSubmit={this.handleSubmit}
             >
                 <div role='alert'>
                     {error && <p className='red'>{error}</p>}
                 </div>
                 <div className='user_name'>
-                    <label htmlFor='RegistrationForm__user_name'>
+                    <label
+                        htmlFor='RegistrationForm__user_name'
+                    >
                         User name <Required />
                     </label>
                     <Input
@@ -70,9 +73,10 @@ export default class SignUpForm extends Component {
                     </Input>
                 </div>
                 <Button type='submit'>
-                    Register
+                    Get started!
                 </Button>
             </form>
+            </Section>
         )
     }
 }

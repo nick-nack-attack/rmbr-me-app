@@ -1,11 +1,8 @@
 import React, { Component } from "react";
-import RmbrContext from "../../contexts/RmbrContext";
+import RmbrmeContext from "../../contexts/RmbrmeContext";
 import RmbrApiService from "../../services/rmbr-api-service";
 import RmbrListItem from '../RmbrListItem/RmbrListItem';
 import AddRmbrForm from '../AddRmbrForm/AddRmbrForm'
-import { countEachRmbr } from '../../helpers';
-import { NiceDate } from "../Utils/Utils";
-import { Button, Textarea } from "../Utils/Utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import './RmbrList.css'
 
@@ -18,13 +15,13 @@ export default class RmbrList extends Component {
         }
     }
 
-    static contextType = RmbrContext;
+    static contextType = RmbrmeContext;
 
     componentDidMount() {
         this.context.clearError()
         const person_id = this.props.person_id;
         RmbrApiService.getRmbrByPersonId(person_id)
-            .then( res => this.context.setRmbrList(res))
+            .then( res => this.context.setRmbrArray(res))
             .catch(err => console.log(err))
 
 
@@ -35,8 +32,8 @@ export default class RmbrList extends Component {
     }
 
     renderRmbrs = () => {
-        const rmbrList = this.context.rmbrList
-        return rmbrList.map(rmbr =>
+        const rmbrArray = this.context.rmbrArray;
+        return rmbrArray.map(rmbr =>
             <RmbrListItem
                 key={rmbr.id}
                 rmbr={rmbr}
@@ -49,7 +46,7 @@ export default class RmbrList extends Component {
     render() {
         const person_id = this.props.person_id;
         const user_id = this.props.user_id;
-        const numOfRmbrs = this.context.rmbrList.length
+        const numOfRmbrs = this.context.rmbrArray.length
         const { error } = this.context;
         return (
             <>

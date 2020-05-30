@@ -1,13 +1,10 @@
 import React, { Component } from "react";
-import RmbrContext from "../../contexts/RmbrContext";
+import RmbrmeContext from "../../contexts/RmbrmeContext";
 import RmbrApiService from "../../services/rmbr-api-service";
 import EditRmbrForm from "../EditRmbrForm/EditRmbrForm";
-import { NiceDate } from "../Utils/Utils";
-import { Button, Textarea } from "../Utils/Utils";
 import './RmbrListItem.css'
 import { format } from 'date-fns'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import moment from "moment";
 
 export default class RmbrListItem extends Component {
 
@@ -21,7 +18,7 @@ export default class RmbrListItem extends Component {
         }
     };
 
-    static contextType = RmbrContext;
+    static contextType = RmbrmeContext;
 
     handleDeleteRmbr = rmbrId => {
         this.setState({error: null});
@@ -39,72 +36,64 @@ export default class RmbrListItem extends Component {
         })
     };
 
-    handleEditRmbr = rmbrId => {
+    handleShowEditForm = selected => {
         this.setState({
-            autofocus: false,
+            autofocus: selected,
             editFormDisplayed: true
         })
     };
 
-    handleAddMoreDetails = () => {
-        this.setState({
-            autofocus: true,
-            editFormDisplayed: true
-        })
-    }
-
     renderRmbr = () => {
-        //format(new Date(this.props.rmbrArray.find(rbr => rbr.person_id === this.props.person.id).date_created), 'MMM, do Y')
-        //format(new Date(dateCreated), 'MMM, do Y')
         const dateCreated = this.props.rmbr.date_created
         return (
-            <div>
-                <header className='rmbr_item_header'>
-                    <h4><b> {this.props.rmbr.rmbr_title} </b></h4>
-                    <h5 className='rmbr_added_label'>
-                        <span><FontAwesomeIcon icon='bolt'/></span>
-                        <span>
+            <>
+            <div className="Rmbr">
+                <div className="rmbr_header_wrapper">
+                    <div className="rmbr_title">
+                        <h4>
+                            { this.props.rmbr.rmbr_title }
+                            <span className='edit_title_inline_button'>
+                                <button onClick={() => this.handleShowEditForm(true)}><FontAwesomeIcon icon='pen' /></button>
+                            </span>
+                        </h4>
+                        <h5 className='rmbr_added_label'>
+                            <span><FontAwesomeIcon id='date_added_bolt' icon='bolt'/></span>
+                            <span>
                             { dateCreated
-                                ? format(new Date(dateCreated), 'MMM, do Y')
+                                ? format(new Date(dateCreated), 'MMM d, Y')
                                 : 'Rmbr'
                             }
-
                         </span>
-                    </h5>
-                    <p>
-                        { this.props.rmbr.rmbr_text }
-                    </p>
-                </header>
-                <div className={'rmbr_item_button_bar'}>
-                    <button
-                        onClick={() => this.handleEditRmbr()}
-                    >
+                        </h5>
+                    </div>
+                </div>
+                <div className="rmbr_description">
+                    <p>{ this.props.rmbr.rmbr_text }</p>
+                </div>
+                <div className='rmbr_add_details_button'>
+                    <button onClick={() => this.handleShowEditForm(false)}>
                         <span>
-                            <FontAwesomeIcon icon='plus'/>
-                            Add Details
+                            <FontAwesomeIcon
+                            className='inline_before_icon'
+                                icon='plus'
+                            />
+                                Add Details
                         </span>
-                    </button>
-                    <button
-                        onClick={() => this.handleAddMoreDetails()}
-                    >
-                        <span>
-                            <FontAwesomeIcon icon='pen' />
-                            Edit
-                        </span>
-                    </button>
-                    <button
-                        onClick={() => this.handleDeleteRmbr()}
-                        className='rmbr_list_item_delete_button'
-                    >
-                        <FontAwesomeIcon icon='trash-alt' />
                     </button>
                 </div>
+                <button
+                    onClick={() => this.handleDeleteRmbr()}
+                    className='list_delete_button rmbr_list_db'
+                >
+                    <FontAwesomeIcon icon='trash-alt' />
+                </button>
             </div>
+
+                </>
         )
     };
 
     render() {
-
         return (
             <li key={this.props.id} className='Rmbr_list_item'>
                 { this.state.editFormDisplayed === true
@@ -119,3 +108,6 @@ export default class RmbrListItem extends Component {
         )
     }
 }
+
+//format(new Date(this.props.rmbrArray.find(rbr => rbr.person_id === this.props.person.id).date_created), 'MMM, do Y')
+//format(new Date(dateCreated), 'MMM, do Y')

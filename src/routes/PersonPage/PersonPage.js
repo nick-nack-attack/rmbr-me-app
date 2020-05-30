@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import PersonContext from "../../contexts/PersonContext";
 import RmbrApiService from "../../services/rmbr-api-service";
 import RmbrList from '../../components/RmbrList/RmbrList'
-import { NiceDate, Hyph, Section } from "../../components/Utils/Utils";
 import EditPersonForm from "../../components/EditPersonForm/EditPersonForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Button } from "../../components/Utils/Utils";
+import RmbrmeContext from "../../contexts/RmbrmeContext";
+import { findPersonById } from '../../helpers'
 
 
 export default class PersonPage extends Component {
@@ -14,17 +15,17 @@ export default class PersonPage extends Component {
         super(props);
         this.state = {
             editFormDisplayed: false,
+            person_id: this.props.match.params.person_id
         }
     };
 
-    static contextType = PersonContext;
+    static contextType = RmbrmeContext;
 
     componentDidMount() {
-       const person_id = this.props.match.params.person_id;
-       this.context.clearError();
-       this.context.setPersonId(person_id)
-       RmbrApiService.getPersonByPersonId(person_id)
-           .then( person => this.context.setPerson(person))
+       RmbrApiService.getPersonByPersonId(this.state.person_id)
+           .then( person => {
+               this.context.setSelectedPerson(person)
+           })
            .catch(err => {
                this.context.setError(err)
             })
@@ -56,10 +57,9 @@ export default class PersonPage extends Component {
     };
 
     render() {
-
         const person_id = this.props.match.params.person_id;
-        const person_name = this.context.person.person_name;
-        const type_of_person = this.context.person.type_of_person;
+        const person_name = this.context.selected_person.person_name
+        const type_of_person = this.context.selected_person.type_of_person || '';
         const { error } = this.context;
 
         return (
@@ -68,20 +68,23 @@ export default class PersonPage extends Component {
                     { !this.state.editFormDisplayed
                         ?   <>
                                 <div className='person_page_header'>
-                                    <h2> {person_name} </h2>
+                                    <h2>
+                                        {person_name}
+                                        <span className='edit_title_inline_button'>
+                                            <button
+                                                onClick={() => this.handleEditPerson(person_id)}
+                                            >
+                                                <FontAwesomeIcon icon='pen' />
+                                            </button>
+                                        </span>
+                                    </h2>
                                     <h3> {type_of_person} </h3>
                                 </div>
-                                <div>
-                                    <button
-                                        onClick={() => this.handleEditPerson(this.props.match.params.person_id)}
-                                    >
-                                        <FontAwesomeIcon icon='pen' />
-                                    </button>
+                                <div className='person_page_delete_button_div'>
                                     <button
                                         onClick={() => this.handleDeletePerson(person_id)}
-                                        className='personListItem__button'
                                     >
-                                        <FontAwesomeIcon icon='trash-alt' />
+                                        <FontAwesomeIcon icon='trash-alt' /><span> Delete Person</span>
                                     </button>
                                 </div>
                             </>
@@ -93,6 +96,12 @@ export default class PersonPage extends Component {
                             />
                     }
                 </header>
+                <Link to={'/'}>
+                <Button>
+                    <FontAwesomeIcon id='arrow-left' icon='arrow-left'/>
+                    Back to My People
+                </Button>
+                </Link>
                 <div>
                     { error
                         ?   <p className='red'>Could not load Rmbrs list</p>
@@ -103,7 +112,12 @@ export default class PersonPage extends Component {
                     }
                 <div>
                 <div>
-                    <Link to={'/'}><button>Back to My People</button></Link>
+                    <Link to={'/'}>
+                        <Button>
+                            <FontAwesomeIcon id='arrow-left' icon='arrow-left'/>
+                            Back to My People
+                        </Button>
+                    </Link>
                 </div>
             </div>
             </div>

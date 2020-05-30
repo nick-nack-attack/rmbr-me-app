@@ -1,11 +1,7 @@
 import React, {
     Component,
     createContext,
-    useReducer
 } from 'react';
-
-// Services
-import TokenService from "../services/token-service";
 
 let UserContext = createContext(({
     user_id: [],
@@ -13,31 +9,6 @@ let UserContext = createContext(({
 }));
 
 export default UserContext;
-
-let initialState = {
-    isLoggedIn: false,
-    fetched: false
-};
-
-let reducer = (state, action) => {
-    switch (action.type) {
-        // Logs the user in. Updates state about the user.
-        case 'login':
-            return {
-                isLoggedIn: true,
-                fetched: true
-            };
-        case 'logout':
-            // Logs the user out. Clears settings and info about user.
-            TokenService.clearAuthToken();
-            return {
-                isLoggedIn: false,
-                fetched: false
-            }
-        default:
-            return initialState
-    }
-};
 
 export class UserProvider extends Component {
 

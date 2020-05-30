@@ -8,7 +8,9 @@ export default class SignUpForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            error: null
+            error: null,
+            user_name: '',
+            password: ''
         }
     };
 
@@ -20,21 +22,31 @@ export default class SignUpForm extends Component {
 
     handleSubmit = ev => {
         ev.preventDefault()
-        const { user_name, password } = ev.target
         this.setState({ error: null })
-        AuthApiService.postUser({
-            user_name: user_name.value,
-            password: password.value
-        })
+        const user_name = this.state.user_name;
+        const password = this.state.password
+        const UserLogin = { user_name, password }
+        AuthApiService.postUser(UserLogin)
             .then(user => {
-                user_name.value = ''
-                password.value = ''
+                this.setState({
+                    user_name: '',
+                    password: ''
+                })
                 this.context.setUserId(user.user_id);
                 this.props.onSignUpSuccess()
             })
             .catch(res => {
-                this.context.setError({ error: res.error })
+                this.setState({ error: res.error })
             })
+    }
+
+    handleInputChange = (event) => {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+        this.setState({
+            [name]: value
+        });
     }
 
     render() {
@@ -45,9 +57,6 @@ export default class SignUpForm extends Component {
                 className='SignUpForm'
                 onSubmit={this.handleSubmit}
             >
-                <div role='alert'>
-                    {error && <p className='red'>{error}</p>}
-                </div>
                 <div className='user_name'>
                     <label
                         htmlFor='RegistrationForm__user_name'
@@ -58,7 +67,9 @@ export default class SignUpForm extends Component {
                         name='user_name'
                         type='text'
                         required
-                        id='RegistrationForm__user_name'>
+                        id='RegistrationForm__user_name'
+                        onChange={(e) => this.handleInputChange(e)}
+                    >
                     </Input>
                 </div>
                 <div className='password'>
@@ -69,12 +80,17 @@ export default class SignUpForm extends Component {
                         name='password'
                         type='password'
                         required
-                        id='RegistrationForm__password'>
+                        id='RegistrationForm__password'
+                        onChange={(e) => this.handleInputChange(e)}
+                    >
                     </Input>
                 </div>
                 <Button type='submit'>
                     Get started!
                 </Button>
+                <div role='alert'>
+                    {error && <p className='error_message'>{error}</p>}
+                </div>
             </form>
             </Section>
         )

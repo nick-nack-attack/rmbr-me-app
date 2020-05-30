@@ -9,7 +9,9 @@ export default class LogInForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            error: null
+            error: null,
+            user_name: '',
+            password: ''
         }
     };
 
@@ -22,12 +24,11 @@ export default class LogInForm extends Component {
     handleSubmitJwtAuth = ev => {
         ev.preventDefault()
         this.setState({ error: null })
-        const { user_name, password } = ev.target
+        const user_name = this.state.user_name;
+        const password = this.state.password
+        const UserLogin = { user_name, password }
 
-        AuthApiService.postLogin({
-            user_name: user_name.value,
-            password: password.value,
-        })
+        AuthApiService.postLogin(UserLogin)
             .then(res => {
                 user_name.value = ''
                 password.value = ''
@@ -39,6 +40,15 @@ export default class LogInForm extends Component {
                     error: res.error
                 })
             })
+    }
+
+    handleInputChange = (event) => {
+        const target = event.target;
+        const value = target.value;
+        const name = target.name;
+        this.setState({
+            [name]: value
+        });
     }
 
     render() {
@@ -55,7 +65,9 @@ export default class LogInForm extends Component {
                     <Input
                         required
                         name='user_name'
-                        id='LoginForm__user_name'>
+                        id='LoginForm__user_name'
+                        onChange={(e) => this.handleInputChange(e)}
+                    >
                     </Input>
                 </div>
                 <div className='password'>
@@ -66,12 +78,17 @@ export default class LogInForm extends Component {
                         required
                         name='password'
                         type='password'
-                        id='LoginForm__password'>
+                        id='LoginForm__password'
+                        onChange={(e) => this.handleInputChange(e)}
+                    >
                     </Input>
                 </div>
                 <Button type='submit'>
                     Login
                 </Button>
+                <div role='alert'>
+                    {error && <p className='error_message'>{error}</p>}
+                </div>
             </form>
         )
     }

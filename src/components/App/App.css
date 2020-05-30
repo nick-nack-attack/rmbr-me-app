@@ -205,3 +205,11 @@ button:hover {
     text-align: right;
     margin-right: 20px;
 }
+
+.error_message {
+    background-color: #CA1551;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    margin-top: 20px;
+}

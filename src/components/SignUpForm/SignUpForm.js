@@ -32,8 +32,11 @@ export default class SignUpForm extends Component {
                     user_name: '',
                     password: ''
                 })
-                this.context.setUserId(user.user_id);
-                this.props.onSignUpSuccess()
+                AuthApiService.postLogin(UserLogin)
+                    .then(res => {
+                        this.context.setUserId(res.id);
+                        this.props.onLoginSuccess()
+                    })
             })
             .catch(res => {
                 this.setState({ error: res.error })

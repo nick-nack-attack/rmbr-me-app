@@ -45,7 +45,7 @@ export default class LogInForm extends Component {
     handleInputChange = (event) => {
         const target = event.target;
         const value = target.value;
-        const name = target.name;
+        const name = target.getAttribute("name");
         this.setState({
             [name]: value
         });

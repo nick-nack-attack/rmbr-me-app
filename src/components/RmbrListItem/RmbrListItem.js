@@ -14,18 +14,19 @@ export default class RmbrListItem extends Component {
             onDeleteRmbrSuccess: () => {},
             editFormDisplayed: false,
             autofocus: false,
+            error: null,
             onCancelEdit: () => {}
         }
     };
 
     static contextType = RmbrmeContext;
 
-    handleDeleteRmbr = rmbrId => {
+    handleDeleteRmbr = rmbr_id => {
         this.setState({error: null});
-        RmbrApiService.deleteRmbr(rmbrId)
-            .then(this.context.deleteRmbr(rmbrId))
+        RmbrApiService.deleteRmbr(rmbr_id)
+            .then(this.context.deleteRmbr(rmbr_id))
             .catch(res => {
-                console.log('Error deleting Rmbr', res)
+                this.setState({error: 'Error deleting rmbr'})
                 })
     };
 
@@ -43,7 +44,7 @@ export default class RmbrListItem extends Component {
         })
     };
 
-    renderRmbr = () => {
+    renderRmbr = (rmbr_id) => {
         const dateCreated = this.props.rmbr.date_created
         return (
             <>
@@ -82,7 +83,7 @@ export default class RmbrListItem extends Component {
                     </button>
                 </div>
                 <button
-                    onClick={() => this.handleDeleteRmbr()}
+                    onClick={() => this.handleDeleteRmbr(rmbr_id)}
                     className='list_delete_button rmbr_list_db'
                 >
                     <FontAwesomeIcon icon='trash-alt' />
@@ -94,15 +95,17 @@ export default class RmbrListItem extends Component {
     };
 
     render() {
+        console.log('THE RMBRLISTITEM ID', this.props.id)
+        const rmbr_id = this.props.id
         return (
-            <li key={this.props.id} className='Rmbr_list_item'>
+            <li key={rmbr_id} className='Rmbr_list_item'>
                 { this.state.editFormDisplayed === true
                     ?   <EditRmbrForm
                             rmbr={this.props.rmbr}
                             autofocus={ this.state.autofocus }
                             onHideEditForm={e => this.onHideEditForm(e)}
                         />
-                    : this.renderRmbr()
+                    : this.renderRmbr(rmbr_id)
                 }
             </li>
         )

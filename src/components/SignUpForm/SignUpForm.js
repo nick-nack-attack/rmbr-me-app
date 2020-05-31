@@ -56,6 +56,8 @@ export default class SignUpForm extends Component {
         const { error } = this.state;
         return (
             <Section>
+                <h2>Sign Up</h2>
+                <p>I spent like 20 hours figuring out how to make this all secure and slick-like. No Email Verification Required. Lose your login. Your data is lost forever!</p>
             <form
                 className='SignUpForm'
                 onSubmit={this.handleSubmit}

@@ -32,13 +32,12 @@ class Header extends Component {
         return (
             <div className='Header__not-logged-in'>
                 <Link
-                    to='/sign-up'>
-                    Register
-                </Link>
-                <Hyph/>
-                <Link
                     to='/log-in'>
                     Log in
+                </Link>
+                <Link
+                    to='/sign-up'>
+                    Free Sign Up
                 </Link>
             </div>
         )
@@ -49,7 +48,7 @@ class Header extends Component {
             <>
                 <nav className='Header'>
                     <h1>
-                        <Link to={TokenService.hasAuthToken() ? '/' : '/'}>
+                        <Link to='/'>
                             {' '}
                             rmbrme
                         </Link>

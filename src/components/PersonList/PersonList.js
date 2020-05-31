@@ -4,6 +4,7 @@ import PersonListItem from "../../components/PersonListItem/PersonListItem";
 import AddPersonForm from '../../components/AddPersonForm/AddPersonForm'
 import { findRmbrByPersonId } from "../../helpers";
 import RmbrmeContext from "../../contexts/RmbrmeContext";
+import emptyStateForPersonList from '../../images/empty_people.png'
 
 export default class PersonList extends Component {
 
@@ -20,14 +21,29 @@ export default class PersonList extends Component {
             .catch(this.context.setError)
     };
 
+    onClickPerson = (person_id) => {
+        this.props.history.push(`/person/${person_id}`)
+    }
+
     renderPeople() {
         const { personArray = [] } = this.context
         const { rmbrArray = [] } = this.context
+
+        if (personArray.length === 0) {
+            return (
+                <div>
+                    <img src={emptyStateForPersonList}/>
+                    <p>Add a Person to start!</p>
+                </div>
+            )
+        }
+
         return personArray.map((person, index) =>
             <PersonListItem
                 key={index}
                 person={person}
                 rmbrArray={findRmbrByPersonId(rmbrArray, person.id)}
+                handleClickPerson={(person_id) => this.onClickPerson(person_id)}
             />
         )
     };

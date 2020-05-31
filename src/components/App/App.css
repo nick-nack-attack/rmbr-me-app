@@ -49,11 +49,11 @@ p {
 section {
     min-height: 200px;
     padding: 30px 30px;
-    background-color: #bbb;
+    background-color: #F6F6F6;
 }
 
 section:nth-child(even) {
-    background-color: #ddd;
+    background-color: #EBEBEB;
 }
 
 p + p {
@@ -202,7 +202,7 @@ button:hover {
 }
 
 .person_page_delete_button_div {
-    text-align: right;
+    float: right;
     margin-right: 20px;
 }
 
@@ -212,4 +212,19 @@ button:hover {
     padding: 10px;
     text-align: center;
     margin-top: 20px;
+}
+
+.landing_page_div {
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.SignUpForm, .LoginForm {
+    margin-top: 20px;
+}
+
+.back_to_root_button {
+    margin-top: 20px;
+    margin-bottom: 20px;
 }

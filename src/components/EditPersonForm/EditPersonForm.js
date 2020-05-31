@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import RmbrApiService from "../../services/rmbr-api-service";
 import RmbrmeContext from "../../contexts/RmbrmeContext";
-import {Input} from "../Utils/Utils";
+import { Input, Section } from "../Utils/Utils";
 
 export default class EditPersonForm extends Component {
 
@@ -71,41 +71,41 @@ export default class EditPersonForm extends Component {
         RmbrApiService.editPerson(person_id, newPerson)
             .then(res => res.json())
             .then(data => {
-                this.context.setPerson(data)
+                this.context.setSelectedPerson(data)
                 this.handleHideForm()
             })
             .catch(res => {
-                console.log('here is data on CATCH:',res)
                 this.setState({error: res.error})
             })
     }
 
     render() {
         return (
-            <form onSubmit={e => this.handleEditPersonSubmit(e)}>
-                <legend>Add Person</legend>
-                <div>
-                    <label>Name</label>
-                    <Input
-                        name='personName'
-                        id='personName'
-                        value={this.state.formPersonName}
-                        onChange={this.handleNameChange}
-                    />
-                </div>
-                <div>
-                    {this.renderCategoryOptions()}
-                </div>
-                <div>
-                    <button>Submit</button>
-                    <button
-                        onClick={() => this.handleHideForm()}
-                    >
-                        Cancel
-                    </button>
-                </div>
-            </form>
-
+            <Section>
+                <form onSubmit={e => this.handleEditPersonSubmit(e)}>
+                    <legend>Add Person</legend>
+                    <div>
+                        <label>Name</label>
+                        <Input
+                            name='personName'
+                            id='personName'
+                            value={this.state.formPersonName}
+                            onChange={this.handleNameChange}
+                        />
+                    </div>
+                    <div>
+                        {this.renderCategoryOptions()}
+                    </div>
+                    <div>
+                        <button>Submit</button>
+                        <button
+                            onClick={() => this.handleHideForm()}
+                        >
+                            Cancel
+                        </button>
+                    </div>
+                </form>
+            </Section>
 
         )
     }

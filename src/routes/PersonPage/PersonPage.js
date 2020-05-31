@@ -56,6 +56,18 @@ export default class PersonPage extends Component {
         })
     };
 
+    renderBackButton = () => {
+        return (
+            <Button
+                className='back_to_root_button'
+                onClick={() => this.props.history.push('/')}
+            >
+                <FontAwesomeIcon id='arrow-left' icon='arrow-left'/>
+                Back to My People
+            </Button>
+        )
+    }
+
     render() {
         const person_id = this.props.match.params.person_id;
         const person_name = this.context.selected_person.person_name
@@ -63,7 +75,7 @@ export default class PersonPage extends Component {
         const { error } = this.context;
 
         return (
-            <div>
+            <div key={person_id}>
                 <header>
                     { !this.state.editFormDisplayed
                         ?   <>
@@ -76,16 +88,16 @@ export default class PersonPage extends Component {
                                             >
                                                 <FontAwesomeIcon icon='pen' />
                                             </button>
-                                        </span>
-                                    </h2>
-                                    <h3> {type_of_person} </h3>
-                                </div>
-                                <div className='person_page_delete_button_div'>
+                                            <div className='person_page_delete_button_div'>
                                     <button
                                         onClick={() => this.handleDeletePerson(person_id)}
                                     >
                                         <FontAwesomeIcon icon='trash-alt' /><span> Delete Person</span>
                                     </button>
+                                </div>
+                                        </span>
+                                    </h2>
+                                    <h3> {type_of_person} </h3>
                                 </div>
                             </>
                         :   <EditPersonForm
@@ -96,12 +108,7 @@ export default class PersonPage extends Component {
                             />
                     }
                 </header>
-                <Link to={'/'}>
-                <Button>
-                    <FontAwesomeIcon id='arrow-left' icon='arrow-left'/>
-                    Back to My People
-                </Button>
-                </Link>
+                { this.renderBackButton() }
                 <div>
                     { error
                         ?   <p className='red'>Could not load Rmbrs list</p>
@@ -112,12 +119,7 @@ export default class PersonPage extends Component {
                     }
                 <div>
                 <div>
-                    <Link to={'/'}>
-                        <Button>
-                            <FontAwesomeIcon id='arrow-left' icon='arrow-left'/>
-                            Back to My People
-                        </Button>
-                    </Link>
+                    { this.renderBackButton() }
                 </div>
             </div>
             </div>

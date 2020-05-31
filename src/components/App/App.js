@@ -20,12 +20,14 @@ import PersonList from "../PersonList/PersonList";
 export default class App extends Component {
 
   state = {
-    hasError: false
+    hasError: false,
+    IdleOut: false
   };
 
   componentDidMount() {
     IdleService.setIdleCallback(this.logoutFromIdle)
     if (TokenService.hasAuthToken()) {
+      this.setState({IdleOut: false})
       IdleService.registerIdleTimerResets()
       TokenService.queueCallbackBeforeExpiry(() => {
         AuthApiService.postRefreshToken()
@@ -45,6 +47,7 @@ export default class App extends Component {
     TokenService.clearAuthToken()
     TokenService.clearCallbackBeforeExpiry()
     IdleService.unregisterIdleResets()
+    this.setState({IdleOut: true})
     this.forceUpdate()
   };
 
@@ -63,6 +66,10 @@ export default class App extends Component {
           <Header/>
         </header>
           <main className="App__main">
+            { this.state.IdleOut === true
+                ? <div role='alert'><p className='error_message'>You have been logged out due to inactivity</p></div>
+                : ""
+            }
             { this.state.hasError && <p className='red'>There was an error!</p> }
             <Switch>
               <Route

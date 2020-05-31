@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import AuthApiService from '../../services/auth-api-service'
-import { Button, Input } from '../Utils/Utils'
+import {Button, Input, Section} from '../Utils/Utils'
 import RmbrmeContext from "../../contexts/RmbrmeContext";
 import TokenService from '../../services/token-service'
 
@@ -11,12 +11,9 @@ export default class LogInForm extends Component {
         this.state = {
             error: null,
             user_name: '',
-            password: ''
+            password: '',
+            onLoginSuccess: () => {}
         }
-    };
-
-    static defaultProps = {
-        onLoginSuccess: () => {},
     };
 
     static contextType = RmbrmeContext;
@@ -29,10 +26,9 @@ export default class LogInForm extends Component {
         const UserLogin = { user_name, password }
 
         AuthApiService.postLogin(UserLogin)
-            .then(res => {
-                user_name.value = ''
-                password.value = ''
-                this.context.setUserId(res.user_id);
+            .then(() => {
+                this.state.user_name = ''
+                this.state.password = ''
                 this.props.onLoginSuccess()
             })
             .catch(res => {
@@ -54,6 +50,9 @@ export default class LogInForm extends Component {
     render() {
         const {error} = this.state;
         return (
+            <>
+                <h2>Log in</h2>
+                <p>Welcome back. Use this everyday because you won't be committing arson. You can't commit arson and use this app at the same time.</p>
             <form
                 className='LoginForm'
                 onSubmit={this.handleSubmitJwtAuth}
@@ -90,6 +89,7 @@ export default class LogInForm extends Component {
                     { error && <p className='error_message'>{error.message || error}</p> }
                 </div>
             </form>
+                </>
         )
     }
 }

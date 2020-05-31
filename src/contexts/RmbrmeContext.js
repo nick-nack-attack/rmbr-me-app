@@ -24,6 +24,7 @@ const RmbrmeContext = React.createContext({
             setSelectedRmbr: () => {},
             setRmbrArray: () => {},
             addRmbr: () => {},
+            addRmbrToArray: () => {},
             deleteRmbr: () => {},
             updateRmbrArray: () => {},
     // errors
@@ -90,6 +91,13 @@ export class RmbrmeProvider extends Component {
         this.setState({rmbr})
     };
 
+    addRmbrToArray = (rmbr) => {
+        this.setRmbrArray([
+            ...this.state.rmbrArray,
+            rmbr
+        ])
+    }
+
     deleteRmbr = (rmbr_id) => {
         this.setState({
             rmbrArray: this.state.rmbrArray.filter((rmbr) => rmbr.id !== rmbr_id)
@@ -135,6 +143,7 @@ export class RmbrmeProvider extends Component {
             setSelectedRmbr: this.setSelectedRmbr,
             setRmbrArray: this.setRmbrArray,
             addRmbr: this.addRmbr,
+            addRmbrToArray: this.addRmbrToArray,
             deleteRmbr: this.deleteRmbr,
             updateRmbrArray: this.updateRmbrArray,
             // errors

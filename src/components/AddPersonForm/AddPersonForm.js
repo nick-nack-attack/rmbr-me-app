@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-
-import { Input } from '../Utils/Utils';
+import { Input, Button } from '../Utils/Utils';
 import RmbrApiService from "../../services/rmbr-api-service";
 import RmbrmeContext from "../../contexts/RmbrmeContext";
 
@@ -82,7 +81,7 @@ export default class AddPersonForm extends Component {
                     {this.renderCategoryOptions()}
                 </div>
                 <div>
-                    <button>Submit</button>
+                    <Button>Submit</Button>
                 </div>
             </form>
         )

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input } from '../Utils/Utils';
+import { Input, Button } from '../Utils/Utils';
 import RmbrApiService from "../../services/rmbr-api-service";
 import RmbrmeContext from "../../contexts/RmbrmeContext";
 
@@ -27,17 +27,19 @@ export default class AddRmbrForm extends Component {
         // this.context.addRmbr
         e.preventDefault()
         this.setState({error: null});
-        const rmbr_title = this.state.rmbrTitle
-        const person_id = this.props.person_id
-        const user_id = this.context.user_id
-        const newRmbr = { rmbr_title, person_id, user_id };
+        const rmbr_title = this.state.rmbrTitle;
+        const rmbr_text = ''
+        const person_id = this.props.person_id;
+        const user_id = window.localStorage.getItem('user_id');
+        const category = 'Past';
+        const newRmbr = { rmbr_title, category, rmbr_text, person_id, user_id };
         RmbrApiService.postRmbr(newRmbr)
             .then(() => {
                 this.context.addRmbr(newRmbr)
                 this.setState({
                     rmbrTitle: ''
                 })
-                this.state.onAddRmbrSuccess(newRmbr)
+                this.props.onAddRmbrSuccess(newRmbr)
             })
             .catch(res => {
                 this.setState({
@@ -60,7 +62,7 @@ export default class AddRmbrForm extends Component {
                         onChange={this.handleTitleChange}
 
                     />
-                    <button>Submit</button>
+                    <Button>Submit</Button>
                 </div>
             </form>
         )

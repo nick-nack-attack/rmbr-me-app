@@ -41,21 +41,17 @@ export default class EditRmbrForm extends Component {
         const rmbr_title = this.state.rmbrTitle
         const rmbr_text = this.state.rmbrText
         const person_id = this.props.rmbr.person_id
-        const user_id = this.context.user_id
+        const user_id = window.localStorage.getItem('user_id')
         const rmbr_id = this.props.rmbr.id
         const category = this.props.rmbr.category
         const EditedRmbr = { rmbr_title, rmbr_text, person_id, user_id, category, rmbr_id };
-        console.log(EditedRmbr)
         RmbrApiService.editRmbr(rmbr_id, EditedRmbr)
             .then(res => res.json())
             .then(data => {
-                console.log('data is: ', data)
-                console.log('person id is: ', person_id)
-                this.context.setRmbrList(findRmbrByPersonId(data, person_id))
+                this.context.setRmbrArray(findRmbrByPersonId(data, person_id))
                 this.handleHideForm()
             })
             .catch(err => {
-                console.log('BIG ERROR!', err)
                 this.setState({
                     error:err.error
                 })

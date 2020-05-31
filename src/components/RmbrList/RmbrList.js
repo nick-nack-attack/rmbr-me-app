@@ -21,9 +21,10 @@ export default class RmbrList extends Component {
         this.context.clearError()
         const person_id = this.props.person_id;
         RmbrApiService.getRmbrByPersonId(person_id)
-            .then( res => this.context.setRmbrArray(res))
+            .then( res => {
+                this.context.setRmbrArray(res)
+            })
             .catch(err => console.log(err))
-
 
     };
 
@@ -31,11 +32,17 @@ export default class RmbrList extends Component {
         console.log('onDeleteRmbrSuccess ran!', rmbrId)
     }
 
+    handleAddRmbrSuccess = (rmbr) => {
+        this.context.addRmbrToArray(rmbr)
+            .catch(err => console.log(err))
+
+    }
+
     renderRmbrs = () => {
         const rmbrArray = this.context.rmbrArray;
         return rmbrArray.map(rmbr =>
             <RmbrListItem
-                key={rmbr.id}
+                id={rmbr.id}
                 rmbr={rmbr}
                 onDeleteRmbrSuccess={rmbrId => this.onDeleteRmbrSuccess(rmbrId)}
                 className='rmbr_list_item'
@@ -48,16 +55,13 @@ export default class RmbrList extends Component {
         const user_id = this.props.user_id;
         const numOfRmbrs = this.context.rmbrArray.length
         const { error } = this.context;
+        const rmbrOrRmbrsLabel = <span>{numOfRmbrs === 0 ? 'No Rmbrs yet! ' : numOfRmbrs === 1 ? numOfRmbrs + ' Rmbr ' : numOfRmbrs + ' Rmbrs '}</span>
         return (
             <>
                 <ul className='rmbr__list'>
                     <h3>
                         <span>
-                            {numOfRmbrs === 0
-                                ? 'No Rmbrs yet! '
-                                : numOfRmbrs === 1
-                                    ? numOfRmbrs + ' Rmbr '
-                                    : numOfRmbrs + ' Rmbrs '}
+                            { rmbrOrRmbrsLabel }
                         </span>
                         <span><FontAwesomeIcon icon='bolt'/></span>
                     </h3>
@@ -69,6 +73,7 @@ export default class RmbrList extends Component {
                 <AddRmbrForm
                     person_id={person_id}
                     user_id={user_id}
+                    onAddRmbrSuccess={(rmbr) => this.handleAddRmbrSuccess(rmbr)}
                 />
             </>
 

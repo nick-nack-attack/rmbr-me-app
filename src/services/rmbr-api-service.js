@@ -69,7 +69,7 @@ const RmbrApiService = {
     },
 
     postPerson(newPerson) {
-        return fetch (`http://localhost:8000/api/person`, {
+        return fetch (`${config.API_ENDPOINT}/person`, {
             method: 'POST',
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,

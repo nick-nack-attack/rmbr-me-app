@@ -30,7 +30,6 @@ export default class LogInForm extends Component {
 
         AuthApiService.postLogin(UserLogin)
             .then(res => {
-                console.log('this is the res', res)
                 user_name.value = ''
                 password.value = ''
                 this.context.setUserId(res.user_id);
@@ -54,7 +53,6 @@ export default class LogInForm extends Component {
 
     render() {
         const {error} = this.state;
-        console.log(error)
         return (
             <form
                 className='LoginForm'

@@ -28,13 +28,13 @@ export default class SignUpForm extends Component {
         const UserLogin = { user_name, password }
         AuthApiService.postUser(UserLogin)
             .then(user => {
+                this.context.setUserId(user.id);
                 this.setState({
                     user_name: '',
                     password: ''
                 })
                 AuthApiService.postLogin(UserLogin)
                     .then(res => {
-                        this.context.setUserId(res.id);
                         this.props.onLoginSuccess()
                     })
             })
@@ -92,7 +92,7 @@ export default class SignUpForm extends Component {
                     Get started!
                 </Button>
                 <div role='alert'>
-                    {error && <p className='error_message'>{error}</p>}
+                    { error && <p className='error_message'>{error.message || error}</p> }
                 </div>
             </form>
             </Section>

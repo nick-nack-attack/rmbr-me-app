@@ -1,19 +1,10 @@
 import React from "react";
-import { format as formatDate } from 'date-fns';
 import { format } from 'date-fns';
 import './Utils.css'
 
 export default function PrettyDate(oldDate) {
     return format(new Date(oldDate), 'MMM d')
 }
-
-export function NiceDate({ date, format='Do MMMM YYYY' }) {
-    return formatDate(date, format)
-};
-
-export function Hyph() {
-    return <span className='Hyph'>{' - '}</span>
-};
 
 export function Button({ className, ...props }) {
     return <button className={['Button', className].join(' ')} {...props} />

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import AuthApiService from "../../services/auth-api-service";
-import { Button, Section, Input, Required } from '../Utils/Utils'
+import { Button, Section, Input, Required } from '../Utils/Utils';
+import ErrorMsg from "../Utils/ErrorMsg";
 import RmbrmeContext from "../../contexts/RmbrmeContext";
+
 
 export default class SignUpForm extends Component {
 
@@ -91,8 +93,9 @@ export default class SignUpForm extends Component {
                 <Button type='submit'>
                     Get started!
                 </Button>
+                <ErrorMsg message={error.message || error}/>
                 <div role='alert'>
-                    { error && <p className='error_message'>{error.message || error}</p> }
+                    { error && <ErrorMsg message={error.message || error}/> }
                 </div>
             </form>
         )

@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import never_forget from '../../images/never_forget.png'
 import listening_skills from '../../images/listening_skills.png'
 import have_better from '../../images/have_better.png'
+import {Section} from '../Utils/Utils'
 
-export default class UserLoggedOut extends Component {
+export default class LandingPage extends Component {
 
     handleSignUpNowClick = () => {
         const { history } = this.props
@@ -13,10 +14,10 @@ export default class UserLoggedOut extends Component {
 
     render() {
         return (
-            <div className='landing_page_div'>
-                <header>
+            <Section className='landing_page_section'>
+                <header className='landing_page_header'>
                     <h1>rmbrme</h1>
-                    <h2>be a better buddy and bro</h2>
+                    <h2>be a better buddy</h2>
                 </header>
                 <section>
                     <img src={listening_skills}/>
@@ -35,21 +36,22 @@ export default class UserLoggedOut extends Component {
                 <section>
                     <img src={have_better}/>
                     <header>
-                        <h3>Have better relationships</h3>
+                            <h3>Have better relationships</h3>
                     </header>
                     <p>People will appreciate you more as you remember more about them.</p>
                 </section>
                 <section>
-                    <header>
-                        <h3>Start remembering now!</h3>
+                    <header className='sign_up_cta'>
+                        <h3>No more forgetting or regretting</h3>
                     </header>
                     <button
                         onClick={() => this.handleSignUpNowClick()}
+                        className='sign_up_button'
                     >
                         Sign Up Now
                     </button>
                 </section>
-            </div>
+            </Section>
 
         )
 

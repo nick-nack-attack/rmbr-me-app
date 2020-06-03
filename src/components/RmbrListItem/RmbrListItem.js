@@ -3,8 +3,8 @@ import RmbrmeContext from "../../contexts/RmbrmeContext";
 import RmbrApiService from "../../services/rmbr-api-service";
 import EditRmbrForm from "../EditRmbrForm/EditRmbrForm";
 import './RmbrListItem.css'
-import { format } from 'date-fns'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import PrettyDate from "../Utils/Utils";
 
 export default class RmbrListItem extends Component {
 
@@ -61,7 +61,7 @@ export default class RmbrListItem extends Component {
                             <span><FontAwesomeIcon id='date_added_bolt' icon='bolt'/></span>
                             <span>
                             { dateCreated
-                                ? format(new Date(dateCreated), 'MMM d, Y')
+                                ? PrettyDate(dateCreated)
                                 : 'Rmbr'
                             }
                         </span>
@@ -81,13 +81,13 @@ export default class RmbrListItem extends Component {
                                 Add Details
                         </span>
                     </button>
+                    <button
+                        onClick={() => this.handleDeleteRmbr(rmbr_id)}
+                        className='rmbr_list_delete-button'
+                    >
+                        <FontAwesomeIcon icon='trash-alt' />
+                    </button>
                 </div>
-                <button
-                    onClick={() => this.handleDeleteRmbr(rmbr_id)}
-                    className='list_delete_button rmbr_list_db'
-                >
-                    <FontAwesomeIcon icon='trash-alt' />
-                </button>
             </div>
 
                 </>
@@ -95,7 +95,6 @@ export default class RmbrListItem extends Component {
     };
 
     render() {
-        console.log('THE RMBRLISTITEM ID', this.props.id)
         const rmbr_id = this.props.id
         return (
             <li key={rmbr_id} className='Rmbr_list_item'>

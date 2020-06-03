@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LandingPage component renders LandingPage by default 1`] = `
+<Section
+  className="landing_page_section"
+>
+  <header
+    className="landing_page_header"
+  >
+    <h1>
+      rmbrme
+    </h1>
+    <h2>
+      be a better buddy
+    </h2>
+  </header>
+  <section>
+    <img
+      src="listening_skills.png"
+    />
+    <header>
+      <h3>
+        Improve your listening skills
+      </h3>
+    </header>
+    <p>
+      rmbrme helps you remember things about your friends and family so you can be more engaged in their lives.
+    </p>
+  </section>
+  <section>
+    <img
+      src="never_forget.png"
+    />
+    <header>
+      <h3>
+        Never forget a detail
+      </h3>
+    </header>
+    <p>
+      Stay up-to-date on the people you love or like a lot.
+    </p>
+  </section>
+  <section>
+    <img
+      src="have_better.png"
+    />
+    <header>
+      <h3>
+        Have better relationships
+      </h3>
+    </header>
+    <p>
+      People will appreciate you more as you remember more about them.
+    </p>
+  </section>
+  <section>
+    <header
+      className="sign_up_cta"
+    >
+      <h3>
+        No more forgetting or regretting
+      </h3>
+    </header>
+    <button
+      className="sign_up_button"
+      onClick={[Function]}
+    >
+      Sign Up Now
+    </button>
+  </section>
+</Section>
+`;

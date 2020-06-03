@@ -4,7 +4,6 @@ import RmbrApiService from "../../services/rmbr-api-service";
 import RmbrListItem from '../RmbrListItem/RmbrListItem';
 import AddRmbrForm from '../AddRmbrForm/AddRmbrForm'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import './RmbrList.css'
 
 export default class RmbrList extends Component {
 
@@ -38,19 +37,21 @@ export default class RmbrList extends Component {
 
     }
 
-    renderRmbrs = () => {
-        const rmbrArray = this.context.rmbrArray;
-        return rmbrArray.map(rmbr =>
-            <RmbrListItem
-                id={rmbr.id}
-                rmbr={rmbr}
-                onDeleteRmbrSuccess={rmbrId => this.onDeleteRmbrSuccess(rmbrId)}
-                className='rmbr_list_item'
-            />
-        )
-    };
-
     render() {
+
+        this.renderRmbrs = () => {
+            const rmbrArray = this.context.rmbrArray;
+            return rmbrArray.sort((a,b) => a.id - b.id).map(rmbr =>
+                <RmbrListItem
+                    key={rmbr.id}
+                    id={rmbr.id}
+                    rmbr={rmbr}
+                    onDeleteRmbrSuccess={rmbrId => this.onDeleteRmbrSuccess(rmbrId)}
+                    className='rmbr_list_item'
+                />
+            )
+        };
+
         const person_id = this.props.person_id;
         const user_id = this.props.user_id;
         const numOfRmbrs = this.context.rmbrArray.length
@@ -59,7 +60,9 @@ export default class RmbrList extends Component {
         return (
             <>
                 <ul className='rmbr__list'>
-                    <h3>
+                    <h3
+                        className='rmbr_list_num-label'
+                    >
                         <span>
                             { rmbrOrRmbrsLabel }
                         </span>
@@ -70,11 +73,13 @@ export default class RmbrList extends Component {
                         : this.renderRmbrs()
                     }
                 </ul>
+                <div className='add_rmbr_div'>
                 <AddRmbrForm
                     person_id={person_id}
                     user_id={user_id}
                     onAddRmbrSuccess={(rmbr) => this.handleAddRmbrSuccess(rmbr)}
                 />
+                </div>
             </>
 
         )

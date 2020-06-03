@@ -51,17 +51,27 @@ export default class PersonList extends Component {
     render() {
 
         const { error } = this.context;
+        const personCount = this.context.personArray.length;
+        const rmbrCount = this.context.rmbrArray.length;
+        const personLabel = personCount === 1 ? 'person' : 'people';
+        const rmbrLabel = rmbrCount === 1? 'rmbr' : 'rmbrs';
 
         return (
             <>
                 <ul id='person_list'>
-                    <label>You have <b>{this.context.personArray.length}</b> people with <b>{this.context.rmbrArray.length}</b> rmbrs</label>
-                    { error
-                        ? <p className='red'>There was an error, try again</p>
-                        : this.renderPeople() }
+                    <label
+                        className='person_list_label'
+                    >
+                        You have <b>{ personCount }</b> { personLabel } with <b>{ rmbrCount }</b> { rmbrLabel }
+                    </label>
+                        { error
+                            ? <p className='red'>There was an error, try again</p>
+                            : this.renderPeople() }
                 </ul>
 
-                <div className='PeopleListPage__add-person-button'>
+                <div
+                    className='add_person_div'
+                >
                     <AddPersonForm/>
                 </div>
             </>

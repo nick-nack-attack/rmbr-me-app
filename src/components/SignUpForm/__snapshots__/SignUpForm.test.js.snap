@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignUpForm component renders SignUpForm by default 1`] = `
+<form
+  className="SignUpForm"
+  onSubmit={[Function]}
+>
+  <legend>
+    <h2>
+      Sign Up
+    </h2>
+  </legend>
+  <div
+    className="user_name"
+  >
+    <label
+      htmlFor="RegistrationForm__user_name"
+    >
+      Email 
+      <Required />
+    </label>
+    <Input
+      id="RegistrationForm__user_name"
+      name="user_name"
+      onChange={[Function]}
+      required={true}
+      type="text"
+    />
+  </div>
+  <div
+    className="password"
+  >
+    <label
+      htmlFor="RegistrationForm__password"
+    >
+      Password 
+      <Required />
+    </label>
+    <Input
+      id="RegistrationForm__password"
+      name="password"
+      onChange={[Function]}
+      required={true}
+      type="password"
+    />
+  </div>
+  <Button
+    type="submit"
+  >
+    Get started!
+  </Button>
+  <div
+    role="alert"
+  />
+</form>
+`;

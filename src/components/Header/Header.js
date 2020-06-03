@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { Hyph } from "../Utils/Utils";
 import TokenService from '../../services/token-service'
 import IdleService from "../../services/idle-service";
 import './Header.css'
@@ -32,12 +31,14 @@ class Header extends Component {
         return (
             <div className='Header__not-logged-in'>
                 <Link
+                    id='log-in-link'
                     to='/log-in'>
                     Log in
                 </Link>
                 <Link
+                    id='sign-up-link'
                     to='/sign-up'>
-                    Free Sign Up
+                    Sign Up
                 </Link>
             </div>
         )

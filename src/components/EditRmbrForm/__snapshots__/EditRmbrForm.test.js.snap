@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditRmbrForm component renders the title and content fields 1`] = `
+<Textarea
+  autoFocus={false}
+  id="rmbrText"
+  name="rmbrText"
+  onChange={[Function]}
+  placeholder="Add details here"
+  value="Friend"
+/>
+`;

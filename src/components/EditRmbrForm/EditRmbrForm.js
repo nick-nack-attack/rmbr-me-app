@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Textarea } from '../Utils/Utils';
+import { Textarea, Button } from '../Utils/Utils';
 import RmbrmeContext from "../../contexts/RmbrmeContext";
 import RmbrApiService from "../../services/rmbr-api-service";
 import { findRmbrByPersonId } from "../../helpers";
@@ -59,7 +59,6 @@ export default class EditRmbrForm extends Component {
     };
 
     render() {
-        // window.onload = document.getElementById('rmbrText').select();
         return (
             <form
                 onSubmit={(e) => this.handleEditRmbrSubmit(e)}
@@ -84,14 +83,19 @@ export default class EditRmbrForm extends Component {
                         value={this.state.rmbrText}
                         placeholder='Add details here'
                         onChange={this.handleTextChange}
-                        autoFocus={this.props.autofocus ? false : true}
+                        autoFocus={!this.props.autofocus}
                     />
-                    <button>Save Changes</button>
-                    <button
+                    <Button
+                        className='edit_save_button edit_button'
+                    >
+                        Save
+                    </Button>
+                    <Button
+                        className='edit_button'
                         onClick={e => this.handleHideForm(e)}
                     >
                         Cancel
-                    </button>
+                    </Button>
                 </div>
             </form>
         )

@@ -14,7 +14,7 @@ import TokenService from "../../services/token-service";
 import AuthApiService from "../../services/auth-api-service";
 import IdleService from "../../services/idle-service";
 import './App.css'
-import UserLoggedOut from "../UserLoggedOut/UserLoggedOut";
+import LandingPage from "../LandingPage/LandingPage";
 import PersonList from "../PersonList/PersonList";
 
 export default class App extends Component {
@@ -54,7 +54,7 @@ export default class App extends Component {
   renderMainPage = () => {
     return TokenService.hasAuthToken()
         ? PersonList
-        : UserLoggedOut
+        : LandingPage
   }
 
   render() {
@@ -65,7 +65,7 @@ export default class App extends Component {
         <header className='App__header'>
           <Header/>
         </header>
-          <main className="App__main">
+          <main className="Main">
             { this.state.IdleOut === true
                 ? <div role='alert'><p className='error_message'>You have been logged out due to inactivity</p></div>
                 : ""

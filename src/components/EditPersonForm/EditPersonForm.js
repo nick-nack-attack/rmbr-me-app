@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import RmbrApiService from "../../services/rmbr-api-service";
 import RmbrmeContext from "../../contexts/RmbrmeContext";
-import { Input, Section } from "../Utils/Utils";
+import { Input, Section, Button } from "../Utils/Utils";
 
 export default class EditPersonForm extends Component {
 
@@ -39,18 +39,21 @@ export default class EditPersonForm extends Component {
         return (
             <>
                 <label><input
+                    id='Friend'
                     type='radio'
                     value='Friend'
                     checked={this.state.selectedOption === 'Friend'}
                     onChange={this.handleOptionChange}
                 />Friend</label>
                 <label><input
+                    id='Family'
                     type='radio'
                     value='Family'
                     checked={this.state.selectedOption === 'Family'}
                     onChange={this.handleOptionChange}
                 />Family</label>
                 <label><input
+                    id='Co-Worker'
                     type='radio'
                     value='Co-Worker'
                     checked={this.state.selectedOption === 'Co-Worker'}
@@ -81,9 +84,14 @@ export default class EditPersonForm extends Component {
 
     render() {
         return (
-            <Section>
-                <form onSubmit={e => this.handleEditPersonSubmit(e)}>
-                    <legend>Add Person</legend>
+            <Section
+                className='edit_person_section'
+            >
+                <form
+                    className='edit_person_form'
+                    onSubmit={e => this.handleEditPersonSubmit(e)}
+                >
+                    <legend className='edit_label'>Edit Person</legend>
                     <div>
                         <label>Name</label>
                         <Input
@@ -93,16 +101,20 @@ export default class EditPersonForm extends Component {
                             onChange={this.handleNameChange}
                         />
                     </div>
-                    <div>
+                    <div className='edit_person_radio_options'>
                         {this.renderCategoryOptions()}
                     </div>
                     <div>
-                        <button>Submit</button>
-                        <button
+                        <Button
+                        className='edit_save_button'
+                        >
+                            Save
+                        </Button>
+                        <Button
                             onClick={() => this.handleHideForm()}
                         >
                             Cancel
-                        </button>
+                        </Button>
                     </div>
                 </form>
             </Section>

@@ -104,7 +104,6 @@ const RmbrApiService = {
     },
 
     editRmbr(rmbr_id, rmbrFields) {
-        console.log(rmbr_id, rmbrFields)
         return fetch(`${config.API_ENDPOINT}/rmbr/${rmbr_id}`, {
             method: 'PATCH',
             headers: {

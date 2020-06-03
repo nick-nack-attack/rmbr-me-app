@@ -3,8 +3,8 @@ import { format as formatDate } from 'date-fns';
 import { format } from 'date-fns';
 import './Utils.css'
 
-export function PrettyDate({oldDate}) {
-    return format(new Date({oldDate}), 'MMM, do Y')
+export default function PrettyDate(oldDate) {
+    return format(new Date(oldDate), 'MMM d')
 }
 
 export function NiceDate({ date, format='Do MMMM YYYY' }) {

@@ -1,0 +1,84 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`EditPersonForm component renders the complete form 1`] = `
+<Section
+  className="edit_person_section"
+>
+  <form
+    className="edit_person_form"
+    onSubmit={[Function]}
+  >
+    <legend
+      className="edit_label"
+    >
+      Edit Person
+    </legend>
+    <div>
+      <label>
+        Name
+      </label>
+      <Input
+        id="personName"
+        name="personName"
+        onChange={[Function]}
+      />
+    </div>
+    <div
+      className="edit_person_radio_options"
+    >
+      <label>
+        <input
+          checked={false}
+          id="Friend"
+          onChange={[Function]}
+          type="radio"
+          value="Friend"
+        />
+        Friend
+      </label>
+      <label>
+        <input
+          checked={false}
+          id="Family"
+          onChange={[Function]}
+          type="radio"
+          value="Family"
+        />
+        Family
+      </label>
+      <label>
+        <input
+          checked={false}
+          id="Co-Worker"
+          onChange={[Function]}
+          type="radio"
+          value="Co-Worker"
+        />
+        Co-Worker
+      </label>
+    </div>
+    <div>
+      <Button
+        className="edit_save_button"
+      >
+        Save
+      </Button>
+      <Button
+        onClick={[Function]}
+      >
+        Cancel
+      </Button>
+    </div>
+  </form>
+</Section>
+`;
+
+exports[`EditPersonForm component renders the radio buttons 1`] = `
+<input
+  checked={true}
+  id="Friend"
+  onChange={[Function]}
+  type="radio"
+  value="Friend"
+/>
+`;

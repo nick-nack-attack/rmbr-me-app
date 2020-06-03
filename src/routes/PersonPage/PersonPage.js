@@ -1,12 +1,11 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
 import RmbrApiService from "../../services/rmbr-api-service";
 import RmbrList from '../../components/RmbrList/RmbrList'
 import EditPersonForm from "../../components/EditPersonForm/EditPersonForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "../../components/Utils/Utils";
 import RmbrmeContext from "../../contexts/RmbrmeContext";
-import { findPersonById } from '../../helpers'
+import PrettyDate from "../../components/Utils/Utils";
 
 
 export default class PersonPage extends Component {
@@ -50,7 +49,7 @@ export default class PersonPage extends Component {
             })
     }
 
-    handleEditPerson = personId => {
+    handleEditPerson = () => {
         this.setState({
             editFormDisplayed: true
         })
@@ -63,7 +62,7 @@ export default class PersonPage extends Component {
                 onClick={() => this.props.history.push('/')}
             >
                 <FontAwesomeIcon id='arrow-left' icon='arrow-left'/>
-                Back to My People
+                Back
             </Button>
         )
     }
@@ -72,6 +71,7 @@ export default class PersonPage extends Component {
         const person_id = this.props.match.params.person_id;
         const person_name = this.context.selected_person.person_name
         const type_of_person = this.context.selected_person.type_of_person || '';
+        const date_created = this.context.selected_person.date_created || new Date();
         const { error } = this.context;
 
         return (
@@ -81,23 +81,25 @@ export default class PersonPage extends Component {
                         ?   <>
                                 <div className='person_page_header'>
                                     <h2>
-                                        {person_name}
+                                        { person_name }
                                         <span className='edit_title_inline_button'>
                                             <button
-                                                onClick={() => this.handleEditPerson(person_id)}
+                                                onClick={() => this.handleEditPerson()}
                                             >
                                                 <FontAwesomeIcon icon='pen' />
                                             </button>
-                                            <div className='person_page_delete_button_div'>
-                                    <button
-                                        onClick={() => this.handleDeletePerson(person_id)}
-                                    >
-                                        <FontAwesomeIcon icon='trash-alt' /><span> Delete Person</span>
-                                    </button>
-                                </div>
+                                                <div className='person_page_delete_button_div'>
+                                                    <button
+                                                        className='list_delete_button'
+                                                        onClick={() => this.handleDeletePerson(person_id)}
+                                                    >
+                                                        <FontAwesomeIcon icon='trash-alt' />
+                                                    </button>
+                                                </div>
                                         </span>
                                     </h2>
-                                    <h3> {type_of_person} </h3>
+                                    <h3> {type_of_person}</h3>
+                                    <text>Added {PrettyDate(date_created)}</text>
                                 </div>
                             </>
                         :   <EditPersonForm
@@ -108,7 +110,6 @@ export default class PersonPage extends Component {
                             />
                     }
                 </header>
-                { this.renderBackButton() }
                 <div>
                     { error
                         ?   <p className='red'>Could not load Rmbrs list</p>

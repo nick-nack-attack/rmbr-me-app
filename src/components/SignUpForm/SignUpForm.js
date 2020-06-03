@@ -55,18 +55,16 @@ export default class SignUpForm extends Component {
     render() {
         const { error } = this.state;
         return (
-            <Section>
-                <h2>Sign Up</h2>
-                <p>I spent like 20 hours figuring out how to make this all secure and slick-like. No Email Verification Required. Lose your login. Your data is lost forever!</p>
             <form
                 className='SignUpForm'
                 onSubmit={this.handleSubmit}
             >
+                <legend><h2>Sign Up</h2></legend>
                 <div className='user_name'>
                     <label
                         htmlFor='RegistrationForm__user_name'
                     >
-                        User name <Required />
+                        Email <Required />
                     </label>
                     <Input
                         name='user_name'
@@ -97,7 +95,6 @@ export default class SignUpForm extends Component {
                     { error && <p className='error_message'>{error.message || error}</p> }
                 </div>
             </form>
-            </Section>
         )
     }
 }

@@ -35,6 +35,7 @@ export default class AddPersonForm extends Component {
                     <input
                         name='selectedOption'
                         type='radio'
+                        className='add_person_input'
                         value={option}
                         checked={this.state.selectedOption === option}
                         onChange={(e) => this.handleInputChange(e)}
@@ -66,7 +67,10 @@ export default class AddPersonForm extends Component {
 
     render() {
         return (
-            <form onSubmit={(ev) => this.handleSubmit(ev)}>
+            <form
+                className='add_person_form'
+                onSubmit={(ev) => this.handleSubmit(ev)}
+            >
                 <legend>Add Person</legend>
                 <div>
                     <Input
@@ -81,7 +85,12 @@ export default class AddPersonForm extends Component {
                     {this.renderCategoryOptions()}
                 </div>
                 <div>
-                    <Button>Submit</Button>
+                    <Button
+                        className=''
+                        disabled={!this.state.formPersonName}
+                    >
+                        Submit
+                    </Button>
                 </div>
             </form>
         )

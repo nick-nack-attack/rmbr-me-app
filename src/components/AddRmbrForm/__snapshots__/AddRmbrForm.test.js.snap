@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AddRmbrForm component renders the complete form 1`] = `
+<form
+  className="add_rmbr_form"
+  onSubmit={[Function]}
+>
+  <legend>
+    Add Rmbr
+  </legend>
+  <div>
+    <Input
+      id="rmbrTitle"
+      name="rmbrTitle"
+      onChange={[Function]}
+      placeholder="Add a new rmbr here"
+    />
+    <Button
+      disabled={true}
+    >
+      Submit
+    </Button>
+  </div>
+</form>
+`;

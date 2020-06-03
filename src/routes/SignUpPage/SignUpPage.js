@@ -16,11 +16,9 @@ export default class SignUpPage extends Component {
 
     render() {
         return (
-
                 <SignUpForm
                     onSignUpSuccess={this.handleSignUpSuccess}
                 />
-
         )
     }
 }

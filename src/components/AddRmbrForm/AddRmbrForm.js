@@ -24,7 +24,6 @@ export default class AddRmbrForm extends Component {
 
 
     handleSubmitRmbr = e => {
-        // this.context.addRmbr
         e.preventDefault()
         this.setState({error: null});
         const rmbr_title = this.state.rmbrTitle;
@@ -34,12 +33,15 @@ export default class AddRmbrForm extends Component {
         const category = 'Past';
         const newRmbr = { rmbr_title, category, rmbr_text, person_id, user_id };
         RmbrApiService.postRmbr(newRmbr)
-            .then(() => {
-                this.context.addRmbr(newRmbr)
+            .then((res) => {
                 this.setState({
                     rmbrTitle: ''
                 })
-                this.props.onAddRmbrSuccess(newRmbr)
+                return res
+            })
+            .then(res => {
+                this.context.addRmbr(res)
+                this.props.onAddRmbrSuccess(res)
             })
             .catch(res => {
                 this.setState({
@@ -51,6 +53,7 @@ export default class AddRmbrForm extends Component {
     render() {
         return (
             <form
+                className='add_rmbr_form'
                 onSubmit={(e) => this.handleSubmitRmbr(e)}
             >
                 <legend>Add Rmbr</legend>
@@ -62,7 +65,11 @@ export default class AddRmbrForm extends Component {
                         onChange={this.handleTitleChange}
 
                     />
-                    <Button>Submit</Button>
+                    <Button
+                        disabled={!this.state.rmbrTitle}
+                    >
+                        Submit
+                    </Button>
                 </div>
             </form>
         )

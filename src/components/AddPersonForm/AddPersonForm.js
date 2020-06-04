@@ -9,9 +9,9 @@ export default class AddPersonForm extends Component {
         super(props);
         this.state = {
             formPersonName: '',
-            selectedOption: 'Friend'
+            selectedOption: 'Friend',
         };
-    }
+    };
 
     static contextType = RmbrmeContext;
 
@@ -22,10 +22,10 @@ export default class AddPersonForm extends Component {
         this.setState({
             [name]: value
         });
-    }
+    };
 
     renderCategoryOptions() {
-        const CategoryOptions = ['Friend', 'Co-Worker', 'Family']
+        const CategoryOptions = ['Friend', 'Co-Worker', 'Family'];
         return CategoryOptions.map((option, index) => {
             return (
                 <label
@@ -43,27 +43,25 @@ export default class AddPersonForm extends Component {
                     {option}
                 </label>
             );
-
         });
-
-    }
+    };
 
     handleSubmit = (e) => {
-        e.preventDefault()
-        this.setState({ error: null })
-        const person_name = this.state.formPersonName
-        const user_id = RmbrApiService.getUserId()
-        const type_of_person  = this.state.selectedOption
-        const newPerson = { person_name, user_id, type_of_person }
+        e.preventDefault();
+        this.setState({ error: null });
+        const person_name = this.state.formPersonName;
+        const user_id = RmbrApiService.getUserId();
+        const type_of_person  = this.state.selectedOption;
+        const newPerson = { person_name, user_id, type_of_person };
         RmbrApiService.postPerson(newPerson)
             .then(res => {
-                this.context.addPerson(res)
-                this.setState({formPersonName: ''})
+                this.context.addPerson(res);
+                this.setState({formPersonName: ''});
             })
             .catch(res => {
-                this.setState({error: res.error})
+                this.setState({error: res.error});
             })
-    }
+    };
 
     render() {
         return (
@@ -86,13 +84,12 @@ export default class AddPersonForm extends Component {
                 </div>
                 <div>
                     <Button
-                        className=''
                         disabled={!this.state.formPersonName}
                     >
                         Submit
                     </Button>
                 </div>
             </form>
-        )
-    }
-}
+        );
+    };
+};

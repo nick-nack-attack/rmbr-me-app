@@ -7,15 +7,13 @@ exports[`LandingPage component renders LandingPage by default 1`] = `
   <header
     className="landing_page_header"
   >
-    <h1>
-      rmbrme
-    </h1>
     <h2>
-      be a better buddy
+      No more forgetting or regretting
     </h2>
   </header>
   <section>
     <img
+      alt="lightning bolt listening to a comment"
       src="listening_skills.png"
     />
     <header>
@@ -29,6 +27,7 @@ exports[`LandingPage component renders LandingPage by default 1`] = `
   </section>
   <section>
     <img
+      alt="lightning bolt remembering a comment"
       src="never_forget.png"
     />
     <header>
@@ -37,11 +36,12 @@ exports[`LandingPage component renders LandingPage by default 1`] = `
       </h3>
     </header>
     <p>
-      Stay up-to-date on the people you love or like a lot.
+      Stay up-to-date on the people who matter to you.
     </p>
   </section>
   <section>
     <img
+      alt="lightning bolt remembering comment"
       src="have_better.png"
     />
     <header>
@@ -50,7 +50,7 @@ exports[`LandingPage component renders LandingPage by default 1`] = `
       </h3>
     </header>
     <p>
-      People will appreciate you more as you remember more about them.
+      People will appreciate you more as you remember things they've said.
     </p>
   </section>
   <section>

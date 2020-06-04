@@ -14,6 +14,7 @@ exports[`AddRmbrForm component renders the complete form 1`] = `
       name="rmbrTitle"
       onChange={[Function]}
       placeholder="Add a new rmbr here"
+      value=""
     />
     <Button
       disabled={true}

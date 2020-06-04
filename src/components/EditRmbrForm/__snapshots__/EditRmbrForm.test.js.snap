@@ -1,5 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`EditRmbrForm component renders the complete form 1`] = `
+<form
+  onSubmit={[Function]}
+>
+  <div>
+    <label>
+      Rmbr title
+    </label>
+    <Textarea
+      autoFocus={false}
+      id="rmbrTitle"
+      name="rmbrTitle"
+      onChange={[Function]}
+      value="Jack"
+    />
+    <label>
+      Rmbr text
+    </label>
+    <Textarea
+      autoFocus={true}
+      id="rmbrText"
+      name="rmbrText"
+      onChange={[Function]}
+      placeholder="Add details here"
+      value="Friend"
+    />
+    <Button
+      className="edit_save_button edit_button"
+    >
+      Save
+    </Button>
+    <Button
+      className="edit_button"
+      onClick={[Function]}
+    >
+      Cancel
+    </Button>
+  </div>
+</form>
+`;
+
 exports[`EditRmbrForm component renders the title and content fields 1`] = `
 <Textarea
   autoFocus={false}

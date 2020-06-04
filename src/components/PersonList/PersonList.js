@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import RmbrApiService from '../../services/rmbr-api-service';
 import PersonListItem from "../../components/PersonListItem/PersonListItem";
-import AddPersonForm from '../../components/AddPersonForm/AddPersonForm'
-import { findRmbrByPersonId } from "../../helpers";
+import AddPersonForm from '../../components/AddPersonForm/AddPersonForm';
+import emptyStateForPersonList from '../../assets/empty_people.png';
+import RmbrApiService from '../../services/rmbr-api-service';
 import RmbrmeContext from "../../contexts/RmbrmeContext";
-import emptyStateForPersonList from '../../images/empty_people.png'
+import { findRmbrByPersonId } from "../../helpers";
 
 export default class PersonList extends Component {
 
     static contextType = RmbrmeContext;
 
     componentDidMount() {
-        this.context.clearError()
-        const user_id = window.localStorage.getItem('user_id')
+        this.context.clearError();
+        const user_id = window.localStorage.getItem('user_id');
         RmbrApiService.getPersonByUserId(user_id)
             .then(this.context.setPersonArray)
             .catch(this.context.setError)
@@ -22,20 +22,27 @@ export default class PersonList extends Component {
     };
 
     onClickPerson = (person_id) => {
-        this.props.history.push(`/person/${person_id}`)
-    }
+        this.props.history.push(`/person/${person_id}`);
+    };
 
     renderPeople() {
-        const { personArray = [] } = this.context
-        const { rmbrArray = [] } = this.context
+        const { personArray = [] } = this.context;
+        const { rmbrArray = [] } = this.context;
 
         if (personArray.length === 0) {
             return (
                 <div>
-                    <img src={emptyStateForPersonList}/>
-                    <p>Add a Person to start!</p>
+                    <img
+                        src={emptyStateForPersonList}
+                        alt='lightning saying he is lonely'
+                    />
+                    <div
+                        className='add-person-label'
+                    >
+                        <p>Add a Person to start!</p>
+                    </div>
                 </div>
-            )
+            );
         }
 
         return personArray.map((person, index) =>
@@ -45,7 +52,7 @@ export default class PersonList extends Component {
                 rmbrArray={findRmbrByPersonId(rmbrArray, person.id)}
                 handleClickPerson={(person_id) => this.onClickPerson(person_id)}
             />
-        )
+        );
     };
 
     render() {
@@ -58,7 +65,9 @@ export default class PersonList extends Component {
 
         return (
             <>
-                <ul id='person_list'>
+                <ul
+                    id='person_list'
+                >
                     <label
                         className='person_list_label'
                     >
@@ -68,15 +77,14 @@ export default class PersonList extends Component {
                             ? <p className='red'>There was an error, try again</p>
                             : this.renderPeople() }
                 </ul>
-
                 <div
                     className='add_person_div'
                 >
                     <AddPersonForm/>
                 </div>
             </>
-        )
-    }
-}
+        );
+    };
+};
 
 

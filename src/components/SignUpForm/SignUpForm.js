@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import AuthApiService from "../../services/auth-api-service";
-import { Button, Section, Input, Required } from '../Utils/Utils';
-import ErrorMsg from "../Utils/ErrorMsg";
 import RmbrmeContext from "../../contexts/RmbrmeContext";
+import { Button, Input, Required } from '../Utils/Utils';
+import ErrorMsg from "../Utils/ErrorMsg";
 
 
 export default class SignUpForm extends Component {
@@ -13,7 +13,7 @@ export default class SignUpForm extends Component {
             error: null,
             user_name: '',
             password: ''
-        }
+        };
     };
 
     static defaultProps = {
@@ -23,27 +23,30 @@ export default class SignUpForm extends Component {
     static contextType = RmbrmeContext;
 
     handleSubmit = ev => {
-        ev.preventDefault()
-        this.setState({ error: null })
+        ev.preventDefault();
+        this.setState({
+            error: null
+        });
         const user_name = this.state.user_name;
-        const password = this.state.password
-        const UserLogin = { user_name, password }
+        const password = this.state.password;
+        const UserLogin = { user_name, password };
+
         AuthApiService.postUser(UserLogin)
             .then(user => {
                 this.context.setUserId(user.id);
                 this.setState({
                     user_name: '',
                     password: ''
-                })
+                });
                 AuthApiService.postLogin(UserLogin)
-                    .then(res => {
-                        this.props.onLoginSuccess()
-                    })
+                    .then(() => {
+                        this.props.onSignUpSuccess()
+                    });
             })
             .catch(res => {
                 this.setState({ error: res.error })
             })
-    }
+    };
 
     handleInputChange = (event) => {
         const target = event.target;
@@ -52,7 +55,7 @@ export default class SignUpForm extends Component {
         this.setState({
             [name]: value
         });
-    }
+    };
 
     render() {
         const { error } = this.state;
@@ -61,8 +64,14 @@ export default class SignUpForm extends Component {
                 className='SignUpForm'
                 onSubmit={this.handleSubmit}
             >
-                <legend><h2>Sign Up</h2></legend>
-                <div className='user_name'>
+                <legend>
+                    <h2>
+                        Sign Up
+                    </h2>
+                </legend>
+                <div
+                    className='user_name'
+                >
                     <label
                         htmlFor='RegistrationForm__user_name'
                     >
@@ -70,15 +79,19 @@ export default class SignUpForm extends Component {
                     </label>
                     <Input
                         name='user_name'
-                        type='text'
+                        type='email'
                         required
                         id='RegistrationForm__user_name'
                         onChange={(e) => this.handleInputChange(e)}
                     >
                     </Input>
                 </div>
-                <div className='password'>
-                    <label htmlFor='RegistrationForm__password'>
+                <div
+                    className='password'
+                >
+                    <label
+                        htmlFor='RegistrationForm__password'
+                    >
                         Password <Required />
                     </label>
                     <Input
@@ -90,14 +103,17 @@ export default class SignUpForm extends Component {
                     >
                     </Input>
                 </div>
-                <Button type='submit'>
+                <Button
+                    type='submit'
+                >
                     Get started!
                 </Button>
-                <ErrorMsg message={error.message || error}/>
-                <div role='alert'>
+                <div
+                    role='alert'
+                >
                     { error && <ErrorMsg message={error.message || error}/> }
                 </div>
             </form>
-        )
-    }
-}
+        );
+    };
+};

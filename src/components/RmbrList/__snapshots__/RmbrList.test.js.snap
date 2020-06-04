@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RmbrList component renders RmbrList by default 1`] = `
+<testContext>
+  <RmbrList
+    context={
+      Object {
+        "$$typeof": Symbol(react.context),
+        "Consumer": Object {
+          "$$typeof": Symbol(react.context),
+          "_calculateChangedBits": null,
+          "_context": [Circular],
+        },
+        "Provider": Object {
+          "$$typeof": Symbol(react.provider),
+          "_context": [Circular],
+        },
+        "_calculateChangedBits": null,
+        "_currentRenderer": null,
+        "_currentRenderer2": null,
+        "_currentValue": Object {
+          "rmbrArray": Array [],
+        },
+        "_currentValue2": Object {
+          "rmbrArray": Array [],
+        },
+        "_threadCount": 0,
+      }
+    }
+  />
+</testContext>
+`;

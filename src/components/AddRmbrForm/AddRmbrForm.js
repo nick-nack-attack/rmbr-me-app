@@ -11,7 +11,7 @@ export default class AddRmbrForm extends Component {
             rmbrTitle: '',
             error: null,
             onAddRmbrSuccess: () => {}
-        }
+        };
     };
 
     static contextType = RmbrmeContext;
@@ -19,7 +19,7 @@ export default class AddRmbrForm extends Component {
     handleTitleChange = changeEvent => {
         this.setState({
             rmbrTitle: changeEvent.target.value
-        })
+        });
     };
 
 
@@ -27,26 +27,22 @@ export default class AddRmbrForm extends Component {
         e.preventDefault()
         this.setState({error: null});
         const rmbr_title = this.state.rmbrTitle;
-        const rmbr_text = ''
+        const rmbr_text = '';
         const person_id = this.props.person_id;
         const user_id = window.localStorage.getItem('user_id');
-        const category = 'Past';
-        const newRmbr = { rmbr_title, category, rmbr_text, person_id, user_id };
+        const newRmbr = { rmbr_title, rmbr_text, person_id, user_id };
         RmbrApiService.postRmbr(newRmbr)
-            .then((res) => {
+            .then(res => {
+                this.context.addRmbr(res);
                 this.setState({
                     rmbrTitle: ''
-                })
-                return res
-            })
-            .then(res => {
-                this.context.addRmbr(res)
-                this.props.onAddRmbrSuccess(res)
+                });
+                this.props.onAddRmbrSuccess(res);
             })
             .catch(res => {
                 this.setState({
-                    error:res.error
-                })
+                    error: res
+                });
             })
         };
 
@@ -62,8 +58,8 @@ export default class AddRmbrForm extends Component {
                         name='rmbrTitle'
                         id='rmbrTitle'
                         placeholder='Add a new rmbr here'
+                        value={this.state.rmbrTitle}
                         onChange={this.handleTitleChange}
-
                     />
                     <Button
                         disabled={!this.state.rmbrTitle}
@@ -72,7 +68,6 @@ export default class AddRmbrForm extends Component {
                     </Button>
                 </div>
             </form>
-        )
-    }
-
-}
+        );
+    };
+};

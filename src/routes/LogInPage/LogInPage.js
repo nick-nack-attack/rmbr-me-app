@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
-import LogInForm from '../../components/LogInForm/LogInForm'
-import { Section } from '../../components/Utils/Utils'
+import React, { Component } from 'react';
+import LogInForm from '../../components/LogInForm/LogInForm';
 
 export default class LogInPage extends Component {
 
@@ -12,15 +11,14 @@ export default class LogInPage extends Component {
     };
 
     handleLoginSuccess = () => {
-        window.location.reload(true)
-
-    }
+        window.location.reload(true);
+    };
 
     render() {
         return (
                 <LogInForm
                     onLoginSuccess={(ev) => this.handleLoginSuccess(ev)}
                 />
-        )
-    }
-}
+        );
+    };
+};

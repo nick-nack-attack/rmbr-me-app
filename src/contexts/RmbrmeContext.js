@@ -31,6 +31,8 @@ const RmbrmeContext = React.createContext({
     error: null,
     setError: () => {},
     clearError: () => {},
+    // etc
+    isLoading: false
 });
 
 export default RmbrmeContext;
@@ -42,84 +44,94 @@ export class RmbrmeProvider extends Component {
         personArray: [],
         selected_rmbr: {},
         rmbrArray: [],
-        error: null
+        error: null,
+        isLoading: false
     };
 
     setUserId = (user_id) => {
         this.setState({
             user_id: localStorage.setItem('user_id', user_id)
-        })
+        });
     };
 
     setSelectedPerson = (person) => {
-        this.setState({selected_person: person})
+        this.setState({selected_person: person});
     };
 
     setPersonArray = (personArray) => {
-        this.setState({personArray})
+        this.setState({personArray});
     };
 
     addPerson = (person) => {
         this.setPersonArray([
             ...this.state.personArray,
-        person
-                            ])
+            person
+        ]);
     };
 
     deletePerson = (person_id) => {
         this.setState({
-        personArray: this.state.personArray.filter(person => person.id !== person_id
-            )
-        })
+            personArray: this.state.personArray.filter(person => person.id !== person_id)
+        });
     };
 
     editPerson = (person) => {
         this.setState({
             person
-        })
+        });
     };
 
     setSelectedRmbr = (rmbr) => {
-    this.setState({rmbr})
+        this.setState({
+            rmbr
+        });
     };
 
     setRmbrArray = (rmbrArray) => {
-        this.setState({rmbrArray})
+        this.setState({
+            rmbrArray
+        });
     };
 
     addRmbr = (rmbr) => {
-        this.setState({rmbr})
+        this.setState({
+            rmbr
+        });
     };
 
     addRmbrToArray = (rmbr) => {
         this.setRmbrArray([
             ...this.state.rmbrArray,
             rmbr
-        ])
-    }
+        ]);
+    };
 
     deleteRmbr = (rmbr_id) => {
         this.setState({
             rmbrArray: this.state.rmbrArray.filter((rmbr) => rmbr.id !== rmbr_id)
-        })
+        });
     };
 
     updateRmbrArray = (editedRmbr) => {
-        const oldArray = this.state.rmbrArray
-        const newArray = oldArray.filter(rmbr => rmbr.id !== editedRmbr.id)
-        this.setRmbrArray(newArray)
+        const oldArray = this.state.rmbrArray;
+        const newArray = oldArray.filter(rmbr => rmbr.id !== editedRmbr.id);
+        this.setRmbrArray(newArray);
         this.setRmbrArray([
             ...this.state.rmbrArray,
             editedRmbr
-        ])
+        ]);
     };
 
     setError = error => {
-        this.setState({error})
+        this.setState({
+            error
+        });
     };
 
     clearError = () => {
-        this.setState({error: null})
+        this.setState({
+            error: null
+        });
     };
 
     render() {
@@ -149,15 +161,15 @@ export class RmbrmeProvider extends Component {
             // errors
             error: this.state.error,
             setError: this.setError,
-            clearError: this.clearError
-
-        }
+            clearError: this.clearError,
+            // etc
+        };
 
         return (
             <RmbrmeContext.Provider value={ value }>
                 { this.props.children }
             </RmbrmeContext.Provider>
         );
-    }
-}
+    };
+};
 

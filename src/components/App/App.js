@@ -1,21 +1,22 @@
 import React, {Component} from 'react';
 import { Route, Switch } from 'react-router-dom';
 
-import Header from "../Header/Header";
 import PrivateRoute from "../Utils/PrivateRoute";
 import PublicRoute from "../Utils/PublicRoute";
 
-import PersonPage from '../../routes/PersonPage/PersonPage'
-import LogInPage from '../../routes/LogInPage/LogInPage'
-import SignUpPage from '../../routes/SignUpPage/SignUpPage'
+import Header from "../Header/Header";
+import PersonPage from '../../routes/PersonPage/PersonPage';
+import LogInPage from '../../routes/LogInPage/LogInPage';
+import SignUpPage from '../../routes/SignUpPage/SignUpPage';
 import NotFoundPage from "../../routes/NotFoundPage/NotFoundPage";
+import LandingPage from "../LandingPage/LandingPage";
+import PersonList from "../PersonList/PersonList";
 
 import TokenService from "../../services/token-service";
 import AuthApiService from "../../services/auth-api-service";
 import IdleService from "../../services/idle-service";
+
 import './App.css'
-import LandingPage from "../LandingPage/LandingPage";
-import PersonList from "../PersonList/PersonList";
 
 export default class App extends Component {
 
@@ -25,41 +26,45 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    IdleService.setIdleCallback(this.logoutFromIdle)
+    IdleService.setIdleCallback(this.logoutFromIdle);
     if (TokenService.hasAuthToken()) {
-      this.setState({IdleOut: false})
-      IdleService.registerIdleTimerResets()
+      this.setState({IdleOut: false});
+      IdleService.registerIdleTimerResets();
       TokenService.queueCallbackBeforeExpiry(() => {
         AuthApiService.postRefreshToken()
             .then(r => {
-              console.log('refresh token posted')
-            })
-      })
-    }
+              console.log('refresh token posted');
+            });
+      });
+    };
   };
 
   componentWillUnmount() {
-    IdleService.unregisterIdleResets()
-    TokenService.clearCallbackBeforeExpiry()
+    IdleService.unregisterIdleResets();
+    TokenService.clearCallbackBeforeExpiry();
   };
 
   logoutFromIdle = () => {
-    TokenService.clearAuthToken()
-    TokenService.clearCallbackBeforeExpiry()
-    IdleService.unregisterIdleResets()
-    this.setState({IdleOut: true})
-    this.forceUpdate()
+    TokenService.clearAuthToken();
+    TokenService.clearCallbackBeforeExpiry();
+    IdleService.unregisterIdleResets();
+    this.setState({IdleOut: true});
+    this.forceUpdate();
   };
-
-  renderMainPage = () => {
-    return TokenService.hasAuthToken()
-        ? PersonList
-        : LandingPage
-  }
 
   render() {
 
-    const mainPage = this.renderMainPage()
+    this.handleDeletePerson = () => {
+      this.forceUpdate();
+    }
+
+    this.renderMainPage = () => {
+      return TokenService.hasAuthToken()
+          ? PersonList
+          : LandingPage
+    };
+    const mainPage = this.renderMainPage();
+
     return (
       <div className="App">
         <header className='App__header'>
@@ -78,22 +83,22 @@ export default class App extends Component {
               />
               <PublicRoute
                 path={'/log-in'}
-                component={LogInPage}
+                component={ LogInPage }
               />
               <PublicRoute
                 path={'/sign-up'}
-                component={SignUpPage}
+                component={ SignUpPage }
               />
               <PrivateRoute
                 path={'/person/:person_id'}
                 component={PersonPage}
               />
               <Route
-                  component={NotFoundPage}
+                  component={ NotFoundPage }
               />
             </Switch>  
           </main>
       </div>
-    )
-  }
-}
+    );
+  };
+};

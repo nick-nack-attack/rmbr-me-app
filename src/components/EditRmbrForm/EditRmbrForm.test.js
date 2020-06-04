@@ -14,7 +14,7 @@ describe(`EditRmbrForm component`, () => {
     }
 
     it(`renders the complete form`, () => {
-        const wrapper = shallow(<EditRmbrForm/>)
+        const wrapper = shallow(<EditRmbrForm rmbr={rmbr}/>)
         expect(toJson(wrapper)).toMatchSnapshot()
     });
     it(`renders the title and content fields`, () => {

@@ -1,40 +1,3 @@
-h2 {
-    margin: 30px 0 0 0;
-}
-
-h3 {
-    margin: 0;
-    text-align: left;
-}
-
-h4 {
-    margin: 0;
-    text-align: left;
-}
-
-h5 {
-    text-align: left;
-    margin: 0;
-}
-
-p {
-    text-align: left;
-    margin: 0;
-}
-
-p + p {
-    margin-top: 15px;
-}
-
-ul {
-    list-style-type: none;
-    padding-left: 10px;
-    padding-right: 10px;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
 @media only screen and (min-width: 320px) {
 
     * {
@@ -46,6 +9,47 @@ ul {
         font-size: 20px;
         color: gray;
         text-align: center;
+    }
+
+    h2 {
+        margin: 30px 0 0 0;
+    }
+
+    h3 {
+        margin: 0;
+        text-align: left;
+    }
+
+    h4 {
+        margin: 0;
+        text-align: left;
+    }
+
+    h5 {
+        text-align: left;
+        margin: 0;
+    }
+
+    p {
+        text-align: left;
+        margin: 0;
+    }
+
+    p + p {
+        margin-top: 15px;
+    }
+
+    ul {
+        list-style-type: none;
+        padding-left: 10px;
+        padding-right: 10px;
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    img {
+        max-width: 225px;
     }
 
     input[type='radio'] {
@@ -79,12 +83,23 @@ ul {
         z-index: 10;
     }
 
+    .App__header {
+        color: white;
+        grid-area: header;
+        padding-top: 70px;
+    }
+
     .add_person_div, .add_rmbr_div {
         background-color: #035b7f;
     }
 
     .add_person_form, .add_rmbr_form {
         padding: 20px;
+    }
+
+    .demo_login {
+        width: 200px;
+        margin: 30px auto 0px auto;
     }
 
     .edit_person_form {
@@ -100,6 +115,11 @@ ul {
         max-width: 425px;
         margin-left: auto;
         margin-right: auto;
+    }
+
+    .add-person-label > p {
+        text-align: center;
+        color: white;
     }
 
     .add_person_radio_options {
@@ -121,11 +141,36 @@ ul {
 
     .Main {
         background-color: #03658C;
-        height: calc(100vh - 70px)
+        grid-area: main;
+        overflow: auto;
+        height: calc(100vh - 70px);
+    }
+
+    .rmbrme_logo:hover {
+        cursor: pointer;
+        background-color: black;
+    }
+
+    .status-label {
+        color: white;
+        font-weight: bold;
+        width: 200px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .loading-image {
+        margin-right: 10px;
+        height: 36px;
     }
 
     .person_list_label {
         color: white;
+    }
+
+    .rmbr_description {
+        text-align: left;
     }
 
     .rmbr_list_num-label {
@@ -133,8 +178,160 @@ ul {
         color: white;
     }
 
-    .LoginForm {
+    .login_with_demo_account_button {
+        margin-top: 40px;
+        border: 2px white solid;
+        color: white;
+        background-color: transparent;
+    }
 
+    .profile-info {
+        display: inline;
+    }
+
+    div > .events_container {
+        border: 2px rgb(150, 150, 150) solid;
+        margin-left: 50px;
+        margin-right: 50px;
+        margin-bottom: 20px;
+        text-align: left;
+        padding-left: 20px;
+    }
+
+    button {
+        border: 2px solid lightgray;
+        border-radius: 5px;
+        background-color: white;
+        font-size: 14px;
+    }
+
+    button:hover {
+        cursor: pointer;
+        background-color: gainsboro;
+    }
+
+    .person_page_header {
+        text-align: left;
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 470px;
+        padding-left: 40px;
+        padding-right: 40px;
+        color: white;
+    }
+
+    .PersonListItem:hover {
+        cursor: pointer;
+        background-color: gainsboro;
+    }
+
+    .personListItem__div_button {
+        text-align: left;
+    }
+
+    .rmbr_item_button_bar {
+        display: flex;
+    }
+
+    .latest_rmbr {
+        float: right;
+        text-align: right;
+    }
+
+    .focus_label {
+        background-color: black;
+        color: white;
+        padding: 0 5px 0 5px;
+    }
+
+    .rmbr_added_label {
+        color: dimgray;
+    }
+
+    .rmbr_item_header {
+        margin-bottom: 5%;
+    }
+
+    #arrow-left {
+        margin-right: 5px;
+    }
+
+    .edit_title_inline_button {
+        margin-left: 5px;
+    }
+
+    .rmbr_add_details_button {
+        margin-top: 10px;
+    }
+
+    .inline_before_icon {
+        margin-right: 5px;
+    }
+
+    .person_page_delete_button_div {
+        float: right;
+        margin-right: 20px;
+    }
+
+    .error_message {
+        background-color: #CA1551;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .SignUpForm, .LoginForm {
+        margin-top: 20px;
+        color: white;
+    }
+
+    /* Color Theme Swatches in Hex */
+    .BRANDING-•-MATOU-1-hex { color: #03658C; }
+    .BRANDING-•-MATOU-2-hex { color: #F2CA52; }
+    .BRANDING-•-MATOU-3-hex { color: #F2EBD5; }
+    .BRANDING-•-MATOU-4-hex { color: #F24141; }
+    .BRANDING-•-MATOU-5-hex { color: #0D0D0D; }
+
+    section {
+        min-height: 200px;
+        padding: 30px 30px;
+        background-color: #F6F6F6;
+        border-radius: 10px;
+    }
+
+    section:nth-child(even) {
+        background-color: #EBEBEB;
+    }
+
+    .landing_page_header {
+        margin-bottom: 40px;
+    }
+
+    .landing_page_section {
+        max-width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .sign_up_button {
+        max-width: 300px;
+        min-width: 200px;
+        height: 50px;
+        font-size: larger;
+        font-weight: bold;
+        color: white;
+        background-color: #F24141;
+        border: none;
+    }
+
+    .sign_up_button:hover {
+        background-color: #a02929;
+    }
+
+    .sign_up_cta, .sign_up_cta > h3 {
+        text-align: center;
+        margin-bottom: 20px;
     }
 
 }
@@ -142,173 +339,34 @@ ul {
 @media only screen and (min-width: 550px) {
 
     .Main {
-        background-color: teal;
+        background-color: #03658C;
+        margin-top: -10px;
+        height: calc(100vh - 70px);
+    }
+
+    .landing_page_section {
+        margin-top: 20px;
+        margin-bottom: 100px;
+    }
+
+    .add_person_form, .add_rmbr_form {
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .add_person_div {
+        margin-bottom: 150px;
+    }
+
+    .add_person_div, .add_rmbr_div {
+        max-width: 430px;
+        margin-left: auto;
+        margin-right: auto;
+        border-radius: 10px;
     }
 
 }
 @media only screen and (min-width: 800px) {
 
-    .Main {
-        background-color: darkblue;
-    }
-
-}
-
-.profile-info {
-    display: inline;
-}
-
-.App__header {
-    color: white;
-    grid-area: header;
-    padding-top: 70px;
-  }
-
-  div > .events_container {
-    border: 2px rgb(150, 150, 150) solid;
-    margin-left: 50px;
-    margin-right: 50px;
-    margin-bottom: 20px;
-    text-align: left;
-    padding-left: 20px;
-}
-
-button {
-    border: 2px solid lightgray;
-    border-radius: 5px;
-    background-color: white;
-    font-size: 14px;
-}
-
-button:hover {
-    cursor: pointer;
-    background-color: gainsboro;
-}
-
-.person_page_header {
-    text-align: left;
-    margin-left: auto;
-    margin-right: auto;
-    max-width: 470px;
-    padding-left: 40px;
-    padding-right: 40px;
-    color: white;
-}
-
-.PersonListItem:hover {
-    cursor: pointer;
-    background-color: gainsboro;
-}
-
-.personListItem__div_button {
-    text-align: left;
-}
-
-.rmbr_item_button_bar {
-    display: flex;
-}
-
-.latest_rmbr {
-    float: right;
-}
-
-.focus_label {
-    background-color: black;
-    color: white;
-    padding: 0 5px 0 5px;
-}
-
-.rmbr_added_label {
-    color: dimgray;
-}
-
-.rmbr_item_header {
-    margin-bottom: 5%;
-}
-
-#arrow-left {
-    margin-right: 5px;
-}
-
-.edit_title_inline_button {
-    margin-left: 5px;
-}
-
-.rmbr_add_details_button {
-    margin-top: 10px;
-}
-
-.inline_before_icon {
-    margin-right: 5px;
-}
-
-.person_page_delete_button_div {
-    float: right;
-    margin-right: 20px;
-}
-
-.error_message {
-    background-color: #CA1551;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    margin-top: 20px;
-}
-
-.SignUpForm, .LoginForm {
-    margin-top: 20px;
-    color: white;
-}
-
-/* Color Theme Swatches in Hex */
-.BRANDING-•-MATOU-1-hex { color: #03658C; }
-.BRANDING-•-MATOU-2-hex { color: #F2CA52; }
-.BRANDING-•-MATOU-3-hex { color: #F2EBD5; }
-.BRANDING-•-MATOU-4-hex { color: #F24141; }
-.BRANDING-•-MATOU-5-hex { color: #0D0D0D; }
-
-section {
-    min-height: 200px;
-    padding: 30px 30px;
-    background-color: #F6F6F6;
-    border-radius: 10px;
-}
-
-section:nth-child(even) {
-    background-color: #EBEBEB;
-}
-
-.Main {
-    background-color: #03658C;
-    grid-area: main;
-    overflow: auto;
-}
-
-.landing_page_header {
-    margin-bottom: 40px;
-}
-
-.landing_page_section {
-    width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.sign_up_button {
-    width: 300px;
-    height: 50px;
-    font-size: larger;
-    font-weight: bold;
-    color: white;
-    background-color: #F24141;
-    border: none;
-}
-
-.sign_up_button:hover {
-    background-color: #a02929;
-}
-
-.sign_up_cta, .sign_up_cta > h3 {
-    text-align: center;
-    margin-bottom: 20px;
 }

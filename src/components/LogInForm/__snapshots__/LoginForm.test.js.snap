@@ -1,53 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`LogInForm component renders LogInForm by default 1`] = `
-<form
-  className="LoginForm"
-  onSubmit={[Function]}
->
-  <legend>
-    <h2>
-      Log in
-    </h2>
-  </legend>
-  <div
-    className="user_name"
+<Fragment>
+  <form
+    className="LoginForm"
+    onSubmit={[Function]}
   >
-    <label
-      htmlFor="LoginForm__user_name"
+    <legend>
+      <h2>
+        Log in
+      </h2>
+    </legend>
+    <div
+      className="user_name"
     >
-      Email
-    </label>
-    <Input
-      id="LoginForm__user_name"
-      name="user_name"
-      onChange={[Function]}
-      required={true}
-    />
-  </div>
-  <div
-    className="password"
-  >
-    <label
-      htmlFor="LoginForm__password"
+      <label
+        htmlFor="LoginForm__user_name"
+      >
+        Email
+      </label>
+      <Input
+        id="LoginForm__user_name"
+        name="user_name"
+        onChange={[Function]}
+        required={true}
+      />
+    </div>
+    <div
+      className="password"
     >
-      Password
-    </label>
-    <Input
-      id="LoginForm__password"
-      name="password"
-      onChange={[Function]}
-      required={true}
-      type="password"
+      <label
+        htmlFor="LoginForm__password"
+      >
+        Password
+      </label>
+      <Input
+        id="LoginForm__password"
+        name="password"
+        onChange={[Function]}
+        required={true}
+        type="password"
+      />
+    </div>
+    <Button
+      type="submit"
+    >
+      Login
+    </Button>
+    <div
+      role="alert"
     />
-  </div>
+  </form>
   <Button
-    type="submit"
+    className="login_with_demo_account_button"
+    onClick={[Function]}
   >
-    Login
+    Log in with Demo Account
   </Button>
-  <div
-    role="alert"
-  />
-</form>
+</Fragment>
 `;

@@ -65,7 +65,6 @@ exports[`AddPersonForm component renders the complete form 1`] = `
   </div>
   <div>
     <Button
-      className=""
       disabled={true}
     >
       Submit

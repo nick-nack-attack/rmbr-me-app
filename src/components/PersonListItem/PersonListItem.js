@@ -1,49 +1,45 @@
 import React, {Component} from 'react';
 import RmbrmeContext from "../../contexts/RmbrmeContext";
 import RmbrApiService from "../../services/rmbr-api-service";
-import PrettyDate from '../Utils/Utils';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { format } from 'date-fns'
+
 
 export default class PersonListItem extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             error: null,
             handleClickPerson: () => {}
-        }
-    }
+        };
+    };
 
     static contextType = RmbrmeContext;
 
     handleClickPerson = (person_id) => {
-        this.props.handleClickPerson(person_id)
+        this.props.handleClickPerson(person_id);
     }
 
     handleDeletePerson = (e, personId) => {
         e.stopPropagation();
-        this.setState({error: null})
+        this.setState({error: null});
         RmbrApiService.deletePerson(personId)
             .then(this.context.deletePerson(personId))
             .catch(res => {
                 this.setState({
                     error: res.error
-                })
+                });
             })
     };
 
     render() {
-        console.log(PrettyDate(this.props.person.date_created))
-        // console.log( format(new Date(this.props.person.date_created), 'MMM, do Y'))
         const person_id = this.props.person.id;
-        const makeARmbrPromptButton = <button onClick={() => this.handleClickPerson(person_id)}> <FontAwesomeIcon icon='plus' /> Create a Rmbr </button>
-        const arrayLength = this.props.rmbrArray.length
+        const makeARmbrPromptButton = <button onClick={() => this.handleClickPerson(person_id)}> <FontAwesomeIcon icon='plus' /> Create a Rmbr </button>;
+        const arrayLength = this.props.rmbrArray.length;
         const PersonRmbrList = !arrayLength
             ? makeARmbrPromptButton
             : (this.props.rmbrArray.find(rbr => rbr.person_id === this.props.person.id)).rmbr_title
-        const rmbrOrRmbrs = arrayLength === 1 ? 'rmbr' : 'rmbrs'
+        const rmbrOrRmbrs = arrayLength === 1 ? 'rmbr' : 'rmbrs';
 
     return (
         <>
@@ -58,7 +54,11 @@ export default class PersonListItem extends Component {
                 >
                     <FontAwesomeIcon icon='trash-alt' />
                 </button>
-                <h3 className='PersonListItem__heading'> { this.props.person.person_name } </h3>
+                <h3
+                    className='PersonListItem__heading'
+                >
+                    { this.props.person.person_name }
+                </h3>
                 <p className='person_category'>{ this.props.person.type_of_person } <FontAwesomeIcon icon='bolt'/> {this.props.rmbrArray.length} {rmbrOrRmbrs}</p>
                 <div
                     className='latest_rmbr'
@@ -69,8 +69,7 @@ export default class PersonListItem extends Component {
                     </div>
                 </div>
             </li>
-
         </>
-        )
-    }
+        );
+    };
 };

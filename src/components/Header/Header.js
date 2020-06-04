@@ -2,21 +2,24 @@ import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import TokenService from '../../services/token-service'
 import IdleService from "../../services/idle-service";
-import './Header.css'
+import Logo from '../../assets/rmbrme.svg'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import './Header.css';
 
 class Header extends Component {
 
     handleLogoutClick = () => {
-        TokenService.clearAuthToken()
-        TokenService.clearCallbackBeforeExpiry()
-        IdleService.unregisterIdleResets()
-        window.location.reload(true)
+        TokenService.clearAuthToken();
+        TokenService.clearCallbackBeforeExpiry();
+        IdleService.unregisterIdleResets();
+        window.location.reload(true);
     };
 
     renderLogoutLink() {
         return (
-            <div className='Header__logged-in'>
+            <div
+                className='Header__logged-in'
+            >
                 <Link
                     onClick={this.handleLogoutClick}
                     to='/'
@@ -24,7 +27,7 @@ class Header extends Component {
                     Logout <FontAwesomeIcon icon='sign-out-alt' />
                 </Link>
             </div>
-        )
+        );
     };
 
     renderLoginLink() {
@@ -41,20 +44,28 @@ class Header extends Component {
                     Sign Up
                 </Link>
             </div>
-        )
+        );
     };
 
     render() {
         return (
             <>
-                <nav className='Header'>
+                <nav
+                    className='Header'
+                >
                     <h1>
-                        <Link to='/'>
-                            {' '}
-                            rmbrme
-                        </Link>
+                            <img
+                                id='rmbrme_logo'
+                                src={Logo}
+                                alt='rmbrme'
+                                onClick={() => this.props.history.push('/')}
+                            />
                     </h1>
-                    <span className='Header__tagline--wide'>Be a Better Buddy</span>
+                    <span
+                        className='Header__tagline--wide'
+                    >
+                        Be a Better Buddy
+                    </span>
                         { TokenService.hasAuthToken()
                             ? this.renderLogoutLink()
                             : this.renderLoginLink() }
@@ -65,4 +76,4 @@ class Header extends Component {
     }
 }
 
-export default withRouter(Header)
+export default withRouter(Header);

@@ -9,9 +9,8 @@ export default class SignUpPage extends Component {
         },
     }
 
-    handleSignUpSuccess = user => {
-        const { history } = this.props
-        history.push('/')
+    handleSignUpSuccess = () => {
+        window.location.reload(true);
     }
 
     render() {

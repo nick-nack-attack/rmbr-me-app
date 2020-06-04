@@ -4,11 +4,14 @@ import TokenService from "./token-service";
 const RmbrApiService = {
 
     getPeople() {
-        console.log('getPeople ran')
         return fetch(`${config.API_ENDPOINT}/people`, {
             headers: {}
         })
-            .then(res => (!res.ok) ? res.json().then(e => Promise.reject(e)) : res.json() )
+            .then(res =>
+                (!res.ok)
+                    ? res.json().then(e => Promise.reject(e))
+                    : res.json()
+            );
     },
 
     getUserId() {
@@ -23,10 +26,11 @@ const RmbrApiService = {
                 'content-type': 'application/json'
             }
         })
-            .then(res => 
-                (!res.ok) 
-                    ? res.json().then(e => Promise.reject(e)) 
-                    : res.json() )
+            .then(res =>
+                (!res.ok)
+                    ? res.json().then(e => Promise.reject(e))
+                    : res.json()
+            );
     },
 
     getPersonByPersonId(person_id) {
@@ -37,7 +41,11 @@ const RmbrApiService = {
                 'content-type': 'application/json'
             }
         })
-            .then(res => (!res.ok) ? res.json().then(e => Promise.reject(e)) : res.json() )
+            .then(res =>
+                (!res.ok)
+                    ? res.json().then(e => Promise.reject(e))
+                    : res.json()
+            );
     },
 
     getRmbrByPersonId(person_id) {
@@ -51,7 +59,8 @@ const RmbrApiService = {
             .then(res => 
                 (!res.ok) 
                 ? res.json().then(e => Promise.reject(e)) 
-                : res.json() )
+                : res.json()
+            );
     },
 
     getRmbrByUserId(user_id) {
@@ -65,7 +74,8 @@ const RmbrApiService = {
         .then(res =>
             (!res.ok)
                 ? res.json().then(e => Promise.reject(e))
-                : res.json() )
+                : res.json()
+        );
     },
 
     postPerson(newPerson) {
@@ -77,7 +87,11 @@ const RmbrApiService = {
             },
             body: JSON.stringify(newPerson)
         })
-        .then(res => (!res.ok) ? res.json().then(e => Promise.reject(e)) : res.json() )
+            .then(res =>
+                (!res.ok)
+                    ? res.json().then(e => Promise.reject(e))
+                    : res.json()
+            );
     },
 
     postRmbr(newRmbr) {
@@ -89,18 +103,11 @@ const RmbrApiService = {
             },
             body: JSON.stringify(newRmbr)
         })
-        .then(res => (!res.ok) ? res.json().then(e => Promise.reject(e)) : res.json() )
-    },
-
-    deleteRmbr(rmbrId) {
-        return fetch(`${config.API_ENDPOINT}/rmbr/${rmbrId}`, {
-            method: 'DELETE',
-            headers: {
-                'authorization': `bearer ${TokenService.getAuthToken()}`,
-                'content-type': 'application/json'
-            },
-        })
-        .then(res => (!res.ok) ? res.json().then(e => Promise.reject(e)) : res.json() )
+            .then(res =>
+                (!res.ok)
+                    ? res.json().then(e => Promise.reject(e))
+                    : res.json()
+            );
     },
 
     editRmbr(rmbr_id, rmbrFields) {
@@ -111,7 +118,7 @@ const RmbrApiService = {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(rmbrFields)
-        })
+        });
     },
 
     editPerson(person_id, personToUpdate) {
@@ -122,7 +129,7 @@ const RmbrApiService = {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(personToUpdate)
-        })
+        });
     },
 
     deletePerson(personId) {
@@ -133,9 +140,26 @@ const RmbrApiService = {
                 'content-type': 'application/json'
             }
         })
-            .then(res => (!res.ok) ? res.json().then(e => Promise.reject(e)) : res.json() )
+            .then(res => {
+                    if (!res.ok)
+                        throw new Error('Could not delete')
+            });
+    },
+
+    deleteRmbr(rmbrId) {
+        return fetch(`${config.API_ENDPOINT}/rmbr/${rmbrId}`, {
+            method: 'DELETE',
+            headers: {
+                'authorization': `bearer ${TokenService.getAuthToken()}`,
+                'content-type': 'application/json'
+            },
+        })
+            .then(res => {
+                if (!res.ok)
+                    throw new Error('Could not delete')
+            });
     }
 
-}
+};
 
 export default RmbrApiService;

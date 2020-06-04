@@ -14,7 +14,8 @@ export default class PersonPage extends Component {
         super(props);
         this.state = {
             editFormDisplayed: false,
-            person_id: this.props.match.params.person_id
+            person_id: this.props.match.params.person_id,
+            onDeletePerson: () => {}
         }
     };
 
@@ -36,18 +37,21 @@ export default class PersonPage extends Component {
         })
     };
 
-    handleDeletePerson = personId => {
+    handleDeletePerson = e => {
+        e.preventDefault()
+        const person_id = this.props.match.params.person_id;
         this.setState({error: null});
-        RmbrApiService.deletePerson(personId)
-            .then(this.context.deletePerson(personId))
-            .then(this.props.history.push('/'))
+        RmbrApiService.deletePerson(person_id)
+            .then(() => {
+                this.context.deletePerson(person_id)
+            })
+            .then(() => this.props.history.push('/'))
             .catch(res => {
-                console.log(res)
                 this.setState({
                     error: res.error
                 })
             })
-    }
+    };
 
     handleEditPerson = () => {
         this.setState({
@@ -91,7 +95,7 @@ export default class PersonPage extends Component {
                                                 <div className='person_page_delete_button_div'>
                                                     <button
                                                         className='list_delete_button'
-                                                        onClick={() => this.handleDeletePerson(person_id)}
+                                                        onClick={(e) => this.handleDeletePerson(e)}
                                                     >
                                                         <FontAwesomeIcon icon='trash-alt' />
                                                     </button>
@@ -99,7 +103,7 @@ export default class PersonPage extends Component {
                                         </span>
                                     </h2>
                                     <h3> {type_of_person}</h3>
-                                    <text>Added {PrettyDate(date_created)}</text>
+                                    <p>Added {PrettyDate(date_created)}</p>
                                 </div>
                             </>
                         :   <EditPersonForm

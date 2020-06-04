@@ -1,5 +1,5 @@
-import config from '../config'
-import TokenService from './token-service'
+import config from '../config';
+import TokenService from './token-service';
 import IdleService from "./idle-service";
 
 const AuthApiService = {
@@ -42,7 +42,6 @@ const AuthApiService = {
                     TokenService.saveUserId(res.user_id)
                     IdleService.registerIdleTimerResets()
                     TokenService.queueCallbackBeforeExpiry()
-                        // return res
             })
       },
 
@@ -76,4 +75,4 @@ const AuthApiService = {
     }
 }
 
-export default AuthApiService
+export default AuthApiService;

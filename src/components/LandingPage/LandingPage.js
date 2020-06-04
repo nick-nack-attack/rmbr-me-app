@@ -1,47 +1,61 @@
 import React, { Component } from 'react';
-import never_forget from '../../images/never_forget.png'
-import listening_skills from '../../images/listening_skills.png'
-import have_better from '../../images/have_better.png'
-import {Section} from '../Utils/Utils'
+import never_forget from '../../assets/never_forget.png'
+import listening_skills from '../../assets/listening_skills.png'
+import have_better from '../../assets/have_better.png'
+import { Section } from '../Utils/Utils'
 
 export default class LandingPage extends Component {
 
     handleSignUpNowClick = () => {
-        const { history } = this.props
-        const destination = '/sign-up'
-        history.push(destination)
+        const { history } = this.props;
+        const destination = '/sign-up';
+        history.push(destination);
     }
 
     render() {
         return (
-            <Section className='landing_page_section'>
-                <header className='landing_page_header'>
-                    <h1>rmbrme</h1>
-                    <h2>be a better buddy</h2>
+            <Section
+                className='landing_page_section'
+            >
+                <header
+                    className='landing_page_header'
+                >
+                    <h2>No more forgetting or regretting</h2>
                 </header>
                 <section>
-                    <img src={listening_skills}/>
+                    <img
+                        src={listening_skills}
+                        alt='lightning bolt listening to a comment'
+                    />
                     <header>
                         <h3>Improve your listening skills</h3>
                     </header>
                     <p>rmbrme helps you remember things about your friends and family so you can be more engaged in their lives.</p>
                 </section>
                 <section>
-                    <img src={never_forget}/>
+                    <img
+                        src={never_forget}
+                        alt='lightning bolt remembering a comment'
+                    />
                     <header>
                         <h3>Never forget a detail</h3>
                     </header>
-                    <p>Stay up-to-date on the people you love or like a lot.</p>
+                    <p>Stay up-to-date on the people who matter to you.</p>
                 </section>
                 <section>
-                    <img src={have_better}/>
+                    <img
+                        src={have_better}
+                        alt='lightning bolt remembering comment'
+                    />
                     <header>
                             <h3>Have better relationships</h3>
                     </header>
-                    <p>People will appreciate you more as you remember more about them.</p>
+                    <p>People will appreciate you more as you remember things they've said.</p>
                 </section>
                 <section>
-                    <header className='sign_up_cta'>
+                    <header
+                        className='sign_up_cta'
+                    >
                         <h3>No more forgetting or regretting</h3>
                     </header>
                     <button
@@ -52,9 +66,6 @@ export default class LandingPage extends Component {
                     </button>
                 </section>
             </Section>
-
-        )
-
-    }
-
-}
+        );
+    };
+};

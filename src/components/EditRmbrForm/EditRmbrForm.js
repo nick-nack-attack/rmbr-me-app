@@ -1,60 +1,59 @@
 import React, { Component } from 'react';
-import { Textarea, Button } from '../Utils/Utils';
 import RmbrmeContext from "../../contexts/RmbrmeContext";
 import RmbrApiService from "../../services/rmbr-api-service";
+import { Textarea, Button } from '../Utils/Utils';
 import { findRmbrByPersonId } from "../../helpers";
 
 export default class EditRmbrForm extends Component {
 
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             rmbrTitle: this.props.rmbr.rmbr_title,
             rmbrText: this.props.rmbr.rmbr_text,
             error: null,
             onCancelEdit: () => {},
             onHideEditForm: () => {}
-        }
+        };
     };
 
     static contextType = RmbrmeContext;
 
     handleHideForm = event => {
-        this.props.onHideEditForm()
+        this.props.onHideEditForm();
     };
 
     handleTitleChange = event => {
         this.setState({
             rmbrTitle: event.target.value
-        })
+        });
     };
 
     handleTextChange = event => {
         this.setState({
             rmbrText: event.target.value
-        })
-    }
+        });
+    };
 
     handleEditRmbrSubmit = e => {
-        e.preventDefault()
+        e.preventDefault();
         this.setState({error: null});
-        const rmbr_title = this.state.rmbrTitle
-        const rmbr_text = this.state.rmbrText
-        const person_id = this.props.rmbr.person_id
-        const user_id = window.localStorage.getItem('user_id')
-        const rmbr_id = this.props.rmbr.id
-        const category = this.props.rmbr.category
-        const EditedRmbr = { rmbr_title, rmbr_text, person_id, user_id, category, rmbr_id };
+        const rmbr_title = this.state.rmbrTitle;
+        const rmbr_text = this.state.rmbrText;
+        const person_id = this.props.rmbr.person_id;
+        const user_id = window.localStorage.getItem('user_id');
+        const rmbr_id = this.props.rmbr.id;
+        const EditedRmbr = { rmbr_title, rmbr_text, person_id, user_id, rmbr_id };
         RmbrApiService.editRmbr(rmbr_id, EditedRmbr)
             .then(res => res.json())
             .then(data => {
-                this.context.setRmbrArray(findRmbrByPersonId(data, person_id))
-                this.handleHideForm()
+                this.context.setRmbrArray(findRmbrByPersonId(data, person_id));
+                this.handleHideForm();
             })
             .catch(err => {
                 this.setState({
                     error:err.error
-                })
+                });
             })
     };
 
@@ -72,7 +71,7 @@ export default class EditRmbrForm extends Component {
                         id='rmbrTitle'
                         value={this.state.rmbrTitle}
                         onChange={this.handleTitleChange}
-                        autoFocus={this.props.autofocus ? true : false}
+                        autoFocus={!!this.props.autofocus}
                     />
                     <label>
                         Rmbr text
@@ -98,7 +97,6 @@ export default class EditRmbrForm extends Component {
                     </Button>
                 </div>
             </form>
-        )
-    }
-
-}
+        );
+    };
+};

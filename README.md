@@ -1,13 +1,71 @@
-The name of your app at the top of the file.
-A link to your live app.
-Documentation of your API.
-Screenshot(s) of your app. This makes your app description much easier to understand.
-A summary section. This should have a concise explanation of what your app does. Try to frame this from the standpoint of what the user does, or what the app enables for the user.
-A section on the technology used.
+# rmbrme - Note Taking App
 
+## Description
+This is for remembering stuff about people you care about. 
+You create people and attached rmbrs (notes) to them. 
+`Rmbr` is the branding name for a note about someone.
 
+## Live Site
+[rmbrme](https://rmbrme.now.sh)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
+- [Technologies](##Technologies)
+- [Planning](##Planning)
+- [Images](##Images)
+- [Requirements](##Requirements)
+- [Available Scripts](##Available Scripts)
+- [Special Thanks](##Special Thanks)
+
+## Technologies
+- HTML5
+- CSS 3
+- React (16.13.1)
+- Node (13.12.0)
+- Express (4.17.1)
+- PostgreSQL (12.3)
+
+## Planning
+- [Wireframes](https://nick-nack-attack.github.io/rmbr-me/) made in HTML
+
+## Images
+• **Landing Page**
+![Landing Page](src/screenshots/landing_page.png)
+
+• **Log In**
+![Log In](src/screenshots/log_in.png)
+
+• **Sign Up**
+![Sign Up](src/screenshots/sign_up.png)
+
+• **Person List**
+![Person List](src/screenshots/personList.png)
+
+• **Person View**
+![Person View](src/screenshots/personPage.png)
+
+• **Edit Person View**
+![Edit Person](src/screenshots/edit_person.png)
+
+• **Edit Rmbr View**
+![Edit Rmbr](src/screenshots/edit_person.png)
+
+## Requirements
+- Your app must do something interesting or useful
+- Your app must be a full-stack app using React, CSS, Node, Express, and PostgreSQL.
+- The client and API should be deployed separately and stored in separate GitHub repos.
+- Both client-side and server-side code must be tested.
+- At a minimum, you should test the happy path for each endpoint in your API and include a smoke test for each component in your React client. If time permits, include tests for the unhappy paths for each endpoint and add snapshot tests for your client where appropriate.
+- Your app must be responsive and work just as well on mobile devices as it does on desktop devices.
+- All code must be high quality, error-free, commented as necessary, and clean. When a hiring manager looks at your code, you want them to think, "This person has great coding habits". There should be no errors in the console.
+- The styling on your client must be polished. That means choosing fonts and colors that make sense, correctly sizing different components, and ensuring that it looks great on both mobile and desktop devices.
+- The content of your app must be clear and readable.
+- You must use vanilla CSS for styling capstones. Frameworks like Bootstrap are not permitted. We've found that employers prefer to see candidates who demonstrate a true understanding of CSS.
+- You must have comprehensive README files for both GitHub repos (we'll discuss this step in detail at the end of this module).
+- Your app must have a landing page that explains what the app does and how to get started, in addition to pages required to deliver the main functionality.
+- You must deploy a live, publicly-accessible version of your app.
+- Your app must live at a custom URL and include a Favicon (we'll cover this later in the module)
+- Your app must work across different browsers (Chrome, Firefox, and Safari at a minimum)
+- If you choose to include an authentication system in your app, you must set up a demo user account and indicate on the landing page how to use it.
 
 ## Available Scripts
 
@@ -36,43 +94,6 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Special Thanks
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
-
+I would like to recognize Jaime Gammel, Cali Stephans, Nicholas Hazel, Fernando Filho, and Tiago Fassoni for their guidance and support.

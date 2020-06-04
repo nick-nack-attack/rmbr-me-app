@@ -8,6 +8,6 @@ const ErrorMsg = (props) => {
             {props.message}
         </span>
     );
-}
+};
 
 export default ErrorMsg;

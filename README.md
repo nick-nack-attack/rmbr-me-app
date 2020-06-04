@@ -9,12 +9,12 @@ You create people and attached rmbrs (notes) to them.
 [rmbrme](https://rmbrme.now.sh)
 
 ## Table of Contents
-- [Technologies](##Technologies)
-- [Planning](##Planning)
-- [Images](##Images)
-- [Requirements](##Requirements)
-- [Available Scripts](##Scripts)
-- [Special Thanks](##Thanks)
+- [Technologies](#Technologies)
+- [Planning](#Planning)
+- [Images](#Images)
+- [Requirements](#Requirements)
+- [Available Scripts](#Scripts)
+- [Special Thanks](#Thanks)
 
 ## Technologies
 - HTML5

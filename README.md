@@ -13,8 +13,8 @@ You create people and attached rmbrs (notes) to them.
 - [Planning](##Planning)
 - [Images](##Images)
 - [Requirements](##Requirements)
-- [Available Scripts](##Available Scripts)
-- [Special Thanks](##Special Thanks)
+- [Available Scripts](##Scripts)
+- [Special Thanks](##Thanks)
 
 ## Technologies
 - HTML5
@@ -67,7 +67,7 @@ You create people and attached rmbrs (notes) to them.
 - Your app must work across different browsers (Chrome, Firefox, and Safari at a minimum)
 - If you choose to include an authentication system in your app, you must set up a demo user account and indicate on the landing page how to use it.
 
-## Available Scripts
+## Scripts
 
 In the project directory, you can run:
 
@@ -94,6 +94,6 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-## Special Thanks
+## Thanks
 
 I would like to recognize Jaime Gammel, Cali Stephans, Nicholas Hazel, Fernando Filho, and Tiago Fassoni for their guidance and support.

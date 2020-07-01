@@ -1,0 +1,24 @@
+$primary: black;
+$secondary: white;
+
+$error: #CA1551;
+
+$header: #F26A4B;
+$headerSecondary: #833928;
+$facts: #FFF; 
+
+$yellow: #FDF0C7;
+
+$mint: #FBFCC4;
+$blue: #6BA6C7;
+
+$bglist: $mint, $blue;
+
+@mixin linear-gradient($direction, $list) { 
+    background-image: -webkit-linear-gradient($direction, $list);
+    background-image: -moz-linear-gradient($direction, $list);
+    background-image: -o-linear-gradient($direction, $list);
+    background-image: linear-gradient($direction, $list);  
+  };
+
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap');

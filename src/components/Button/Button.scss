@@ -1,0 +1,17 @@
+@import '../../themes/v2';
+
+.icon-only {
+    position: relative;
+    height: 40px;
+    background-color: transparent;
+    &>:hover {
+        color: $secondary;
+        background-color: $error;
+    }
+}
+
+.float {
+    float: right;
+    margin-right: -15px;
+    margin-top: -15px;
+}

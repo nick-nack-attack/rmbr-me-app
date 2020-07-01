@@ -3,6 +3,8 @@ import { Input, Button } from '../Utils/Utils';
 import RmbrApiService from "../../services/rmbr-api-service";
 import RmbrmeContext from "../../contexts/RmbrmeContext";
 
+import './AddPersonForm.scss'
+
 export default class AddPersonForm extends Component {
 
     constructor(props) {

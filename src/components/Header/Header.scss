@@ -1,0 +1,24 @@
+@import '../../themes/_v2.scss';
+
+.Header {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $header;
+    padding: 10px 30px;
+    border-bottom: 2px solid $headerSecondary;
+    &>:hover {
+        cursor: pointer;
+        filter: drop-shadow(0px 2px 2px black);
+        -webkit-transition: background-color 0.5s ease;
+        -moz-transition: background-color 0.5s ease;
+        -o-transition: background-color 0.5s ease;
+        transition: background-color 0.5s ease;
+    }
+}
+
+#rmbrme_logo {
+    height: 40px;
+    margin-top: 5px;
+}

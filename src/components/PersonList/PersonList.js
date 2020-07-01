@@ -5,6 +5,7 @@ import emptyStateForPersonList from '../../assets/empty_people.png';
 import RmbrApiService from '../../services/rmbr-api-service';
 import RmbrmeContext from "../../contexts/RmbrmeContext";
 import { findRmbrByPersonId } from "../../helpers";
+import Person from '../Person/Person';
 
 export default class PersonList extends Component {
 
@@ -46,11 +47,11 @@ export default class PersonList extends Component {
         }
 
         return personArray.map((person, index) =>
-            <PersonListItem
-                key={index}
-                person={person}
-                rmbrArray={findRmbrByPersonId(rmbrArray, person.id)}
-                handleClickPerson={(person_id) => this.onClickPerson(person_id)}
+            <Person
+                key={ index }
+                person={ person }
+                array={ findRmbrByPersonId(rmbrArray, person.id) }
+                handleClickPerson={ (person_id) => this.onClickPerson(person_id) }
             />
         );
     };
@@ -64,15 +65,13 @@ export default class PersonList extends Component {
         const rmbrLabel = rmbrCount === 1? 'rmbr' : 'rmbrs';
 
         return (
-            <>
+            <div>
+                <h2 className='person_list_label'>
+                    You have <b>{ personCount }</b> { personLabel } with <b>{ rmbrCount }</b> { rmbrLabel }
+                </h2>
                 <ul
                     id='person_list'
                 >
-                    <label
-                        className='person_list_label'
-                    >
-                        You have <b>{ personCount }</b> { personLabel } with <b>{ rmbrCount }</b> { rmbrLabel }
-                    </label>
                         { error
                             ? <p className='red'>There was an error, try again</p>
                             : this.renderPeople() }
@@ -82,7 +81,7 @@ export default class PersonList extends Component {
                 >
                     <AddPersonForm/>
                 </div>
-            </>
+            </div>
         );
     };
 };

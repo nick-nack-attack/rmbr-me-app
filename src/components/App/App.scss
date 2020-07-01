@@ -1,0 +1,12 @@
+@import '../../themes/_v2.scss';
+
+.Main {
+    background-image: linear-gradient($bglist);
+    grid-area: main;
+    overflow: auto;
+    height: calc(100vh - 70px);
+}
+
+.person_list_label {
+    color: $primary;
+}

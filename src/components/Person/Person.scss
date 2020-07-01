@@ -5,10 +5,17 @@ li.PersonListItem {
     filter: drop-shadow(0px 5px 5px #7a7a7a);
     &>:hover {
         cursor: pointer;  
-    }
-}
+    };
+};
 
 .cat-and-rmbr {
     display: flex;
     justify-content: space-between;
-}
+};
+
+.latest_rmbr {
+        float: right;
+        text-align: right;
+        margin-top: 10px;
+        font-size: larger;
+};

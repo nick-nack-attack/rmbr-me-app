@@ -17,6 +17,7 @@
     "enzyme-to-json": "^3.5.0",
     "font-awesome": "^4.7.0",
     "jwt-decode": "^2.2.0",
+    "material-design-icons": "^3.0.1",
     "moment": "^2.26.0",
     "node-sass": "^4.14.1",
     "pg": "^8.2.1",

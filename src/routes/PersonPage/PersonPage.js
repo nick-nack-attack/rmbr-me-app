@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useContext, useEffect } from 'react';
 import RmbrApiService from "../../services/rmbr-api-service";
 import RmbrList from '../../components/RmbrList/RmbrList'
 import EditPersonForm from "../../components/EditPersonForm/EditPersonForm";
@@ -6,60 +6,58 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "../../components/Utils/Utils";
 import RmbrmeContext from "../../contexts/RmbrmeContext";
 import PrettyDate from "../../components/Utils/Utils";
+import { useHistory } from 'react-router-dom';
 
+import './PersonPage.scss'; 
 
-export default class PersonPage extends Component {
+const PersonPage = (props) => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            editFormDisplayed: false,
-            person_id: this.props.match.params.person_id,
-            onDeletePerson: () => {}
-        }
-    };
+    const [ showForm, setShowForm ] = useState(false);
+    const [ id, setId ] = useState(props.match.params.person_id);
+    const [ error, setError ] = useState(null);
+    const [ person, setPerson ] = useState({});
+    const history = useHistory();
+    
 
-    static contextType = RmbrmeContext;
+    let context = useContext(RmbrmeContext);
 
-    componentDidMount() {
-       RmbrApiService.getPersonByPersonId(this.state.person_id)
-           .then( person => {
-               this.context.setSelectedPerson(person)
-           })
-           .catch(err => {
-               this.context.setError(err)
+    useEffect(() => {
+        RmbrApiService.getPersonByPersonId(id)
+            .then(person => {
+                context.setSelectedPerson(person);
+                setPerson(person);
             })
+            .catch(err => {
+                context.setError(err);
+            });
+    }, [id]);
+
+    const handleHideEditForm = () => {
+        setShowForm(false);
     };
 
-    onHideEditForm = e => {
-        this.setState({
-            editFormDisplayed: false
-        })
+    const handleShowEditForm = () => {
+        setShowForm(true);
     };
 
-    handleDeletePerson = e => {
-        e.preventDefault()
-        const person_id = this.props.match.params.person_id;
-        this.setState({error: null});
-        RmbrApiService.deletePerson(person_id)
-            .then(() => {
-                this.context.deletePerson(person_id)
-            })
-            .then(() => this.props.history.push('/'))
-            .catch(res => {
-                this.setState({
-                    error: res.error
+    const handleDeletePerson = e => {
+        if (window.confirm(`Are you sure you want to delete this person?`)) {
+            e.preventDefault();
+            setError(null);
+            RmbrApiService.deletePerson(id)
+                .then(() => {
+                    context.deletePerson(id);
                 })
-            })
+                .then(() => {
+                    history.push('/');
+                })
+                .catch(err => {
+                    setError(err);
+                })
+        };
     };
-
-    handleEditPerson = () => {
-        this.setState({
-            editFormDisplayed: true
-        })
-    };
-
-    renderBackButton = () => {
+    
+    const backButton = () => {
         return (
             <Button
                 className='back_to_root_button'
@@ -68,18 +66,36 @@ export default class PersonPage extends Component {
                 <FontAwesomeIcon id='arrow-left' icon='arrow-left'/>
                 Back
             </Button>
-        )
-    }
+        );
+    };
 
-    render() {
-        const person_id = this.props.match.params.person_id;
-        const person_name = this.context.selected_person.person_name
-        const type_of_person = this.context.selected_person.type_of_person || '';
-        const date_created = this.context.selected_person.date_created || new Date();
-        const { error } = this.context;
+    return (
 
-        return (
-            <div key={person_id}>
+        <div>
+            <header>
+                <div className='person_page_header'>
+                    <h2>
+                        { person.person_name }
+                    </h2>
+                    <h3>
+                        { person.type_of_person }
+                    </h3>
+                    <h4>
+                        { PrettyDate(person.date_created || new Date()) }
+                    </h4>
+                </div>
+            </header>
+            <div>
+                <RmbrList 
+                    person_id = { id }
+                    rmbrList = { context.rmbrList }
+                />
+            </div>
+
+        </div>
+
+        /*
+        <div key={person_id}>
                 <header>
                     { !this.state.editFormDisplayed
                         ?   <>
@@ -129,6 +145,9 @@ export default class PersonPage extends Component {
             </div>
             </div>
             </div>
-        )
-    }
-}
+            */
+    );
+
+};
+
+export default PersonPage;

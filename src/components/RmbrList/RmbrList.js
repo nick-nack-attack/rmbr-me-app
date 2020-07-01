@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import RmbrmeContext from "../../contexts/RmbrmeContext";
 import RmbrApiService from "../../services/rmbr-api-service";
 import RmbrListItem from '../RmbrListItem/RmbrListItem';
-import AddRmbrForm from '../AddRmbrForm/AddRmbrForm'
+import AddRmbrForm from '../AddRmbrForm/AddRmbrForm';
+import AddRmbr from '../AddRmbr/AddRmbr';
+import Rmbr from '../Rmbr/Rmbr';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class RmbrList extends Component {
@@ -37,13 +39,19 @@ export default class RmbrList extends Component {
     renderRmbrs = () => {
         const rmbrArray = this.context.rmbrArray;
         return rmbrArray.sort((a,b) => a.id - b.id).map(rmbr =>
-            <RmbrListItem
+            <Rmbr
                 key={rmbr.id}
                 id={rmbr.id}
                 rmbr={rmbr}
-                onDeleteRmbrSuccess={rmbrId => this.onDeleteRmbrSuccess(rmbrId)}
-                className='rmbr_list_item'
+                onDeleteRmbrSuccess={ id => this.onDeleteRmbrSuccess(id) }
             />
+            // <RmbrListItem
+            //     key={rmbr.id}
+            //     id={rmbr.id}
+            //     rmbr={rmbr}
+            //     onDeleteRmbrSuccess={rmbrId => this.onDeleteRmbrSuccess(rmbrId)}
+            //     className='rmbr_list_item'
+            // />
         );
     };
 
@@ -73,12 +81,9 @@ export default class RmbrList extends Component {
                         : this.renderRmbrs()
                     }
                 </ul>
-                <div
-                    className='add_rmbr_div'
-                >
-                    <AddRmbrForm
+                <div>
+                    <AddRmbr
                         person_id={person_id}
-                        user_id={user_id}
                         onAddRmbrSuccess={(rmbr) => this.handleAddRmbrSuccess(rmbr)}
                     />
                 </div>

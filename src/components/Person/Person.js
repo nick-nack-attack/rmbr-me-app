@@ -64,11 +64,11 @@ const Person = (props) => {
             className="PersonListItem"
             onClick={() => handleClick(person.id)}
         >
-            <Button
+            {/* <Button
                 text={ <FontAwesomeIcon icon='trash-alt'/> }
                 className="icon-only float"
                 onClick={ e => handleDelete(e, person.id) }
-            />
+            /> */}
             <h3
                 className='PersonListItem__heading'
             >
@@ -82,7 +82,9 @@ const Person = (props) => {
                 </p>
                 <div>
                     <FontAwesomeIcon icon='bolt'/> 
+                    {' '}
                     { props.array.length }
+                    {' '}
                     { props.array.length === 1 ? 'Rmbr' : 'Rmbrs' }
                 </div>
             </div>

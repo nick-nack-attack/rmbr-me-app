@@ -2,8 +2,9 @@
 
 ## Description
 This is for remembering stuff about people you care about. 
-You create people and attached rmbrs (notes) to them. 
-`Rmbr` is the branding name for a note about someone.
+
+Users can create people and attached rmbrs (notes) to them to enhance their relationships and awareness. 
+`Rmbr` is the brand name for a note about someone; a `rmbr` is a note to remember something about someone.
 
 ## Live Site
 [rmbrme](https://rmbrme.now.sh)

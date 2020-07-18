@@ -1,6 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { Input, Button } from '../Utils/Utils';
-import RmbrApiService from "../../services/rmbr-api-service";
+import AppApiService from "../../services/app-api-service";
 import RmbrmeContext from "../../contexts/RmbrmeContext";
 import icon from '../../assets/thunder-icon.png';
 
@@ -16,7 +16,7 @@ const AddRmbr = (props) => {
     const characterLimit = 50;
 
     // set context
-    let context = useContext(RmbrmeContext);
+    let context = useContext(AppApiService);
 
     useEffect(() => {
         setCharactersLeft(characterLimit - title.length)
@@ -36,7 +36,7 @@ const AddRmbr = (props) => {
             person_id: props.person_id,
             user_id: window.localStorage.getItem('user_id')
         };
-        RmbrApiService.postRmbr(newRmbr)
+        AppApiService.postRmbr(newRmbr)
             .then(res => {
                 context.addRmbr(res);
                 setTitle('');

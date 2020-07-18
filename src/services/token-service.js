@@ -18,6 +18,10 @@ const TokenService = {
         return window.localStorage.getItem(config.TOKEN_KEY);
     },
 
+    getUserId() {
+        return window.localStorage.getItem('user_id');
+    },
+
     clearAuthToken() {
         window.localStorage.removeItem(config.TOKEN_KEY);
         window.localStorage.removeItem('user_id');

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import RmbrApiService from "../../services/rmbr-api-service";
+import AppApiService from "../../services/app-api-service";
 import RmbrmeContext from "../../contexts/RmbrmeContext";
 
 import { Input, Section, Button } from "../Utils/Utils";
@@ -77,11 +77,11 @@ export default class EditPersonForm extends Component {
         e.preventDefault();
         this.setState({ error: null });
         const person_name = this.state.formPersonName;
-        const user_id = RmbrApiService.getUserId();
+        const user_id = AppApiService.getUserId();
         const type_of_person  = this.state.selectedOption;
         const person_id = this.props.person_id;
         const newPerson = { person_name, user_id, type_of_person };
-        RmbrApiService.editPerson(person_id, newPerson)
+        AppApiService.editPerson(person_id, newPerson)
             .then(res => res.json())
             .then(data => {
                 this.context.setSelectedPerson(data);

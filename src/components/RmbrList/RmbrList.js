@@ -1,11 +1,32 @@
-import React, { Component } from "react";
+import React, { Component, useContext, useEffect } from "react";
 import RmbrmeContext from "../../contexts/RmbrmeContext";
-import RmbrApiService from "../../services/rmbr-api-service";
-import RmbrListItem from '../RmbrListItem/RmbrListItem';
-import AddRmbrForm from '../AddRmbrForm/AddRmbrForm';
+import AppApiService from "../../services/app-api-service";
+import {AppContext} from '../../contexts/AppContext';
 import AddRmbr from '../AddRmbr/AddRmbr';
 import Rmbr from '../Rmbr/Rmbr';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
+const RmbrList = () => {
+
+    let appContext = useContext(AppContext);
+
+    /*
+    useEffect(() => {
+        AppApiService.getRmbrByPersonId()
+    }, [appContext])
+    */
+
+    return (
+        <ul>
+
+        </ul>
+    )
+
+};
+
+export default RmbrList;
+
+/*
 
 export default class RmbrList extends Component {
 
@@ -16,12 +37,12 @@ export default class RmbrList extends Component {
         };
     };
 
-    static contextType = RmbrmeContext;
+    static contextType = AppApiService;
 
     componentDidMount() {
-        this.context.clearError();
+        //this.context.clearError();
         const person_id = this.props.person_id;
-        RmbrApiService.getRmbrByPersonId(person_id)
+        AppApiService.getRmbrByPersonId(person_id)
             .then( res => {
                 this.context.setRmbrArray(res);
             })
@@ -52,8 +73,8 @@ export default class RmbrList extends Component {
 
         const person_id = this.props.person_id;
         const user_id = this.props.user_id;
-        const numOfRmbrs = this.context.rmbrArray.length;
-        const { error } = this.context;
+        const numOfRmbrs = 0//this.context.rmbrArray.length;
+        
         const rmbrOrRmbrsLabel = <span>{numOfRmbrs === 0 ? 'No Rmbrs yet! ' : numOfRmbrs === 1 ? numOfRmbrs + ' Rmbr ' : numOfRmbrs + ' Rmbrs '}</span>;
 
         return (
@@ -85,3 +106,4 @@ export default class RmbrList extends Component {
     };
 };
 
+*/

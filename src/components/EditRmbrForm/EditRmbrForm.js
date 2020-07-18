@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import RmbrmeContext from "../../contexts/RmbrmeContext";
-import RmbrApiService from "../../services/rmbr-api-service";
+import AppApiService from "../../services/app-api-service";
 import { Textarea, Button } from '../Utils/Utils';
 import { findRmbrByPersonId } from "../../helpers";
 
@@ -46,7 +46,7 @@ export default class EditRmbrForm extends Component {
         const user_id = window.localStorage.getItem('user_id');
         const rmbr_id = this.props.rmbr.id;
         const EditedRmbr = { rmbr_title, rmbr_text, person_id, user_id, rmbr_id };
-        RmbrApiService.editRmbr(rmbr_id, EditedRmbr)
+        AppApiService.editRmbr(rmbr_id, EditedRmbr)
             .then(res => res.json())
             .then(data => {
                 this.context.setRmbrArray(findRmbrByPersonId(data, person_id));

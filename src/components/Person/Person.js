@@ -3,13 +3,13 @@ import React, { Component, useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 // components
-import Button from '../Button/Button';
+import { Button } from '../Utils/Utils';
 
 // contexts
 import RmbrmeContext from "../../contexts/RmbrmeContext";
 
 // service
-import RmbrApiService from "../../services/rmbr-api-service";
+import AppApiService from "../../services/app-api-service";
 
 // style
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -18,7 +18,7 @@ import './Person.scss';
 const Person = (props) => {
 
     // set context
-    let context = useContext(RmbrmeContext);
+    let context = useContext(AppApiService);
 
     // set variables
     const history = useHistory();
@@ -27,7 +27,6 @@ const Person = (props) => {
     const [ secondary, setSecondary ] = useState();
 
     useEffect(() => {
-        console.log(props.array.length);
         if (props.array.length > 0) {
             setSecondary(
                 props.array.find(rbr => rbr.person_id === person.id).rmbr_title
@@ -36,6 +35,7 @@ const Person = (props) => {
             setSecondary(
                 <button onClick={() => props.handleClickPerson(person.id)}>
                     <FontAwesomeIcon icon='plus' />
+                        {' '}
                         Create a Rmbr
                 </button>
             )
@@ -50,7 +50,7 @@ const Person = (props) => {
     const handleDelete = (e, id) => {
         e.stopPropagation();
         setError(null);
-        RmbrApiService.deletePerson(id)
+        AppApiService.deletePerson(id)
             .then(context.deletePerson(id))
             .catch(res => {
                 setError(res.error)

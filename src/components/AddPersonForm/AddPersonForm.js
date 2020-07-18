@@ -1,6 +1,6 @@
 import React, { Component, useState, useContext } from 'react';
 import { Input, Button } from '../Utils/Utils';
-import RmbrApiService from "../../services/rmbr-api-service";
+import AppApiService from "../../services/app-api-service";
 import RmbrmeContext from "../../contexts/RmbrmeContext";
 
 import './AddPersonForm.scss';
@@ -18,12 +18,12 @@ const AddPersonForm = () => {
 
         const newPerson = { 
             person_name: personName, 
-            user_id: RmbrApiService.getUserId(), 
+            user_id: AppApiService.getUserId(), 
             type_of_person: prop
         };
         console.log(newPerson)
 
-        RmbrApiService.postPerson(newPerson)
+        AppApiService.postPerson(newPerson)
             .then(res => {
                 AppContext.addPerson(res);
                 setPersonName('');

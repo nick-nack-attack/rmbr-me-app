@@ -1,10 +1,10 @@
 import config from "../config";
 import TokenService from "./token-service";
 
-const RmbrApiService = {
+const AppApiService = {
 
     getPeople() {
-        return fetch(`${config.API_ENDPOINT}/people`, {
+        return fetch(`${config.API_ENDPOINT}/person`, {
             headers: {}
         })
             .then(res =>
@@ -12,6 +12,10 @@ const RmbrApiService = {
                     ? res.json().then(e => Promise.reject(e))
                     : res.json()
             );
+    },
+
+    getRmbrs(user_id) {
+        return fetch(`${config.API_ENDPOINT}/rmbr/user/${user_id}`, )
     },
 
     getUserId() {
@@ -162,4 +166,4 @@ const RmbrApiService = {
 
 };
 
-export default RmbrApiService;
+export default AppApiService;

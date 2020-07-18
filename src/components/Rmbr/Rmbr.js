@@ -1,7 +1,7 @@
 // rmbr component
 import React, { Component, useContext, useState } from "react";
 import RmbrmeContext from "../../contexts/RmbrmeContext";
-import RmbrApiService from "../../services/rmbr-api-service";
+import AppApiService from "../../services/app-api-service";
 import EditRmbrForm from "../EditRmbrForm/EditRmbrForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import icon from '../../assets/thunder-icon.png';
@@ -13,7 +13,7 @@ import './Rmbr.scss';
 const Rmbr = (props) => {
 
     // set context
-    let context = useContext(RmbrmeContext);
+    let context = useContext(AppApiService);
 
     // set variables
     const [ showEditForm, setShowEditForm ] = useState(false);
@@ -23,7 +23,7 @@ const Rmbr = (props) => {
     const handleDeleteRmbr = (e, id) => {
         e.preventDefault();
         setError(null);
-        RmbrApiService.deleteRmbr(id)
+        AppApiService.deleteRmbr(id)
             .then(() => {
                 props.onDeleteRmbrSuccess(id)
             })

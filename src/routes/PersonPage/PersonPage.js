@@ -1,5 +1,5 @@
 import React, { Component, useState, useContext, useEffect } from 'react';
-import RmbrApiService from "../../services/rmbr-api-service";
+import AppApiService from "../../services/app-api-service";
 import RmbrList from '../../components/RmbrList/RmbrList'
 import EditPersonForm from "../../components/EditPersonForm/EditPersonForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -22,7 +22,7 @@ const PersonPage = (props) => {
     let context = useContext(RmbrmeContext);
 
     useEffect(() => {
-        RmbrApiService.getPersonByPersonId(id)
+        AppApiService.getPersonByPersonId(id)
             .then(person => {
                 context.setSelectedPerson(person);
                 setPerson(person);
@@ -40,22 +40,22 @@ const PersonPage = (props) => {
         setShowForm(true);
     };
 
-    const handleDeletePerson = e => {
-        if (window.confirm(`Are you sure you want to delete this person?`)) {
-            e.preventDefault();
-            setError(null);
-            RmbrApiService.deletePerson(id)
-                .then(() => {
-                    context.deletePerson(id);
-                })
-                .then(() => {
-                    history.push('/');
-                })
-                .catch(err => {
-                    setError(err);
-                })
-        };
-    };
+    // const handleDeletePerson = e => {
+    //     if (window.confirm(`Are you sure you want to delete this person?`)) {
+    //         e.preventDefault();
+    //         setError(null);
+    //         AppApiService.deletePerson(id)
+    //             .then(() => {
+    //                 context.deletePerson(id);
+    //             })
+    //             .then(() => {
+    //                 history.push('/');
+    //             })
+    //             .catch(err => {
+    //                 setError(err);
+    //             })
+    //     };
+    // };
     
     const backButton = () => {
         return (
@@ -93,18 +93,18 @@ const PersonPage = (props) => {
                         </Button>
                         <Button 
                             className="icon-button"
-                            onClick={e => handleDeletePerson(e)}
+                            //onClick={e => handleDeletePerson(e)}
                         >
                             <span class="material-icons">delete</span>
                         </Button>
                     </div>
 
-                    <EditPersonForm
+                    {<EditPersonForm
                                 person_id={person.person_id}
                                 person_name={person.person_name}
                                 type_of_person={person.type_of_person}
                                 onHideEditForm={e => handleHideEditForm(e)}
-                            />
+                    />}
 
                 </div>
                 

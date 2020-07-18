@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import RmbrmeContext from "../../contexts/RmbrmeContext";
-import RmbrApiService from "../../services/rmbr-api-service";
+import AppApiService from "../../services/app-api-service";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
@@ -23,7 +23,7 @@ export default class PersonListItem extends Component {
     handleDeletePerson = (e, personId) => {
         e.stopPropagation();
         this.setState({error: null});
-        RmbrApiService.deletePerson(personId)
+        AppApiService.deletePerson(personId)
             .then(this.context.deletePerson(personId))
             .catch(res => {
                 this.setState({

@@ -1,89 +1,82 @@
-import React, { Component } from 'react';
+import React, { Component, useContext, useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
+
 import PersonListItem from "../../components/PersonListItem/PersonListItem";
 import AddPersonForm from '../../components/AddPersonForm/AddPersonForm';
 import emptyStateForPersonList from '../../assets/empty_people.png';
-import RmbrApiService from '../../services/rmbr-api-service';
+import AppApiService from '../../services/app-api-service';
 import RmbrmeContext from "../../contexts/RmbrmeContext";
+
+import { AppContext } from '../../contexts/AppContext';
+
 import { findRmbrByPersonId } from "../../helpers";
+import { Input } from '../Utils/Utils';
+
 import Person from '../Person/Person';
 
-export default class PersonList extends Component {
+const PersonList = () => {
 
-    static contextType = RmbrmeContext;
+    // set context
+    let appContext = useContext(AppContext);
+    const history = useHistory();
 
-    componentDidMount() {
-        this.context.clearError();
-        const user_id = window.localStorage.getItem('user_id');
-        RmbrApiService.getPersonByUserId(user_id)
-            .then(this.context.setPersonArray)
-            .catch(this.context.setError)
-        RmbrApiService.getRmbrByUserId(user_id)
-            .then(res => this.context.setRmbrArray(res))
-            .catch(this.context.setError)
+    const [ people, setPeople ] = useState([]);
+    const [ rmbrs, setRmbrs ] = useState([]);
+    const [ searchTerm, setSearchTerm ] = useState('');
+    const [ results, setResults ] = useState([]);
+
+    const handleClick = (id) => {
+        history.push(`/person/${id}`);
     };
 
-    onClickPerson = (person_id) => {
-        this.props.history.push(`/person/${person_id}`);
-    };
+    useEffect(() => {
+        setPeople(appContext.state.people);
+        setRmbrs(appContext.state.rmbrs);
+    }, [appContext])
 
-    renderPeople() {
-        const { personArray = [] } = this.context;
-        const { rmbrArray = [] } = this.context;
-
-        if (personArray.length === 0) {
-            return (
-                <div>
-                    <img
-                        src={emptyStateForPersonList}
-                        alt='lightning saying he is lonely'
-                    />
-                    <div
-                        className='add-person-label'
-                    >
-                        <p>Add a Person to start!</p>
-                    </div>
-                </div>
-            );
-        }
-
-        return personArray.map((person, index) =>
-            <Person
-                key={ index }
-                person={ person }
-                array={ findRmbrByPersonId(rmbrArray, person.id) }
-                handleClickPerson={ (person_id) => this.onClickPerson(person_id) }
-            />
-        );
-    };
-
-    render() {
-
-        const { error } = this.context;
-        const personCount = this.context.personArray.length;
-        const rmbrCount = this.context.rmbrArray.length;
-        const personLabel = personCount === 1 ? 'person' : 'people';
-        const rmbrLabel = rmbrCount === 1? 'rmbr' : 'rmbrs';
-
-        return (
+    const renderemptystate = (
+        
             <div>
-                <h2 className='person_list_label'>
-                    You have <b>{ personCount }</b> { personLabel } with <b>{ rmbrCount }</b> { rmbrLabel }
-                </h2>
-                <ul
-                    id='person_list'
-                >
-                        { error
-                            ? <p className='red'>There was an error, try again</p>
-                            : this.renderPeople() }
-                </ul>
-                <div
-                    className='add_person_div'
-                >
-                    <AddPersonForm/>
+                <img
+                    src={ emptyStateForPersonList }
+                    alt={ "lightning says he's lonely" }
+                />
+                <div>
+                    <p>Add a person to start!</p>
                 </div>
             </div>
-        );
-    };
+        )
+    
+
+    return (
+
+        <>
+            <AddPersonForm/>
+            <Input placeHolder="Search"/>
+            <h2>
+                You have { people && people.length } people with { rmbrs && rmbrs.length } rmbrs.
+            </h2>
+            { people === undefined
+                ? (
+                    renderemptystate
+                ) 
+                : ''}
+            <ul>
+                { people && people.map((person, index) => {
+                    return (
+                        <Person
+                            key={ index }
+                            person={ person }
+                            array={ findRmbrByPersonId(rmbrs, person.id) }
+                            handleClickPerson={ person_id => handleClick(person_id) }
+                        />
+                    )
+                }) }
+            </ul>
+        </>
+
+    )
+
 };
 
-
+export default PersonList;

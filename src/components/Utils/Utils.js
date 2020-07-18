@@ -1,6 +1,6 @@
 import React from "react";
 import { format } from 'date-fns';
-import './Utils.css'
+import './Utils.scss'
 
 export default function PrettyDate(oldDate) {
     return format(new Date(oldDate), 'MMM d')

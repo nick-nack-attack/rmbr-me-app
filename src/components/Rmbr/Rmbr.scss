@@ -4,24 +4,52 @@
     font-size: 16px;
     background-color: $yellow;
     filter: drop-shadow(0px 5px 5px #0000001e);
-    padding: 5px;
-    margin: 20px;
+    margin: 10px;
     max-width: 500px;
+    text-align: left;
+
+    &>.rmbr-label {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+    }
+
+    &>.date-label {
+        background-color: yellowgreen;
+        padding: 3px;
+    }
+
 }
 
 .PersonListItem {
     padding: 20px;
 }
 
-.rmbr-label {
-    display: flex;
-    align-items: center;
-    padding: 5px;
+.more {
+    margin-right: 0;
 }
 
-.more {
-    float: right;
-    margin-top: -37px;
+.more-options {
+
+    cursor: pointer;
+    margin: 0;
+    display: flex;
+    justify-content: space-evenly;
+
+    &>button {
+        color: rgba(0, 0, 0, 0.500);
+        text-align: center;
+        width: 33%;
+        border: none;
+        background-color: transparent;
+    }
+
+    &>button:hover {
+        color: $primary;
+        background-color: $yhover;
+        margin: 0;
+    }
+
 }
 
 .thunder-icon {

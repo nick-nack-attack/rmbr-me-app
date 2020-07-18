@@ -45,13 +45,6 @@ export default class RmbrList extends Component {
                 rmbr={rmbr}
                 onDeleteRmbrSuccess={ id => this.onDeleteRmbrSuccess(id) }
             />
-            // <RmbrListItem
-            //     key={rmbr.id}
-            //     id={rmbr.id}
-            //     rmbr={rmbr}
-            //     onDeleteRmbrSuccess={rmbrId => this.onDeleteRmbrSuccess(rmbrId)}
-            //     className='rmbr_list_item'
-            // />
         );
     };
 
@@ -81,7 +74,7 @@ export default class RmbrList extends Component {
                         : this.renderRmbrs()
                     }
                 </ul>
-                <div>
+                <div className="add-rmbr-div">
                     <AddRmbr
                         person_id={person_id}
                         onAddRmbrSuccess={(rmbr) => this.handleAddRmbrSuccess(rmbr)}

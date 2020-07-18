@@ -64,11 +64,6 @@ const Person = (props) => {
             className="PersonListItem"
             onClick={() => handleClick(person.id)}
         >
-            {/* <Button
-                text={ <FontAwesomeIcon icon='trash-alt'/> }
-                className="icon-only float"
-                onClick={ e => handleDelete(e, person.id) }
-            /> */}
             <h3
                 className='PersonListItem__heading'
             >

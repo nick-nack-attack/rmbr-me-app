@@ -1,4 +1,10 @@
+@import '../../themes/_v2.scss';
+
 @media only screen and (min-width: 320px) {
+
+    button.icon-button {
+        width: 50px;
+    }
 
     .Hyph {
         margin-right: 5px;
@@ -7,8 +13,8 @@
 
     .Input,
     .Textarea {
-        border: 1px solid #ddd;
         display: block;
+        border: none;
         font-size: 1.1em;
         margin-bottom: 10px;
         padding: 10px;
@@ -65,13 +71,14 @@
 
     .Button:disabled {
         background-color: transparent;
-        border: 2px solid #02425c;
-        color: #02425c;
+        border: 2px solid rgba(0, 0, 0, 0.250);
+        color: rgba(0, 0, 0, 0.250);
         cursor: default;
     }
-
+    
     .edit_button {
-        width: 170px !important;
+        width: 130px !important;
+        margin: 10px;
     }
 
     .list_delete_button {
@@ -100,14 +107,11 @@
 @media only screen and (min-width: 550px) {
 
     .Button {
-        width: 250px;
-    }
-
-    .edit_save_button {
-        margin-right: 10px;
+        max-width: 250px;
     }
 
 }
+
 @media only screen and (min-width: 800px) {
 
 

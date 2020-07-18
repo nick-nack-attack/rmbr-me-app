@@ -1,87 +1,70 @@
-import React, { Component } from 'react'
-import AuthApiService from '../../services/auth-api-service'
+import React, { Component, useState, useContext } from 'react';
+import AuthApiService from '../../services/auth-api-service';
 import RmbrmeContext from "../../contexts/RmbrmeContext";
-import { Button, Input } from '../Utils/Utils'
+import { Button, Input } from '../Utils/Utils';
 
-export default class LogInForm extends Component {
+const LoginForm = (props) => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            error: null,
-            user_name: '',
-            password: '',
-            onLoginSuccess: () => {}
-        };
-    };
+    const [ email, setemail ] = useState();
+    const [ password, setPassword ] = useState();
+    const [ buttonLabel, setButtonLabel ] = useState('Welcome back!');
+    const [ error, seterror ] = useState(null);
 
-    static contextType = RmbrmeContext;
+    let context = useContext(RmbrmeContext);
 
-    handleSubmitJwtAuth = ev => {
+    let handleSubmitJwtAuth = ev => {
+        setButtonLabel('Submitting Login...');
         ev.preventDefault();
-        this.setState({
-            error: null
-        });
-        const user_name = this.state.user_name;
-        const password = this.state.password;
-        const UserLogin = { user_name, password };
+        seterror(null);
+        let userLogin = {
+            user_name: email,
+            password: password
+        };
+        AuthApiService.postLogin(userLogin)
+            .then(() => {
+                setPassword('');
+                setemail('');
+                props.onLoginSuccess();
+            })
+            .catch(res => {
+                setButtonLabel('Somthing went wrong');
+                seterror(res.error);
+            })
+    };
 
-        AuthApiService.postLogin(UserLogin)
+    let handleDemoLogin = ev => {
+        setButtonLabel('Submitting Login...');
+        ev.preventDefault();
+        seterror(null);
+
+        let userLogin = {
+            user_name: 'JoeBang@gmail.com',
+            password: '$uperS1pper'
+        };
+
+        AuthApiService.postLogin(userLogin)
             .then(() => {
                 this.setState({
                     user_name: '',
                     password: ''
                 })
-                this.props.onLoginSuccess();
+                props.onLoginSuccess();
             })
             .catch(res => {
-                this.setState({
-                    error: res.error
-                });
+                setButtonLabel('Somthing went wrong');
+                seterror(res.error);
             })
     };
 
-    handleInputChange = (event) => {
-        const target = event.target;
-        const value = target.value;
-        const name = target.getAttribute("name");
-        this.setState({
-            [name]: value
-        });
-    };
-
-    handleDemoLogin = (event) => {
-        event.preventDefault();
-        this.setState({ error: null });
-        const user_name = 'JoeBang@gmail.com';
-        const password = '$uperS1pper';
-        const UserLogin = { user_name, password }
-        AuthApiService.postLogin(UserLogin)
-            .then(() => {
-                this.setState({
-                    user_name: '',
-                    password: ''
-                })
-                this.props.onLoginSuccess();
-            })
-            .catch(res => {
-                this.setState({
-                    error: res.error
-                });
-            })
-    }
-
-    render() {
-        const {error} = this.state;
-        return (
-            <>
+    return (
+        <>
             <form
                 className='LoginForm'
-                onSubmit={this.handleSubmitJwtAuth}
+                onSubmit={e => handleSubmitJwtAuth(e)}
             >
                 <legend>
                     <h2>
-                        Log in
+                        Log in {}
                     </h2>
                 </legend>
                 <div
@@ -97,7 +80,8 @@ export default class LogInForm extends Component {
                         name='user_name'
                         type='email'
                         id='LoginForm__user_name'
-                        onChange={(e) => this.handleInputChange(e)}
+                        value={email}
+                        onChange={e => setemail(e.target.value)}
                     >
                     </Input>
                 </div>
@@ -114,7 +98,7 @@ export default class LogInForm extends Component {
                         name='password'
                         type='password'
                         id='LoginForm__password'
-                        onChange={(e) => this.handleInputChange(e)}
+                        onChange={e => setPassword(e.target.value)}
                     >
                     </Input>
                 </div>
@@ -126,16 +110,19 @@ export default class LogInForm extends Component {
                 <div
                     role='alert'
                 >
-                    { error && <p className='error_message'>{error.message || error}</p> }
+                    { error ? <p className='error_message'>{error.message || error}</p> : <p className="info_message">{ buttonLabel }</p>}
                 </div>
             </form>
             <Button
                 className='login_with_demo_account_button'
-                onClick={(e) => this.handleDemoLogin(e)}
+                onClick={e => handleDemoLogin(e)}
             >
                 Log in with Demo Account
             </Button>
+
         </>
-        );
-    };
-};
+    )
+
+}
+
+export default LoginForm;

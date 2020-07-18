@@ -72,19 +72,44 @@ const PersonPage = (props) => {
     return (
 
         <div>
-            <header>
-                <div className='person_page_header'>
-                    <h2>
-                        { person.person_name }
-                    </h2>
-                    <h3>
-                        { person.type_of_person }
-                    </h3>
-                    <h4>
-                        { PrettyDate(person.date_created || new Date()) }
-                    </h4>
+            
+                <div className="person-header">
+                    
+                        <h2>
+                            { person.person_name }
+                        </h2>
+                        <h3>
+                            { person.type_of_person }
+                        </h3>
+                        <h4>
+                            { PrettyDate(person.date_created || new Date()) }
+                        </h4>
+                    
+                    <div className="options-div">
+                        <Button 
+                            className="icon-button"
+                        >        
+                            <span class="material-icons">create</span>
+                        </Button>
+                        <Button 
+                            className="icon-button"
+                            onClick={e => handleDeletePerson(e)}
+                        >
+                            <span class="material-icons">delete</span>
+                        </Button>
+                    </div>
+
+                    <EditPersonForm
+                                person_id={person.person_id}
+                                person_name={person.person_name}
+                                type_of_person={person.type_of_person}
+                                onHideEditForm={e => handleHideEditForm(e)}
+                            />
+
                 </div>
-            </header>
+                
+                
+        
             <div>
                 <RmbrList 
                     person_id = { id }

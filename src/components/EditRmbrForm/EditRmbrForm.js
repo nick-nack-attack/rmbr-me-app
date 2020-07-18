@@ -4,6 +4,8 @@ import RmbrApiService from "../../services/rmbr-api-service";
 import { Textarea, Button } from '../Utils/Utils';
 import { findRmbrByPersonId } from "../../helpers";
 
+import './EditRmbrForm.scss'
+
 export default class EditRmbrForm extends Component {
 
     constructor(props) {
@@ -71,17 +73,6 @@ export default class EditRmbrForm extends Component {
                         id='rmbrTitle'
                         value={this.state.rmbrTitle}
                         onChange={this.handleTitleChange}
-                        autoFocus={!!this.props.autofocus}
-                    />
-                    <label>
-                        Rmbr text
-                    </label>
-                    <Textarea
-                        name='rmbrText'
-                        id='rmbrText'
-                        value={this.state.rmbrText}
-                        placeholder='Add details here'
-                        onChange={this.handleTextChange}
                         autoFocus={!this.props.autofocus}
                     />
                     <Button

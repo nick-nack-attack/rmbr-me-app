@@ -9,13 +9,15 @@
 
 .person_list_label {
     color: $primary;
+    margin: 20px auto;
+    font-size: 20px;
 }
 
 ul {
     list-style: none;
     flex-wrap: wrap;
     display: inline-flex;
-    flex-flow: column;
+    flex-flow: wrap;
     padding-left: 10px;
     padding-right: 10px;
     margin-left: auto;
@@ -25,11 +27,14 @@ ul {
 li {
     display: inline-block;
     padding: 20px;
-    
     margin: 20px;
 }
 
 li:hover {
     cursor: pointer;
     filter: drop-shadow(0px 10px 10px #7a7a7a);
+}
+
+.add-rmbr-div {
+    text-align: -webkit-center;
 }

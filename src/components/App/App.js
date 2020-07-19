@@ -92,7 +92,7 @@ export default class App extends Component {
               />
               <PrivateRoute
                 path={'/person/:person_id'}
-                component={PersonPage}
+                component={ PersonPage }
               />
               <Route
                   component={ NotFoundPage }

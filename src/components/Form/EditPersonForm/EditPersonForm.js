@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import AppApiService from "../../services/app-api-service";
-import RmbrmeContext from "../../contexts/RmbrmeContext";
+import AppApiService from "../../../services/app-api-service";
+import RmbrmeContext from "../../../contexts/RmbrmeContext";
 
-import { Input, Section, Button } from "../Utils/Utils";
+import { Input, Section, Button } from "../../Utils/Utils";
 
 export default class EditPersonForm extends Component {
 

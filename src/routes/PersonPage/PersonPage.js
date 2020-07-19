@@ -10,14 +10,13 @@ import { useHistory } from 'react-router-dom';
 
 import './PersonPage.scss'; 
 
-const PersonPage = (props) => {
+const PersonPage = props => {
 
     const [ showForm, setShowForm ] = useState(false);
     const [ id, setId ] = useState(props.match.params.person_id);
     const [ error, setError ] = useState(null);
     const [ person, setPerson ] = useState({});
     const history = useHistory();
-    
 
     let context = useContext(RmbrmeContext);
 
@@ -72,48 +71,28 @@ const PersonPage = (props) => {
     return (
 
         <div>
-            
-                <div className="person-header">
+            <div className="person-header">
                     
-                        <h2>
-                            { person.person_name }
-                        </h2>
-                        <h3>
-                            { person.type_of_person }
-                        </h3>
-                        <h4>
-                            { PrettyDate(person.date_created || new Date()) }
-                        </h4>
+                <h2>
+                    { person.person_name }
+                </h2>
+                <h3>
+                    { person.type_of_person }
+                </h3>
+                <h4>
+                    { PrettyDate(person.date_created || new Date()) }
+                </h4>
                     
-                    <div className="options-div">
-                        <Button 
-                            className="icon-button"
-                        >        
-                            <span class="material-icons">create</span>
-                        </Button>
-                        <Button 
-                            className="icon-button"
-                            //onClick={e => handleDeletePerson(e)}
-                        >
-                            <span class="material-icons">delete</span>
-                        </Button>
-                    </div>
-
-                    {<EditPersonForm
-                                person_id={person.person_id}
-                                person_name={person.person_name}
-                                type_of_person={person.type_of_person}
-                                onHideEditForm={e => handleHideEditForm(e)}
-                    />}
-
+                <div className="options-div">
+                    <Button label="edit"/>        
+                    <Button label="delete" /*onClick={e => handleDeletePerson(e)}*/ />                     
                 </div>
-                
-                
+
+            </div>
         
             <div>
                 <RmbrList 
-                    person_id = { id }
-                    rmbrList = { context.rmbrList }
+                    person={ person }
                 />
             </div>
 

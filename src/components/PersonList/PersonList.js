@@ -14,6 +14,11 @@ import { Input } from '../Utils/Utils';
 
 import Person from '../Person/Person';
 
+// components
+import SearchForPerson from '../Form/SearchForPerson/SearchForPerson';
+import AddPerson from '../Form/AddPerson/AddPerson';
+import PersonForm from '../Form/PersonForm/PersonForm';
+
 const PersonList = () => {
 
     // set context
@@ -29,30 +34,43 @@ const PersonList = () => {
         history.push(`/person/${id}`);
     };
 
+    const handleChange = e => {
+        setSearchTerm(e);
+    };
+
     useEffect(() => {
+
         setPeople(appContext.state.people);
         setRmbrs(appContext.state.rmbrs);
-    }, [appContext])
+
+    }, [appContext]);
+
+    useEffect(() => {
+
+        const filterBySearch = people.filter(r => r.person_name.toLowerCase().includes(searchTerm.toLowerCase()));
+        setResults(filterBySearch);
+
+    }, [searchTerm])
+
 
     const renderemptystate = (
-        
+        <div>
+            <img
+                src={ emptyStateForPersonList }
+                alt={ "lightning says he's lonely" }
+            />
             <div>
-                <img
-                    src={ emptyStateForPersonList }
-                    alt={ "lightning says he's lonely" }
-                />
-                <div>
-                    <p>Add a person to start!</p>
-                </div>
+                <p>Add a person to start!</p>
             </div>
-        )
-    
+        </div>
+    );    
 
     return (
 
         <>
-            <AddPersonForm/>
-            <Input placeHolder="Search"/>
+            <AddPerson/>
+                {' — '}
+            <SearchForPerson searchName={e => handleChange(e)}/>
             <h2>
                 You have { people && people.length } people with { rmbrs && rmbrs.length } rmbrs.
             </h2>
@@ -62,16 +80,20 @@ const PersonList = () => {
                 ) 
                 : ''}
             <ul>
-                { people && people.map((person, index) => {
-                    return (
-                        <Person
-                            key={ index }
-                            person={ person }
-                            array={ findRmbrByPersonId(rmbrs, person.id) }
-                            handleClickPerson={ person_id => handleClick(person_id) }
-                        />
-                    )
-                }) }
+                { 
+                    ( searchTerm.length === 0
+                        ? people 
+                        : people ).map((person, index) => {
+                            return (
+                                <Person
+                                    key={ index }
+                                    person={ person }
+                                    array={ findRmbrByPersonId(rmbrs, person.id) }
+                                    handleClickPerson={ person_id => handleClick(person_id) }
+                                />
+                            );
+                        })
+                }
             </ul>
         </>
 

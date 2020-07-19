@@ -1,0 +1,11 @@
+@import '../../themes/v2';
+
+.button-row {
+    display: flex;
+    justify-content: center;
+};
+
+Button[label="Co-Worker"] {
+    margin-left: 20px;
+    margin-right: 20px;
+};

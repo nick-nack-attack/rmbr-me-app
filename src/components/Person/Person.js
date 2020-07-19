@@ -15,7 +15,7 @@ import AppApiService from "../../services/app-api-service";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './Person.scss';
 
-const Person = (props) => {
+const Person = props => {
 
     // set context
     let context = useContext(AppApiService);

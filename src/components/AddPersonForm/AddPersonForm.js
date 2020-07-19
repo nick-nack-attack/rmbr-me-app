@@ -21,7 +21,6 @@ const AddPersonForm = () => {
             user_id: AppApiService.getUserId(), 
             type_of_person: prop
         };
-        console.log(newPerson)
 
         AppApiService.postPerson(newPerson)
             .then(res => {

@@ -103,10 +103,9 @@ const LoginForm = (props) => {
                     </Input>
                 </div>
                 <Button
-                    type='submit'
-                >
-                    Login
-                </Button>
+                    label="Login"
+                    type="submit"
+                />
                 <div
                     role='alert'
                 >
@@ -114,12 +113,10 @@ const LoginForm = (props) => {
                 </div>
             </form>
             <Button
+                label="Login with Demo Account"
                 className='login_with_demo_account_button'
                 onClick={e => handleDemoLogin(e)}
-            >
-                Log in with Demo Account
-            </Button>
-
+            />
         </>
     )
 

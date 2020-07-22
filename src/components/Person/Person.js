@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { Button } from '../Utils/Utils';
 
 // contexts
-import RmbrmeContext from "../../contexts/RmbrmeContext";
+import { AppContext as appContext } from "../../contexts/AppContext";
 
 // service
 import AppApiService from "../../services/app-api-service";
@@ -18,18 +18,19 @@ import './Person.scss';
 const Person = props => {
 
     // set context
-    let context = useContext(AppApiService);
+    let context = useContext(appContext);
 
     // set variables
     const history = useHistory();
     const [ error, setError ] = useState(null);
     const [ person, setPerson ] = useState(props.person);
+    const [ rmbrs, setRmbrs ] = useState(context.state.rmbrs);
     const [ secondary, setSecondary ] = useState();
 
     useEffect(() => {
-        if (props.array.length > 0) {
+        if (rmbrs) {
             setSecondary(
-                props.array.find(rbr => rbr.person_id === person.id).rmbr_title
+                /* rmbrs.find(rbr => rbr.person_id === person.id).rmbr_title */
             ) 
         } else {
             setSecondary(
@@ -40,21 +41,10 @@ const Person = props => {
                 </button>
             )
         };
-
     }, [props.array]);
 
     const handleClick = (id) => {
         props.handleClickPerson(id)
-    };
-
-    const handleDelete = (e, id) => {
-        e.stopPropagation();
-        setError(null);
-        AppApiService.deletePerson(id)
-            .then(context.deletePerson(id))
-            .catch(res => {
-                setError(res.error)
-            })
     };
 
     return (
@@ -71,12 +61,12 @@ const Person = props => {
             </h3>
             <div className="cat-and-rmbr">
                 <p
-                    className='person_category'
+                    className="person_category"
                 >
                     { person.type_of_person }
                 </p>
                 <div>
-                    <FontAwesomeIcon icon='bolt'/> 
+                    <FontAwesomeIcon icon="bolt"/> 
                     {' '}
                     { props.array.length }
                     {' '}

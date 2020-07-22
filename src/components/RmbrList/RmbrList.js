@@ -11,21 +11,24 @@ const RmbrList = (props) => {
     let appContext = useContext(AppContext);
     
     const [ error, seterror ] = useState(null);
+    const [ id, setId ] = useState(props.id);
     const [ person, setPerson ] = useState(props.person);
-    const [ rmbrs, serRmbrs ] = useState(props.rmbrs);
     const [ sortedRmbrs, setSortedRmbrs ] = useState([]);
-    
+    const [ rmbrs, setRmbrs ] = useState(appContext.state.rmbrs);
 
     useEffect(() => {
-        let personRmbrs = appContext.state.rmbrs.filter(r => r.id === person.id);
-        setSortedRmbrs(personRmbrs);
-        console.log(sortedRmbrs);
-        console.log('person is', person)
-    }, [person])
+        setRmbrs(appContext.state.rmbrs);
+        appContext.dispatch({
+            type: 'refetch'
+        })
+    }, [ person ]);
 
-    
     const renderRmbrs = () => {
-        return appContext.state.rmbrs.map(rmbr => {
+        const personRmbrs = appContext.state.rmbrs;
+        const personId = props.person.id;
+        const sortRmbrs = personRmbrs.filter(r => r.id === personId);
+        
+        return sortRmbrs.map(rmbr => {
             return (
                 <Rmbr
                     key={rmbr.id}
@@ -35,24 +38,18 @@ const RmbrList = (props) => {
             )
         })
     }
-    
-
-    /*
-    useEffect(() => {
-        AppApiService.getRmbrByPersonId()
-    }, [appContext])
-    */
 
     return (
         <ul className="rmbr__list">
-            <h3></h3>
+            <h3>Rmbr List</h3>
             { 
                 error 
                     ? <p className='red'>There was an error, try again</p>
-                    : renderRmbrs()
+                    : /* rmbrs.map(r => <Rmbr key={r.id} id={r.id} rmbr={r}/>) */ renderRmbrs()
+                    
             }
         </ul>
-    )
+    );
 
 };
 

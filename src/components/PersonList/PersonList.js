@@ -2,7 +2,6 @@ import React, { Component, useContext, useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
 import PersonListItem from "../../components/PersonListItem/PersonListItem";
-import AddPersonForm from '../../components/AddPersonForm/AddPersonForm';
 import emptyStateForPersonList from '../../assets/empty_people.png';
 import AppApiService from '../../services/app-api-service';
 import RmbrmeContext from "../../contexts/RmbrmeContext";
@@ -17,7 +16,6 @@ import Person from '../Person/Person';
 // components
 import SearchForPerson from '../Form/SearchForPerson/SearchForPerson';
 import AddPerson from '../Form/AddPerson/AddPerson';
-import PersonForm from '../Form/PersonForm/PersonForm';
 
 const PersonList = () => {
 
@@ -39,17 +37,13 @@ const PersonList = () => {
     };
 
     useEffect(() => {
-
         setPeople(appContext.state.people);
         setRmbrs(appContext.state.rmbrs);
-
     }, [appContext]);
 
     useEffect(() => {
-
         const filterBySearch = people.filter(r => r.person_name.toLowerCase().includes(searchTerm.toLowerCase()));
         setResults(filterBySearch);
-
     }, [searchTerm])
 
 

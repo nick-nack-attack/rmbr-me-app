@@ -19,29 +19,18 @@ const AddPerson = () => {
         };
         AppApiService.postPerson(newPerson)
             .then(() => {
+                setPersonName('');
                 appContext.dispatch({
                     type: 'refetch'
                 })
-                setPersonName('');
             })
             .catch(res => {
                 seterror(res);
             })
-    }
+    };
 
-    return (
-        <form>    
-            <legend>Add Person</legend>
-            <Input
-                name="name"
-                placeholder="Person"
-                defaultValue={personName}
-                maxlength={25}
-                onChange={e => setPersonName(e.target.value)}
-            />
-            <label>
-                {personName && 'Add person as ...'}
-            </label>
+    const makeButtonRow = () => {
+        return (
             <div className="button-row">
                 <Button
                     label="Friend"
@@ -62,6 +51,23 @@ const AddPerson = () => {
                     onClick={(e) => handleSubmit(e, 'Family')}
                 />
             </div>
+        );
+    };
+
+    return (
+        <form>    
+            <legend>Add Person</legend>
+            <Input
+                name="name"
+                placeholder="Person"
+                defaultValue={personName}
+                maxlength={25}
+                onChange={e => setPersonName(e.target.value)}
+            />
+            <label>
+                { personName && 'Add person as ...' }
+            </label>
+                { personName && makeButtonRow() }
         </form>
     );
 

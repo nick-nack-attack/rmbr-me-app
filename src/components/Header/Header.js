@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import TokenService from '../../services/token-service'
-import IdleService from "../../services/idle-service";
-import logo from '../../assets/rmbrme_logo.png';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import IdleService from '../../services/idle-service';
+import logo from '../../assets/rmbrmelogo.svg';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import './Header.scss';
 import './Header.css';
@@ -58,7 +58,7 @@ class Header extends Component {
                     <h1>
                             <img
                                 id='rmbrme_logo'
-                                src={logo}
+                                src={ logo }
                                 alt='rmbrme'
                                 onClick={() => this.props.history.push('/')}
                             />

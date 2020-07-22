@@ -20,3 +20,13 @@ div.person-header {
     float: right;
     margin-top: -20;
 }
+
+.confirm-modal {
+    display: absolute;
+    height: 75px;
+    width: 300px;
+    background-color: yellow;
+    &>p {
+        color: black;
+    }
+};

@@ -8,6 +8,7 @@
     background-color: $header;
     padding: 10px 30px;
     border-bottom: 2px solid $headerSecondary;
+
     &>:hover {
         cursor: pointer;
         filter: drop-shadow(0px 2px 2px black);
@@ -16,7 +17,8 @@
         -moz-transition: filter 0.5s ease-in-out;
         -o-transition: filter 0.5s ease-in-out;
         transition: filter 0.5s ease-in-out;
-    }
+    };
+
 }
 
 #rmbrme_logo {

@@ -10,7 +10,7 @@ import TokenService from '../services/token-service';
 import AppApiService from '../services/app-api-service';
 import { parseWithOptions } from 'date-fns/fp';
 
-const ApiWrapper = (props) => {
+const ApiWrapper = props => {
 
     // set variables
     let appContext = useContext(AppContext);

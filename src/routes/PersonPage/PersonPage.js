@@ -1,7 +1,7 @@
-import React, { Component, useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import AppApiService from "../../services/app-api-service";
 import RmbrList from '../../components/RmbrList/RmbrList'
-import EditPersonForm from "../../components/EditPersonForm/EditPersonForm";
+import EditPersonForm from "../../components/Form/EditPersonForm/EditPersonForm";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button } from "../../components/Utils/Utils";
 import RmbrmeContext from "../../contexts/RmbrmeContext";
@@ -9,6 +9,7 @@ import PrettyDate from "../../components/Utils/Utils";
 import { useHistory } from 'react-router-dom';
 
 import './PersonPage.scss'; 
+import { AppContext } from '../../contexts/AppContext';
 
 const PersonPage = props => {
 
@@ -19,6 +20,7 @@ const PersonPage = props => {
     const history = useHistory();
 
     let context = useContext(RmbrmeContext);
+    let appContext = useContext(AppContext);
 
     useEffect(() => {
         AppApiService.getPersonByPersonId(id)
@@ -39,33 +41,27 @@ const PersonPage = props => {
         setShowForm(true);
     };
 
-    // const handleDeletePerson = e => {
-    //     if (window.confirm(`Are you sure you want to delete this person?`)) {
-    //         e.preventDefault();
-    //         setError(null);
-    //         AppApiService.deletePerson(id)
-    //             .then(() => {
-    //                 context.deletePerson(id);
-    //             })
-    //             .then(() => {
-    //                 history.push('/');
-    //             })
-    //             .catch(err => {
-    //                 setError(err);
-    //             })
-    //     };
-    // };
-    
-    const backButton = () => {
-        return (
-            <Button
-                className='back_to_root_button'
-                onClick={() => this.props.history.push('/')}
-            >
-                <FontAwesomeIcon id='arrow-left' icon='arrow-left'/>
-                Back
-            </Button>
-        );
+    const handleDelete = () => {
+
+    };
+
+    const handleConfirmDelete = (e, id) => {
+        if ( window.confirm(`Are you sure you want to delete this person?`)) {
+            e.preventDefault();
+            setError(null);
+            AppApiService.deletePerson(id)
+                .then(() => {
+                    appContext.dispatch({
+                        type: 'refetch'
+                    });
+                })
+                .then(() => {
+                    history.push('/');
+                })
+                .catch(err => {
+                    setError(err);
+                })
+        } 
     };
 
     return (
@@ -85,13 +81,23 @@ const PersonPage = props => {
                     
                 <div className="options-div">
                     <Button label="edit"/>        
-                    <Button label="delete" /*onClick={e => handleDeletePerson(e)}*/ />                     
+                    <Button 
+                        label="delete" 
+                        onClick={e => handleConfirmDelete(e, id)}
+                    />
                 </div>
 
             </div>
+
+            <Button
+                label='Back'
+                className='back_to_root_button'
+                onClick={() => history.push('/')}
+            />
         
             <div>
                 <RmbrList 
+                    id={id}
                     person={ person }
                 />
             </div>

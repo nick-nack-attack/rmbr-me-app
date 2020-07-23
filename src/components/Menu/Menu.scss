@@ -1,0 +1,23 @@
+@import "../../themes/v2";
+
+.menu-row {
+    height: 50px;
+    background-color: whitesmoke;
+    width: 200px;
+    border-bottom: 1px solid darkgrey;
+    text-align: center;
+    right: 0;
+};
+
+.hide {
+    display: none;
+};
+
+.show {
+    display: flex;
+    flex-flow: column;
+};
+
+.menu-container {
+    text-align: -webkit-right;
+}

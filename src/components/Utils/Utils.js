@@ -1,10 +1,5 @@
 import React from "react";
-import { format } from 'date-fns';
 import './Utils.scss';
-
-export default function PrettyDate(oldDate) {
-    return format(new Date(oldDate), 'MMM d')
-}
 
 export function Button({ className, ...props }) {
     return ( 

@@ -1,23 +1,30 @@
-import React, {Component} from 'react';
+// this component handles all pages in the app
+import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
+// route
 import PrivateRoute from "../Utils/PrivateRoute";
 import PublicRoute from "../Utils/PublicRoute";
 
-import Header from "../Header/Header";
-import PersonPage from '../../routes/PersonPage/PersonPage';
-import LogInPage from '../../routes/LogInPage/LogInPage';
-import SignUpPage from '../../routes/SignUpPage/SignUpPage';
-import NotFoundPage from "../../routes/NotFoundPage/NotFoundPage";
-import LandingPage from "../LandingPage/LandingPage";
-import PersonList from "../PersonList/PersonList";
-
+// service
 import TokenService from "../../services/token-service";
 import AuthApiService from "../../services/auth-api-service";
 import IdleService from "../../services/idle-service";
 
+// component
+import Header from "../Header/Header";
+
+// styling
 import './App.css';
 import './App.scss';
+
+// components
+import LogInPage from "../Page/LogIn/LogInPage";
+import SignUpPage from "../Page/SignUp/SignUpPage";
+import PersonPage from '../Page/Person/PersonPage';
+import LandingPage from "../Page/Landing/LandingPage";
+import NotFoundPage from '../Page/NotFound/NotFoundPage';
+import PersonList from '../List/Person/PersonList';
 
 export default class App extends Component {
 
@@ -64,6 +71,7 @@ export default class App extends Component {
           ? PersonList
           : LandingPage
     };
+
     const mainPage = this.renderMainPage();
 
     return (

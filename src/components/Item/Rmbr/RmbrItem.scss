@@ -1,0 +1,58 @@
+@import "../../../themes/_v2";
+
+.rmbr-container {
+    font-size: 16px;
+    background-color: $yellow;
+    filter: drop-shadow(0px 5px 5px #0000001e);
+    margin: 10px;
+    max-width: 500px;
+    text-align: left;
+
+    &>.rmbr-label {
+        display: flex;
+        align-items: center;
+        padding: 20px;
+    }
+
+    &>.date-label {
+        background-color: yellowgreen;
+        padding: 3px;
+    }
+
+}
+
+.PersonListItem {
+    padding: 20px;
+}
+
+.more {
+    margin-right: 0;
+}
+
+.more-options {
+
+    cursor: pointer;
+    margin: 0;
+    display: flex;
+    justify-content: space-evenly;
+
+    &>button {
+        color: rgba(0, 0, 0, 0.500);
+        text-align: center;
+        width: 33%;
+        border: none;
+        background-color: transparent;
+    }
+
+    &>button:hover {
+        color: $primary;
+        background-color: $yhover;
+        margin: 0;
+    }
+
+}
+
+.thunder-icon {
+    height: 30px;
+    margin: 5px;
+}

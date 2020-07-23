@@ -1,0 +1,72 @@
+@import '../../../../themes/v2';
+
+.add-rmbr-container {
+    font-size: 16px;
+    background-color: $secondary;
+    filter: drop-shadow(0px 5px 5px #0000001e);
+    margin: 20px;
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.add-title-label {
+    display: flex;
+}
+
+.active {
+    max-width: 500px;
+}
+
+.inactive {
+    width: 150px
+}
+
+.hide {
+    display: none;
+}
+
+.show-end {
+    float: right;
+    display: flex;
+    align-items: center;
+}
+
+.hide-end {
+    display: none;
+}
+
+.hide-submit-rmbr {
+    display: none;
+}
+
+.thunder-icon {
+    height: 30px;
+    margin-top: -1px;
+}
+
+#rmbrTitle {
+    transition: width 0.4s ease-in-out;
+    border-style: none;
+    font-size: 16px;
+    vertical-align: sub;
+    &>:focus {
+        width:100%!important;
+        background-color: red;
+    }
+    &>:hover {
+        background-color: yellowgreen;
+    }
+}
+
+.active-rmbr-input {
+    width: 100%;
+}
+
+.hide-rmbr-input {
+    width: 100px;
+}
+
+.submit-rmbr {
+    margin-left: 10px;
+}

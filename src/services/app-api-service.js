@@ -133,7 +133,13 @@ const AppApiService = {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(personToUpdate)
-        });
+        })
+        .then( res =>
+            (!res.ok
+                ? res.json().then( e => Promise.reject(e))
+                : res.json()
+            )
+        )
     },
 
     deletePerson(personId) {

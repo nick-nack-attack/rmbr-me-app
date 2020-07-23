@@ -11,6 +11,9 @@ import AppApiService from "../../../services/app-api-service";
 import AddRmbr from '../../Form/Rmbr/Add/AddRmbr';
 import RmbrItem from '../../Item/Rmbr/RmbrItem';
 
+// style
+import "../List.scss";
+
 const RmbrList = props => {
 
     let appContext = useContext(AppContext);
@@ -41,7 +44,7 @@ const RmbrList = props => {
 
     const renderRmbrs = () => {
         
-        return rmbrs.sort((a,b) => a.id - b.id).map(rmbr => {
+        return rmbrs.sort((a,b) => b.id - a.id).map(rmbr => {
             return (
                 <RmbrItem
                     key={rmbr.id}
@@ -55,6 +58,10 @@ const RmbrList = props => {
 
     return (
         <div>
+            <AddRmbr 
+                person_id={ id }
+                onAddRmbrSuccess={ e => handleAddRmbr(e) } 
+            />
             { notification }
             <ul className="rmbr__list">
                 { 
@@ -63,10 +70,6 @@ const RmbrList = props => {
                         : renderRmbrs()
                 }
             </ul>
-            <AddRmbr 
-                person_id={ id }
-                onAddRmbrSuccess={ e => handleAddRmbr(e) } 
-            />
         </div>
     );
 

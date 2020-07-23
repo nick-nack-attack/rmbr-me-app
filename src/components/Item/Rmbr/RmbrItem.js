@@ -49,7 +49,7 @@ const RmbrItem = props => {
     };
 
     return (
-        <div className="rmbr-container">
+        <li className="rmbr-container">
         { showEditForm 
             ?   <EditRmbrForm
                     rmbr={rmbr}
@@ -74,7 +74,7 @@ const RmbrItem = props => {
             </div>
             </>
         }
-        </div>
+        </li>
     );
 
 }

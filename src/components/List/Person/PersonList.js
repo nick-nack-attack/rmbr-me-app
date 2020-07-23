@@ -15,6 +15,7 @@ import PersonItem from "../../Item/Person/PersonItem";
 
 // style
 import emptyStateImage from "../../../assets/empty_people.png"
+import "../List.scss";
 
 // components
 
@@ -62,17 +63,21 @@ const PersonList = () => {
 
     const renderPeople = () => {
         return (
-        people.map(person => {
-            return (
-                <PersonItem 
-                    person={person} 
-                    // pass in only the rmbrs the person has
-                    array={ findRmbrByPersonId(rmbrs, person.id) }
-                    handleClickPerson={ id => handleClick(id) }
-                />
-            )
-        })
-        )
+            <ul> 
+                {
+                    people.map(person => {
+                        return (
+                            <PersonItem 
+                                person={person} 
+                                // pass in only the rmbrs the person has
+                                array={ findRmbrByPersonId(rmbrs, person.id) }
+                                handleClickPerson={ id => handleClick(id) }
+                            />
+                        )
+                    })
+                }   
+            </ul>
+        );
     };
 
     const renderAnnoucement = () => {

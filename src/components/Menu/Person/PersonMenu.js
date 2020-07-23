@@ -19,10 +19,16 @@ const PersonMenu = props => {
         setHide(!hide);
     };
 
+    const handleDeleteClick = e => {
+        e.preventDefault();
+        props.handleDeleteClick();
+        setHide(!hide);
+    }
+
     return (
         <div className="menu-container">
             <Button
-                label={ <span class="material-icons">menu</span> }
+                label={ hide ? <span class="material-icons">menu</span> : <span class="material-icons">close</span> }
                 onClick={ e => toggleMenu(e) }
             />
             <div className={ hide ? 'hide' : 'show' }>
@@ -32,7 +38,7 @@ const PersonMenu = props => {
                 />
                 <Button
                     label="delete"
-                    onClick={ e => props.handleDeleteClick(e) }
+                    onClick={ e => handleDeleteClick(e) }
                 />
             </div>
         </div>

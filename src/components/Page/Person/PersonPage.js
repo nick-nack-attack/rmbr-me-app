@@ -51,28 +51,34 @@ const PersonPage = props => {
         setShowForm(false);
     };
 
+    const handleEditSuccess = e => {
+        setPerson({
+            id: person.id,
+            person_name: e.person_name,
+            type_of_person: e.type_of_person,
+            user_id: person.user_id, 
+            first_met: person.first_met, 
+            last_contact: person.last_contact, 
+            date_created: person.date_created, 
+            date_modified: person.date_modified
+        })
+        setShowForm(false)
+    }
+
     const handleShowEditForm = () => {
         setShowForm(true);
-    };
-
-    const handleDelete = () => {
-
     };
 
     const renderHeader = () => {
         return (
             <div className="person-header"> 
-            <h2>
-                { person.person_name }
-            </h2>
-            <h3>
-                { person.type_of_person } since { PrettyDate(person.date_created || new Date()) }
-            </h3>
-            <PersonMenu
-                handleEditClick={ () => handleShowEditForm() }
-                handleDeleteClick={ e => handleDelete(e) }
-            />
-        </div>
+                <h2>{ person.person_name }</h2>
+                <h3>{ person.type_of_person }</h3>
+                <PersonMenu
+                    handleEditClick={ () => handleShowEditForm() }
+                    handleDeleteClick={ e => handleConfirmDelete(e) }
+                />
+            </div>
         );
     };
 
@@ -81,6 +87,7 @@ const PersonPage = props => {
             <EditPersonForm 
                 person={ person }
                 handleCancelClick={ () => handleHideEditForm() }
+                handleCloseForm={ e => handleEditSuccess(e) }
             />
         );
     };

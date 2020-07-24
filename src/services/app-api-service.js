@@ -122,7 +122,12 @@ const AppApiService = {
                 'content-type': 'application/json'
             },
             body: JSON.stringify(rmbrFields)
-        });
+        })
+        .then(res =>
+            (!res.ok)
+                ? res.json().then(e => Promise.reject(e))
+                : res.json()
+        );
     },
 
     editPerson(person_id, personToUpdate) {

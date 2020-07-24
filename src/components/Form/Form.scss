@@ -6,6 +6,13 @@
 };
 
 Button[label="Co-Worker"] {
-    margin-left: 20px;
-    margin-right: 20px;
+    margin: auto 20px;
 };
+
+.SignUpForm, .LoginForm {
+    margin-top: 20px;
+    &>legend {
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+}

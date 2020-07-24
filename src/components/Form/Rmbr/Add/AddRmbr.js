@@ -46,12 +46,8 @@ const AddRmbr = props => {
             person_id: props.person_id,
             user_id: window.localStorage.getItem('user_id')
         };
-        console.log('NEW RMBR', newRmbr)
         AppApiService.postRmbr(newRmbr)
             .then(res => {
-                context.refetch({
-                    type: 'refetch'
-                })
                 setTitle('');
                 props.onAddRmbrSuccess(res);
             })

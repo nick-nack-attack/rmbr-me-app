@@ -46,7 +46,7 @@ const PersonList = () => {
     useEffect(() => {
         const filterBySearch = people.filter(r => r.person_name.toLowerCase().includes(searchTerm.toLowerCase()));
         setResults(filterBySearch);
-    }, [ searchTerm ])
+    }, [ searchTerm ]);
 
 
     const renderemptystate = (
@@ -65,7 +65,7 @@ const PersonList = () => {
         return (
             <ul> 
                 {
-                    people.map(person => {
+                    people.sort((a,b) => b.id - a.id).map(person => {
                         return (
                             <PersonItem 
                                 person={person} 

@@ -35,32 +35,46 @@ const RmbrList = props => {
         }, 6000);
     };
 
-    const handleAddRmbr = () => {
-        setNotification('Rmbr has been Added')
+    const handleAddRmbr = rbr => {
+        setNotification('Rmbr has been Added');
+        setRmbrs([...rmbrs, rbr]);
+        appContext.dispatch({
+            type: 'refetch'
+        });
         setTimeout(() => {
             setNotification(null)
         }, 6000);
     };
 
     const renderRmbrs = () => {
-        
-        return rmbrs.sort((a,b) => b.id - a.id).map(rmbr => {
+
+        if (rmbrs.length === 0) {
             return (
-                <RmbrItem
-                    key={rmbr.id}
-                    id={rmbr.id}
-                    rmbr={rmbr}
-                    onDeleteRmbrSuccess={() => handleDeleteRmbr()}
-                />
+                <div>
+                    Click on 'rmbr this...' <br/> to create your first rmbr
+                </div>
             );
-        });
+        } else {
+            return rmbrs.sort((a,b) => b.id - a.id).map(rmbr => {
+                return (
+                    <RmbrItem
+                        key={rmbr.id}
+                        id={rmbr.id}
+                        rmbr={rmbr}
+                        onDeleteRmbrSuccess={() => handleDeleteRmbr()}
+                    />
+                );
+            });
+        }
+        
+        
     };
 
     return (
         <div>
             <AddRmbr 
                 person_id={ id }
-                onAddRmbrSuccess={ e => handleAddRmbr(e) } 
+                onAddRmbrSuccess={ rbr => handleAddRmbr(rbr) } 
             />
             { notification }
             <ul className="rmbr__list">

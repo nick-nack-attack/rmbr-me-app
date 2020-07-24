@@ -24,16 +24,12 @@ const PersonItem = props => {
     const history = useHistory();
     const [ error, setError ] = useState(null);
     const [ person, setPerson ] = useState(props.person);
-    const [ rmbrs, setRmbrs ] = useState(props.array);
     const [ secondary, setSecondary ] = useState();
 
     useEffect(() => {
-        console.log('here is the passed in array', props.array, 'array lenght', props.array.length)
         if (props.array.length !== 0) {
             setSecondary(
                 props.array[props.array.length - 1].rmbr_title
-                // props.array.find(rbr => rbr.person_id === person.id).rmbr_title
-                /* rmbrs.find(rbr => rbr.person_id === person.id).rmbr_title */
             ) 
         } else {
             setSecondary(

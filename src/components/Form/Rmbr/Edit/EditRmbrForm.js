@@ -17,6 +17,7 @@ import './EditRmbrForm.scss'
 
 const EditRmbrForm = props => {
 
+    const [ id, setId ] = useState(props.rmbr.id)
     const [ rmbr, setRmbr ] = useState(props.rmbr);
     const [ error, setError ] = useState(null);
     const context = useContext(AppContext);
@@ -26,8 +27,18 @@ const EditRmbrForm = props => {
         props.onHideEditForm();
     };
 
+    const handleSubmit = e => {
+        e.preventDefault();
+        const editedRmbr = { rmbr_title: rmbr.rmbr_title }
+        AppApiService.editRmbr(id, editedRmbr)
+            .then(res => {
+                let returnedRmbr = res.find(rbr => rbr.id === id)
+                props.onEditRmbrSuccess(returnedRmbr);
+            })
+    };
+
     return (
-        <form>
+        <form onSubmit={ e => handleSubmit(e) }>
             <legend>Edit Rmbr</legend>
             <Textarea
                 value={ rmbr.rmbr_title }
@@ -36,6 +47,7 @@ const EditRmbrForm = props => {
             />
             <Button
                 label="Save"
+                type="submit"
             />
             <Button
                 label="Cancel"

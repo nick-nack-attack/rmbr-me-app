@@ -3,6 +3,9 @@ import AuthApiService from '../../../services/auth-api-service';
 import RmbrmeContext from "../../../contexts/RmbrmeContext";
 import { Button, Input } from '../../Utils/Utils';
 
+import "../Form.scss";
+import Loader from '../../Utils/Loader';
+
 const LogIn = props => {
 
     const [ email, setemail ] = useState();
@@ -109,7 +112,10 @@ const LogIn = props => {
                 <div
                     role='alert'
                 >
-                    { error ? <p className='error_message'>{error.message || error}</p> : <p className="info_message">{ buttonLabel }</p>}
+                    { 
+                        error 
+                            ? <p className='error_message'>{error.message || error}</p> 
+                            : <p className="info_message">{ buttonLabel }</p>}
                 </div>
             </form>
             <Button

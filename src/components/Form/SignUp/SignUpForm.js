@@ -1,9 +1,16 @@
-import React, { Component } from 'react'
+// component for creating a new account
+import React, { Component } from 'react';
+
+// service
 import AuthApiService from "../../../services/auth-api-service";
+
+// components & utils
 import RmbrmeContext from "../../../contexts/RmbrmeContext";
 import { Button, Input, Required } from '../../Utils/Utils';
 import ErrorMsg from "../../Utils/ErrorMsg";
 
+// style
+import "../Form.scss";
 
 export default class SignUp extends Component {
 
@@ -104,6 +111,7 @@ export default class SignUp extends Component {
                     </Input>
                 </div>
                 <Button
+                    label="Get Started"
                     type='submit'
                 >
                     Get started!

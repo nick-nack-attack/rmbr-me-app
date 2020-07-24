@@ -40,6 +40,11 @@ const RmbrItem = props => {
             })
     };
 
+    const replaceEditedRmbr = rbr => {
+        setShowEditForm(false);
+        setRmbr({...rmbr, rmbr_title: rbr.rmbr_title})
+    };
+
     const hideEdit = () => {
         setShowEditForm(false);
     };
@@ -52,8 +57,9 @@ const RmbrItem = props => {
         <li className="rmbr-container">
         { showEditForm 
             ?   <EditRmbrForm
-                    rmbr={rmbr}
+                    rmbr={ rmbr }
                     onHideEditForm={ () => hideEdit() }
+                    onEditRmbrSuccess={ rbr => replaceEditedRmbr(rbr) }
                 />  
             : <>
                 <div className='rmbr-label'>

@@ -150,9 +150,9 @@
 
     .login_with_demo_account_button {
         margin-top: 40px;
+        margin-left: auto;
+        margin-right: auto;
         border: 2px white solid;
-        color: white;
-        background-color: transparent;
     }
 
     .profile-info {
@@ -238,11 +238,6 @@
         margin-top: 20px;
     }
 
-    .SignUpForm, .LoginForm {
-        margin-top: 20px;
-        color: white;
-    }
-
     /* Color Theme Swatches in Hex */
     .BRANDING-•-MATOU-1-hex { color: #03658C; }
     .BRANDING-•-MATOU-2-hex { color: #F2CA52; }
@@ -253,12 +248,12 @@
     section {
         min-height: 200px;
         padding: 30px 30px;
-        background-color: #F6F6F6;
+        /* background-color: #F6F6F6; */
         border-radius: 10px;
     }
 
     section:nth-child(even) {
-        background-color: #EBEBEB;
+        /* background-color: #EBEBEB; */
     }
 
     .landing_page_header {

@@ -1,8 +1,9 @@
 @import "../../../themes/v2";
 
 li.PersonListItem {
-    margin: 3px;
     background-color: $yellow;
+    width: 80%;
+    margin: 3px auto;
     filter: drop-shadow(0px 5px 5px #7a7a7a);
     &>:hover {
         cursor: pointer;  

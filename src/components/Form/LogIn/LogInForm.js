@@ -1,4 +1,4 @@
-import React, { Component, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import AuthApiService from '../../../services/auth-api-service';
 import RmbrmeContext from "../../../contexts/RmbrmeContext";
 import { Button, Input } from '../../Utils/Utils';
@@ -30,7 +30,7 @@ const LogIn = props => {
                 props.onLoginSuccess();
             })
             .catch(res => {
-                setButtonLabel('Somthing went wrong');
+                setButtonLabel('Something went wrong');
                 seterror(res.error);
             })
     };

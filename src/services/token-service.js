@@ -1,5 +1,5 @@
 import jwtDecode from 'jwt-decode';
-import config from '../config';
+import * as config from '../config';
 
 let _timeoutId;
 const _TEN_SECONDS_IN_MS = 10000;

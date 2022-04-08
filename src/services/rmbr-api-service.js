@@ -1,10 +1,9 @@
-import config from "../config";
+import { REACT_APP_API_ENDPOINT } from "../config";
 import TokenService from "./token-service";
 
 const RmbrApiService = {
-
     getPeople() {
-        return fetch(`${config.API_ENDPOINT}/people`, {
+        return fetch(`${REACT_APP_API_ENDPOINT}/people`, {
             headers: {}
         })
             .then(res =>
@@ -19,7 +18,7 @@ const RmbrApiService = {
     },
 
     getPersonByUserId(user_id) {
-        return fetch(`${config.API_ENDPOINT}/person/user/${user_id}`, {
+        return fetch(`${REACT_APP_API_ENDPOINT}/person/user/${user_id}`, {
             method: 'GET',
             headers: {
                 'Authorization': `bearer ${TokenService.getAuthToken()}`,
@@ -34,7 +33,7 @@ const RmbrApiService = {
     },
 
     getPersonByPersonId(person_id) {
-        return fetch(`${config.API_ENDPOINT}/person/${person_id}`, {
+        return fetch(`${REACT_APP_API_ENDPOINT}/person/${person_id}`, {
             method: 'GET',
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
@@ -49,22 +48,22 @@ const RmbrApiService = {
     },
 
     getRmbrByPersonId(person_id) {
-        return fetch(`${config.API_ENDPOINT}/person/${person_id}/rmbr`, {
+        return fetch(`${REACT_APP_API_ENDPOINT}/person/${person_id}/rmbr`, {
             method: 'GET',
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
                 'content-type': 'application/json'
             }
         })
-            .then(res => 
-                (!res.ok) 
-                ? res.json().then(e => Promise.reject(e)) 
+            .then(res =>
+                (!res.ok)
+                ? res.json().then(e => Promise.reject(e))
                 : res.json()
             );
     },
 
     getRmbrByUserId(user_id) {
-        return fetch (`${config.API_ENDPOINT}/rmbr/user/${user_id}`, {
+        return fetch (`${REACT_APP_API_ENDPOINT}/rmbr/user/${user_id}`, {
             method: 'GET',
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
@@ -79,7 +78,7 @@ const RmbrApiService = {
     },
 
     postPerson(newPerson) {
-        return fetch (`${config.API_ENDPOINT}/person`, {
+        return fetch (`${REACT_APP_API_ENDPOINT}/person`, {
             method: 'POST',
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
@@ -95,7 +94,7 @@ const RmbrApiService = {
     },
 
     postRmbr(newRmbr) {
-        return fetch (`${config.API_ENDPOINT}/rmbr`, {
+        return fetch (`${REACT_APP_API_ENDPOINT}/rmbr`, {
             method: 'POST',
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
@@ -111,7 +110,7 @@ const RmbrApiService = {
     },
 
     editRmbr(rmbr_id, rmbrFields) {
-        return fetch(`${config.API_ENDPOINT}/rmbr/${rmbr_id}`, {
+        return fetch(`${REACT_APP_API_ENDPOINT}/rmbr/${rmbr_id}`, {
             method: 'PATCH',
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
@@ -122,7 +121,7 @@ const RmbrApiService = {
     },
 
     editPerson(person_id, personToUpdate) {
-        return fetch(`${config.API_ENDPOINT}/person/${person_id}`, {
+        return fetch(`${REACT_APP_API_ENDPOINT}/person/${person_id}`, {
             method: 'PATCH',
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
@@ -133,7 +132,7 @@ const RmbrApiService = {
     },
 
     deletePerson(personId) {
-        return fetch(`${config.API_ENDPOINT}/person/${personId}`, {
+        return fetch(`${REACT_APP_API_ENDPOINT}/person/${personId}`, {
             method: 'DELETE',
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,
@@ -147,7 +146,7 @@ const RmbrApiService = {
     },
 
     deleteRmbr(rmbrId) {
-        return fetch(`${config.API_ENDPOINT}/rmbr/${rmbrId}`, {
+        return fetch(`${REACT_APP_API_ENDPOINT}/rmbr/${rmbrId}`, {
             method: 'DELETE',
             headers: {
                 'authorization': `bearer ${TokenService.getAuthToken()}`,

@@ -1,5 +1,5 @@
 import jwtDecode from 'jwt-decode';
-import config from '../config';
+import { REACT_APP_API_TOKEN } from '../config';
 
 let _timeoutId;
 const _TEN_SECONDS_IN_MS = 10000;
@@ -7,7 +7,7 @@ const _TEN_SECONDS_IN_MS = 10000;
 const TokenService = {
 
     saveAuthToken(token) {
-        window.localStorage.setItem(config.API_TOKEN, token);
+        window.localStorage.setItem(REACT_APP_API_TOKEN, token);
     },
 
     saveUserId(user_id) {
@@ -15,11 +15,11 @@ const TokenService = {
     },
 
     getAuthToken() {
-        return window.localStorage.getItem(config.API_TOKEN);
+        return window.localStorage.getItem(REACT_APP_API_TOKEN);
     },
 
     clearAuthToken() {
-        window.localStorage.removeItem(config.API_TOKEN);
+        window.localStorage.removeItem(REACT_APP_API_TOKEN);
         window.localStorage.removeItem('user_id');
     },
 

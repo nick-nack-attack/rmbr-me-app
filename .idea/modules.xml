@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/rmbr-me-app.iml" filepath="$PROJECT_DIR$/.idea/rmbr-me-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../rmbr-me-server/.idea/rmbr-me-server.iml" filepath="$PROJECT_DIR$/../rmbr-me-server/.idea/rmbr-me-server.iml" />
     </modules>
   </component>
 </project>

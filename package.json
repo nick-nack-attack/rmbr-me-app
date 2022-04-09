@@ -17,7 +17,7 @@
     "enzyme-to-json": "^3.5.0",
     "font-awesome": "^4.7.0",
     "jwt-decode": "^2.2.0",
-    "moment": "^2.26.0",
+    "moment": "^2.29.2",
     "pg": "^8.2.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

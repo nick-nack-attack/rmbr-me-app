@@ -1,5 +1,5 @@
-import { REACT_APP_API_ENDPOINT } from '../config';
-import TokenService from './token-service';
+import { REACT_APP_API_ENDPOINT } from "../config";
+import TokenService from "./token-service";
 import IdleService from "./idle-service";
 
 const AuthApiService = {
